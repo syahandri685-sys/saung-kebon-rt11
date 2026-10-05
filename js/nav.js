@@ -1,31 +1,40 @@
-const PAGES = ['home', 'warga', 'iuran', 'keuangan', 'setoran', 'pengumuman', 'pengaduan', 'ronda', 'surat', 'tamu', 'voting', 'akun'];
+const PAGES = ['home','warga','iuran','keuangan','setoran','pengumuman','pengaduan','ronda','surat','tamu','voting','akun'];
 
 const NAV_ITEMS = [
-  { id: 'home', icon: '🏠', label: 'Beranda' },
-  { id: 'warga', icon: '👥', label: 'Warga' },
-  { id: 'iuran', icon: '✅', label: 'Iuran' },
-  { id: 'keuangan', icon: '💰', label: 'Keuangan' },
-  { id: 'setoran', icon: '📤', label: 'Setoran' },
-  { id: 'pengumuman', icon: '📢', label: 'Pengumuman' },
-  { id: 'pengaduan', icon: '🚨', label: 'Pengaduan' },
-  { id: 'ronda', icon: '🛡️', label: 'Ronda' },
-  { id: 'surat', icon: '✉️', label: 'Surat' },
-  { id: 'tamu', icon: '👤', label: 'Tamu' },
-  { id: 'voting', icon: '🗳️', label: 'Voting' },
-  { id: 'akun', icon: '⚙️', label: 'Akun' }
+  { id:'home', icon:'🏠', label:'Beranda' },
+  { id:'warga', icon:'👥', label:'Warga' },
+  { id:'iuran', icon:'✅', label:'Iuran' },
+  { id:'keuangan', icon:'💰', label:'Keuangan' },
+  { id:'setoran', icon:'📤', label:'Setoran' },
+  { id:'pengumuman', icon:'📢', label:'Pengumuman' },
+  { id:'pengaduan', icon:'🚨', label:'Pengaduan' },
+  { id:'ronda', icon:'🛡️', label:'Ronda' },
+  { id:'surat', icon:'✉️', label:'Surat' },
+  { id:'tamu', icon:'👤', label:'Tamu' },
+  { id:'voting', icon:'🗳️', label:'Voting' },
+  { id:'akun', icon:'⚙️', label:'Akun' }
 ];
 
 const buildSidebar = () => {
-  $('sidebarMenu').innerHTML = NAV_ITEMS.map(n =>
+  const menu = $('sidebarMenu');
+  if (!menu) return;
+  menu.innerHTML = NAV_ITEMS.map(n =>
     `<div class="sidebar-item" data-page="${n.id}" onclick="showPage('${n.id}')"><span class="icon">${n.icon}</span>${n.label}</div>`
   ).join('');
 };
 
 const buildHomeMenu = () => {
-  $('homeMenu').innerHTML = NAV_ITEMS.filter(n => n.id !== 'home' && n.id !== 'akun').map(n => {
-    const cls = { warga: 'mi-blue', iuran: 'mi-green', keuangan: 'mi-orange', setoran: 'mi-indigo', pengumuman: 'mi-yellow', pengaduan: 'mi-red', ronda: 'mi-purple', surat: 'mi-teal', tamu: 'mi-pink', voting: 'mi-lime' }[n.id] || 'mi-blue';
+  const el = $('homeMenu');
+  if (!el) return;
+  el.innerHTML = NAV_ITEMS.filter(n => n.id !== 'home' && n.id !== 'akun').map(n => {
+    const cls = { warga:'mi-blue', iuran:'mi-green', keuangan:'mi-orange', setoran:'mi-indigo', pengumuman:'mi-yellow', pengaduan:'mi-red', ronda:'mi-purple', surat:'mi-teal', tamu:'mi-pink', voting:'mi-lime' }[n.id] || 'mi-blue';
     return `<div class="menu-item" onclick="showPage('${n.id}')"><div class="menu-icon ${cls}">${n.icon}</div><span>${n.label}</span></div>`;
   }).join('');
+};
+
+const setActiveNav = page => {
+  document.querySelectorAll('.sidebar-item').forEach(b => b.classList.toggle('active', b.dataset.page === page));
+  document.querySelectorAll('.bottom-nav button').forEach(b => b.classList.toggle('active', b.dataset.page === page));
 };
 
 const showPage = page => {
@@ -34,14 +43,13 @@ const showPage = page => {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const el = $('page' + page.charAt(0).toUpperCase() + page.slice(1));
   if (el) el.classList.add('active');
-  document.querySelectorAll('.sidebar-item').forEach(b => b.classList.toggle('active', b.dataset.page === page));
+  setActiveNav(page);
   refreshCurrentPage();
   window.scrollTo({ top: 0 });
 };
 
 const refreshCurrentPage = () => {
   updateDashboard();
-  buildSidebar();
   switch (currentPage) {
     case 'warga': renderWargaList(); break;
     case 'iuran': renderIuranList(); break;
@@ -59,9 +67,9 @@ const refreshCurrentPage = () => {
 
 const updateDashboard = () => {
   const kas = appData.kas || [];
-  const saldo = kas.reduce((s, k) => s + (k.tipe === 'Masuk' ? k.nominal : -k.nominal), 0);
-  const masuk = kas.filter(k => k.tipe === 'Masuk').reduce((s, k) => s + k.nominal, 0);
-  const keluar = kas.filter(k => k.tipe === 'Keluar').reduce((s, k) => s + k.nominal, 0);
+  const saldo = kas.reduce((s,k) => s + (k.tipe === 'Masuk' ? k.nominal : -k.nominal), 0);
+  const masuk = kas.filter(k => k.tipe === 'Masuk').reduce((s,k) => s + Number(k.nominal||0), 0);
+  const keluar = kas.filter(k => k.tipe === 'Keluar').reduce((s,k) => s + Number(k.nominal||0), 0);
   $('hSaldo').textContent = rp(saldo);
   $('hMasuk').textContent = rp(masuk);
   $('hKeluar').textContent = rp(keluar);
@@ -73,25 +81,30 @@ const updateDashboard = () => {
   const pct = tot > 0 ? Math.round(lunas / tot * 100) : 0;
   $('hIuranPct').textContent = pct + '%';
   $('hIuranBar').style.width = pct + '%';
-  $('hLapor').textContent = (appData.lapor || []).filter(l => l.status !== 'Selesai').length;
+  $('hLapor').textContent = (appData.lapor || []).filter(l => l.status !== 'Selesai' && l.status !== 'Ditolak').length;
   const p = (appData.pengumuman || []).find(x => x.pin) || (appData.pengumuman || [])[0];
   if (p) {
-    $('annCategory').textContent = p.kat;
+    $('annCategory').textContent = p.kat || 'Pengumuman';
     $('annTitle').textContent = p.judul;
     $('annDesc').textContent = p.isi;
-    $('annDate').textContent = '📅 ' + tglIndo(p.tgl);
+    $('annDate').textContent = '📅 ' + tglIndo(p.tgl) + (p.oleh ? ' · 👤 ' + p.oleh : '');
   }
   const badge = $('notifBadge');
-  const c = (appData.lapor || []).filter(l => l.status === 'Baru').length;
+  const c = (appData.lapor || []).filter(l => l.status === 'Baru').length +
+            (isStaff() ? (appData.setoran || []).filter(s => s.status === 'Pending').length : 0);
   badge.textContent = c;
   badge.classList.toggle('show', c > 0);
 };
 
 const showNotif = () => {
+  const pending = (appData.setoran || []).filter(s => s.status === 'Pending').length;
+  const baru = (appData.lapor || []).filter(l => l.status === 'Baru').length;
   openModal(`<div class="modal-header"><h3>🔔 Notifikasi</h3><button class="modal-close" onclick="closeModal()">✕</button></div>
     <div style="display:flex;flex-direction:column;gap:10px">
-      <div style="padding:12px;background:#FEF3C7;border-radius:12px;border-left:4px solid #F59E0B"><b>💰 Iuran Oktober</b><div style="font-size:12px;color:#6B7280">Segera bayar</div></div>
-      <div style="padding:12px;background:#DBEAFE;border-radius:12px;border-left:4px solid #3B82F6"><b>📢 Kerja Bakti</b><div style="font-size:12px;color:#6B7280">Sabtu 07.00</div></div>
+      ${pending ? `<div style="padding:12px;background:#FEF3C7;border-radius:12px;border-left:4px solid #F59E0B;cursor:pointer" onclick="closeModal();showPage('setoran')"><b>📤 ${pending} setoran menunggu konfirmasi</b><div style="font-size:12px;color:#6B7280">Klik untuk verifikasi</div></div>` : ''}
+      ${baru ? `<div style="padding:12px;background:#FEE2E2;border-radius:12px;border-left:4px solid #EF4444;cursor:pointer" onclick="closeModal();showPage('pengaduan')"><b>🚨 ${baru} pengaduan baru</b><div style="font-size:12px;color:#6B7280">Perlu tindak lanjut</div></div>` : ''}
+      <div style="padding:12px;background:#DBEAFE;border-radius:12px;border-left:4px solid #3B82F6"><b>📢 Pengumuman terbaru</b><div style="font-size:12px;color:#6B7280">${esc(((appData.pengumuman||[]).find(p=>p.pin)||(appData.pengumuman||[])[0]||{}).judul || '-')}</div></div>
+      ${!pending && !baru ? '<div class="empty" style="padding:24px"><div class="empty-icon">🎉</div><p>Tidak ada notifikasi baru</p></div>' : ''}
     </div>`);
 };
 
@@ -99,7 +112,7 @@ const showAnnouncementDetail = () => {
   const p = (appData.pengumuman || []).find(x => x.pin) || (appData.pengumuman || [])[0];
   if (!p) return;
   openModal(`<div class="modal-header"><h3>📢 ${esc(p.judul)}</h3><button class="modal-close" onclick="closeModal()">✕</button></div>
-    <span class="badge b-yellow">${esc(p.kat)}</span>
-    <p style="margin:12px 0;line-height:1.7">${esc(p.isi)}</p>
-    <div style="font-size:12px;color:#9CA3AF">📅 ${tglIndo(p.tgl)} · ${esc(p.oleh || '')}</div>`);
+    <span class="badge b-yellow">${esc(p.kat || 'Pengumuman')}</span>
+    <p style="margin:12px 0;line-height:1.7;color:#4B5563">${esc(p.isi)}</p>
+    <div style="font-size:12px;color:#9CA3AF;padding-top:12px;border-top:1px solid #E5E7EB">📅 ${tglIndo(p.tgl)} · 👤 ${esc(p.oleh || 'Pengurus')}</div>`);
 };
