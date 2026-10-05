@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Saung Kebun RT 11 RW 44</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#F4F4F8;color:#1F2937}
+
+/* LAYOUT GRID - PASTI BENAR */
+.app{display:grid;grid-template-columns:250px 1fr;grid-template-rows:auto 1fr;min-height:100vh}
+
+/* HEADER - DI ATAS, FULL WIDTH */
+.header{
+  grid-column:1/-1;
+  background:linear-gradient(135deg,#7C3AED,#6D28D9,#5B21B6);
+  color:#fff;
+  padding:20px 28px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 4px 12px rgba(109,40,217,.2);
+}
+.header-left h1{font-size:22px;font-weight:800;margin-bottom:4px}
+.header-left p{font-size:13px;opacity:.9}
+.header-left .loc{font-size:12px;opacity:.8;margin-top:2px}
+.notif-btn{
+  width:44px;height:44px;
+  background:rgba(255,255,255,.2);
+  border:none;border-radius:12px;
+  font-size:22px;cursor:pointer;
+  position:relative;
+}
+.notif-btn .badge{
+  position:absolute;top:-4px;right:-4px;
+  background:#EF4444;color:#fff;
+  width:20px;height:20px;border-radius:50%;
+  font-size:11px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  border:2px solid #6D28D9;
+}
+
+/* SIDEBAR - DI KIRI */
+.sidebar{
+  background:#fff;
+  border-right:1px solid #E5E7EB;
+  padding:20px 0;
+  overflow-y:auto;
+}
+.sidebar-header{
+  padding:0 20px 16px;
+  border-bottom:1px solid #E5E7EB;
+  margin-bottom:12px;
+}
+.sidebar-header h2{font-size:18px;font-weight:800;color:#1F2937}
+.sidebar-header p{font-size:12px;color:#6B7280;margin-top:2px}
+.menu-item{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 20px;
+  cursor:pointer;
+  color:#6B7280;
+  font-weight:600;font-size:14px;
+  transition:all .15s;
+}
+.menu-item:hover{background:#F5F3FF;color:#1F2937}
+.menu-item.active{background:#EDE9FE;color:#5B21B6;border-right:3px solid #7C3AED}
+.menu-item .icon{font-size:18px;width:22px;text-align:center}
+
+/* KONTEN - DI KANAN SIDEBAR */
+.content{
+  padding:24px 28px;
+  overflow-y:auto;
+  background:#F4F4F8;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  border-radius:16px;
+  padding:22px;
+  margin-bottom:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,.04);
+  border:1px solid #ECECF3;
+}
+.card-header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:16px;flex-wrap:wrap;gap:10px;
+}
+.card-header h3{font-size:17px;font-weight:700;display:flex;align-items:center;gap:8px}
+.card-header .link{font-size:13px;color:#6D28D9;font-weight:700;cursor:pointer}
+
+/* FINANCE GRID */
+.finance-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.finance-item{padding:16px;border-radius:12px;border:1px solid transparent}
+.finance-item.green{background:#F0FDF4;border-color:#BBF7D0}
+.finance-item.blue{background:#EFF6FF;border-color:#BFDBFE}
+.finance-item.orange{background:#FFF7ED;border-color:#FED7AA}
+.finance-item.purple{background:#F5F3FF;border-color:#DDD6FE}
+.finance-item.red{background:#FEF2F2;border-color:#FECACA}
+.finance-item .label{font-size:11px;color:#6B7280;font-weight:700;text-transform:uppercase;margin-bottom:6px}
+.finance-item .value{font-size:20px;font-weight:800;color:#1F2937}
+.finance-item .icon{font-size:28px;margin-top:8px}
+
+/* MENU GRID */
+.menu-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.menu-box{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  padding:16px 8px;
+  background:#fff;
+  border:1px solid #E5E7EB;
+  border-radius:14px;
+  cursor:pointer;
+  transition:all .2s;
+}
+.menu-box:hover{transform:translateY(-3px);box-shadow:0 6px 16px rgba(0,0,0,.08);border-color:#C4B5FD}
+.menu-box .mi{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px}
+.menu-box span{font-size:12px;font-weight:600;color:#374151}
+.mi-1{background:linear-gradient(135deg,#DBEAFE,#BFDBFE)}
+.mi-2{background:linear-gradient(135deg,#D1FAE5,#A7F3D0)}
+.mi-3{background:linear-gradient(135deg,#EDE9FE,#DDD6FE)}
+.mi-4{background:linear-gradient(135deg,#FEE2E2,#FECACA)}
+.mi-5{background:linear-gradient(135deg,#FEF3C7,#FDE68A)}
+.mi-6{background:linear-gradient(135deg,#FCE7F3,#FBCFE8)}
+.mi-7{background:linear-gradient(135deg,#CCFBF1,#99F6E4)}
+.mi-8{background:linear-gradient(135deg,#E0E7FF,#C7D2FE)}
+
+/* SECTION TITLE */
+.section-title{font-size:15px;font-weight:800;color:#1F2937;margin:20px 0 12px;display:flex;align-items:center;gap:8px}
+.section-title::before{content:"";width:4px;height:18px;background:linear-gradient(180deg,#7C3AED,#5B21B6);border-radius:3px}
+
+/* PROGRESS */
+.progress{height:10px;background:#E5E7EB;border-radius:5px;overflow:hidden;margin-top:10px}
+.progress>div{height:100%;background:linear-gradient(90deg,#7C3AED,#6D28D9);transition:width .8s}
+
+/* BADGE */
+.badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.b-purple{background:#EDE9FE;color:#5B21B6}
+.b-green{background:#D1FAE5;color:#065F46}
+.b-yellow{background:#FEF3C7;color:#92400E}
+
+/* BUTTON */
+.btn{padding:10px 18px;border:none;border-radius:10px;font-weight:700;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .2s}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:linear-gradient(135deg,#7C3AED,#6D28D9);color:#fff}
+.btn-sm{padding:7px 12px;font-size:12px}
+
+/* PAGE */
+.page{display:none}
+.page.active{display:block}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .app{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .finance-grid{grid-template-columns:1fr 1fr}
+  .menu-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:500px){
+  .finance-grid{grid-template-columns:1fr}
+  .menu-grid{grid-template-columns:repeat(2,1fr)}
+  .header{padding:16px}
+  .header-left h1{font-size:18px}
+  .content{padding:16px}
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <h1 id="hRole">Ketua RT</h1>
+      <p id="hName">Dirham Rozi</p>
+      <div class="loc">📍 Saung Kebun · RT 11 / RW 44</div>
+    </div>
+    <button class="notif-btn" onclick="alert(' Tidak ada notifikasi baru')">
+      🔔
+      <span class="badge" id="notifBadge">1</span>
+    </button>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h2>🏘️ Saung Kebun</h2>
+      <p>RT 11 / RW 44</p>
+    </div>
+    <div class="menu-item active" data-page="home" onclick="showPage('home',this)"><span class="icon">🏠</span>Beranda</div>
+    <div class="menu-item" data-page="warga" onclick="showPage('warga',this)"><span class="icon">👥</span>Warga</div>
+    <div class="menu-item" data-page="iuran" onclick="showPage('iuran',this)"><span class="icon">✅</span>Iuran</div>
+    <div class="menu-item" data-page="keuangan" onclick="showPage('keuangan',this)"><span class="icon">💰</span>Keuangan</div>
+    <div class="menu-item" data-page="setoran" onclick="showPage('setoran',this)"><span class="icon">📤</span>Setoran</div>
+    <div class="menu-item" data-page="pengumuman" onclick="showPage('pengumuman',this)"><span class="icon">📢</span>Pengumuman</div>
+    <div class="menu-item" data-page="pengaduan" onclick="showPage('pengaduan',this)"><span class="icon">🚨</span>Pengaduan</div>
+    <div class="menu-item" data-page="ronda" onclick="showPage('ronda',this)"><span class="icon">🛡️</span>Ronda</div>
+    <div class="menu-item" data-page="surat" onclick="showPage('surat',this)"><span class="icon">️</span>Surat</div>
+    <div class="menu-item" data-page="tamu" onclick="showPage('tamu',this)"><span class="icon">👤</span>Tamu</div>
+    <div class="menu-item" data-page="voting" onclick="showPage('voting',this)"><span class="icon">🗳️</span>Voting</div>
+    <div class="menu-item" data-page="akun" onclick="showPage('akun',this)"><span class="icon">⚙️</span>Akun</div>
+  </div>
+
+  <!-- KONTEN -->
+  <div class="content">
+
+    <!-- BERANDA -->
+    <div class="page active" id="page-home">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px">
+          <div style="flex:1">
+            <span class="badge b-purple">Pengumuman</span>
+            <h2 style="font-size:20px;font-weight:800;margin:10px 0">Selamat Datang di Portal Saung Kebun</h2>
+            <p style="font-size:14px;color:#6B7280;line-height:1.6;margin-bottom:12px">Portal Kepengurusan RT 11 RW 44 resmi diluncurkan dengan tampilan baru bertema ungu.</p>
+            <div style="font-size:12px;color:#9CA3AF;font-weight:600"> 1 Oktober 2026 ·  Ketua RT</div>
+          </div>
+          <div style="font-size:52px;opacity:.18">📢</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>💰 Ringkasan Keuangan</h3>
+          <span class="link" onclick="showPage('keuangan',document.querySelector('[data-page=keuangan]'))">Laporan →</span>
+        </div>
+        <div class="finance-grid">
+          <div class="finance-item green"><div class="label">Saldo Kas</div><div class="value">Rp 150.000</div><div class="icon">💵</div></div>
+          <div class="finance-item blue"><div class="label">Pemasukan</div><div class="value">Rp 300.000</div><div class="icon">️</div></div>
+          <div class="finance-item orange"><div class="label">Pengeluaran</div><div class="value">Rp 150.000</div><div class="icon">⬇️</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3>📊 Statistik Warga</h3></div>
+        <div class="finance-grid">
+          <div class="finance-item purple"><div class="label">Total Warga</div><div class="value">5</div><div class="icon"></div></div>
+          <div class="finance-item green"><div class="label">Iuran Lunas</div><div class="value">2/5</div><div class="icon">✅</div></div>
+          <div class="finance-item red"><div class="label">Pengaduan Aktif</div><div class="value">1</div><div class="icon">🚨</div></div>
+        </div>
+        <div style="margin-top:14px">
+          <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:#374151;margin-bottom:6px"><span>Progress Iuran Bulan Ini</span><span>40%</span></div>
+          <div class="progress"><div style="width:40%"></div></div>
+        </div>
+      </div>
+
+      <div class="section-title">Menu Cepat</div>
+      <div class="menu-grid">
+        <div class="menu-box" onclick="showPage('warga',document.querySelector('[data-page=warga]'))"><div class="mi mi-1">👥</div><span>Warga</span></div>
+        <div class="menu-box" onclick="showPage('iuran',document.querySelector('[data-page=iuran]'))"><div class="mi mi-2">✅</div><span>Iuran</span></div>
+        <div class="menu-box" onclick="showPage('keuangan',document.querySelector('[data-page=keuangan]'))"><div class="mi mi-3">💰</div><span>Keuangan</span></div>
+        <div class="menu-box" onclick="showPage('setoran',document.querySelector('[data-page=setoran]'))"><div class="mi mi-8">📤</div><span>Setoran</span></div>
+        <div class="menu-box" onclick="showPage('pengumuman',document.querySelector('[data-page=pengumuman]'))"><div class="mi mi-5">📢</div><span>Pengumuman</span></div>
+        <div class="menu-box" onclick="showPage('pengaduan',document.querySelector('[data-page=pengaduan]'))"><div class="mi mi-4">🚨</div><span>Pengaduan</span></div>
+        <div class="menu-box" onclick="showPage('ronda',document.querySelector('[data-page=ronda]'))"><div class="mi mi-3">️</div><span>Ronda</span></div>
+        <div class="menu-box" onclick="showPage('surat',document.querySelector('[data-page=surat]'))"><div class="mi mi-7">✉️</div><span>Surat</span></div>
+        <div class="menu-box" onclick="showPage('tamu',document.querySelector('[data-page=tamu]'))"><div class="mi mi-6">👤</div><span>Tamu</span></div>
+        <div class="menu-box" onclick="showPage('voting',document.querySelector('[data-page=voting]'))"><div class="mi mi-2">🗳️</div><span>Voting</span></div>
+      </div>
+    </div>
+
+    <!-- WARGA -->
+    <div class="page" id="page-warga">
+      <div class="card">
+        <div class="card-header"><h3>👥 Data Warga</h3><button class="btn btn-primary btn-sm" onclick="alert('Fitur tambah warga')">＋ Tambah</button></div>
+        <div style="margin-bottom:14px"><input type="text" placeholder="🔍 Cari nama, blok..." style="width:100%;padding:12px 16px;border:2px solid #E5E7EB;border-radius:12px;font-size:14px"></div>
+        <div id="wargaList"></div>
+      </div>
+    </div>
+
+    <!-- IURAN -->
+    <div class="page" id="page-iuran">
+      <div class="card">
+        <div class="card-header"><h3>✅ Status Iuran Warga</h3></div>
+        <div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:12px;padding:14px;margin-bottom:16px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div><b style="font-size:14px">💡 Info Iuran</b><div style="font-size:12px;color:#6B7280;margin-top:4px">Nominal: <b>Rp 50.000</b>/bulan</div></div>
+            <button class="btn btn-primary btn-sm" onclick="showPage('setoran',document.querySelector('[data-page=setoran]'))">💰 Setor</button>
+          </div>
+        </div>
+        <div id="iuranList"></div>
+      </div>
+    </div>
+
+    <!-- KEUANGAN -->
+    <div class="page" id="page-keuangan">
+      <div class="card">
+        <div class="card-header"><h3>💰 Keuangan</h3></div>
+        <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap">
+          <select style="flex:1;padding:11px;border:2px solid #E5E7EB;border-radius:11px;font-size:13px"><option>Oktober 2026</option><option>November 2026</option></select>
+          <select style="flex:1;padding:11px;border:2px solid #E5E7EB;border-radius:11px;font-size:13px"><option>Per Bulan</option><option>Semua</option></select>
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap">
+          <button class="btn btn-primary" style="flex:1" onclick="alert('Form tambah transaksi')">＋ Tambah</button>
+          <button class="btn" style="flex:1;background:#F3F4F6;color:#374151" onclick="alert('Filter direset')">🔄 Reset</button>
+          <button class="btn" style="flex:1;background:#EF4444;color:#fff" onclick="window.print()">📄 PDF</button>
+        </div>
+        <div style="background:#F5F3FF;border:1px solid #DDD6FE;border-radius:12px;padding:14px;margin-bottom:16px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div><b style="font-size:14px">💳 Rekening Iuran</b></div>
+            <button class="btn btn-sm" style="background:#fff;border:1px solid #DDD6FE;color:#6D28D9" onclick="alert('Rekening disalin!')">📋 Salin</button>
+          </div>
+          <div style="background:#fff;border-radius:10px;padding:12px;margin-top:10px;border:1px solid #DDD6FE">
+            <div style="font-size:12px;color:#6B7280">Bank Mandiri</div>
+            <div style="font-size:17px;font-weight:800;font-family:monospace;margin:4px 0">123-00-456789-0</div>
+            <div style="font-size:12px;color:#6B7280">A/N Kas RT 11 Saung Kebun</div>
+          </div>
+        </div>
+        <div class="finance-grid">
+          <div class="finance-item green"><div class="label">Saldo</div><div class="value">Rp 150.000</div></div>
+          <div class="finance-item blue"><div class="label">Masuk</div><div class="value">Rp 300.000</div></div>
+          <div class="finance-item orange"><div class="label">Keluar</div><div class="value">Rp 150.000</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3>📊 Mutasi Kas</h3></div>
+        <div id="mutasiList"></div>
+      </div>
+    </div>
+
+    <!-- SETORAN -->
+    <div class="page" id="page-setoran">
+      <div class="card">
+        <div class="card-header"><h3>📤 Setoran Online</h3></div>
+        <div style="background:#F5F3FF;border:1px solid #DDD6FE;border-radius:12px;padding:14px;margin-bottom:16px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div><b style="font-size:14px">💳 Transfer ke Rekening RT</b></div>
+            <button class="btn btn-sm" style="background:#fff;border:1px solid #DDD6FE;color:#6D28D9" onclick="alert('Rekening disalin!')">📋 Salin</button>
+          </div>
+          <div style="background:#fff;border-radius:10px;padding:12px;margin-top:10px;border:1px solid #DDD6FE">
+            <div style="font-size:12px;color:#6B7280">Bank Mandiri</div>
+            <div style="font-size:17px;font-weight:800;font-family:monospace;margin:4px 0">123-00-456789-0</div>
+            <div style="font-size:12px;color:#6B7280">A/N Kas RT 11 Saung Kebun</div>
+          </div>
+        </div>
+        <div style="border:1px dashed #C4B5FD;border-radius:14px;padding:16px;background:#F5F3FF">
+          <div class="section-title" style="margin-top:0">Form Setoran Baru</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+            <div><label style="font-size:11px;font-weight:700;color:#374151;text-transform:uppercase">Bulan</label><select style="width:100%;padding:11px;border:2px solid #E5E7EB;border-radius:11px;margin-top:4px"><option>Oktober 2026</option><option>November 2026</option></select></div>
+            <div><label style="font-size:11px;font-weight:700;color:#374151;text-transform:uppercase">Nominal</label><input type="number" value="50000" style="width:100%;padding:11px;border:2px solid #E5E7EB;border-radius:11px;margin-top:4px"></div>
+          </div>
+          <div style="margin-bottom:12px"><label style="font-size:11px;font-weight:700;color:#374151;text-transform:uppercase">Metode</label><select style="width:100%;padding:11px;border:2px solid #E5E7EB;border-radius:11px;margin-top:4px"><option>Transfer Bank</option><option>E-Wallet</option><option>QRIS</option><option>Tunai</option></select></div>
+          <div style="margin-bottom:12px"><label style="font-size:11px;font-weight:700;color:#374151;text-transform:uppercase"> Bukti Transfer (multi-foto)</label><div style="border:2px dashed #C4B5FD;border-radius:12px;padding:18px;text-align:center;background:#fff;margin-top:4px;cursor:pointer" onclick="alert('Pilih foto dari device')"><div style="font-size:28px">📷</div><div style="font-size:13px;color:#6B7280;font-weight:600">Klik untuk pilih foto</div></div></div>
+          <div style="margin-bottom:12px"><label style="font-size:11px;font-weight:700;color:#374151;text-transform:uppercase">Catatan</label><textarea rows="2" style="width:100%;padding:11px;border:2px solid #E5E7EB;border-radius:11px;margin-top:4px" placeholder="Catatan untuk bendahara..."></textarea></div>
+          <button class="btn btn-primary" style="width:100%;padding:13px" onclick="alert('Setoran terkirim!')">📤 Kirim Setoran</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3>📋 Riwayat Setoran Saya</h3></div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">
+          <div style="padding:12px;border-radius:12px;text-align:center;background:#F0FDF4;border:1px solid #BBF7D0"><div style="font-size:18px;font-weight:800">0</div><div style="font-size:10px;color:#6B7280;font-weight:700;text-transform:uppercase">Dikonfirmasi</div></div>
+          <div style="padding:12px;border-radius:12px;text-align:center;background:#FFFBEB;border:1px solid #FDE68A"><div style="font-size:18px;font-weight:800">0</div><div style="font-size:10px;color:#6B7280;font-weight:700;text-transform:uppercase">Menunggu</div></div>
+          <div style="padding:12px;border-radius:12px;text-align:center;background:#FEF2F2;border:1px solid #FECACA"><div style="font-size:18px;font-weight:800">0</div><div style="font-size:10px;color:#6B7280;font-weight:700;text-transform:uppercase">Ditolak</div></div>
+        </div>
+        <div style="text-align:center;padding:40px 20px;color:#9CA3AF"><div style="font-size:48px;opacity:.4;margin-bottom:10px"></div><p>Anda belum pernah setor</p></div>
+      </div>
+    </div>
+
+    <!-- PENGUMUMAN -->
+    <div class="page" id="page-pengumuman">
+      <div class="card">
+        <div class="card-header"><h3> Pengumuman</h3><button class="btn btn-primary btn-sm" onclick="alert('Form tambah pengumuman')">＋ Tambah</button></div>
+        <div style="display:flex;align-items:center;gap:13px;padding:14px;border:1px solid #E5E7EB;border-radius:14px;margin-bottom:10px">
+          <div style="width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,#C4B5FD,#A78BFA);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">📢</div>
+          <div style="flex:1"><div style="font-size:14px;font-weight:700">Selamat Datang di Portal Saung Kebun 📌 <span class="badge b-purple">Pengumuman</span></div><div style="font-size:12px;color:#6B7280;margin-top:4px">Portal Kepengurusan RT 11 RW 44 resmi diluncurkan dengan tampilan baru bertema ungu.</div><div style="font-size:11px;color:#9CA3AF;margin-top:4px">📅 1 Oktober 2026 · 👤 Ketua RT</div></div>
+          <div style="display:flex;gap:6px"><button class="btn btn-sm" style="background:#EDE9FE;color:#5B21B6" onclick="alert('Edit pengumuman')">✏️</button><button class="btn btn-sm" style="background:#FEE2E2;color:#DC2626" onclick="alert('Hapus pengumuman?')">🗑️</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PENGADUAN -->
+    <div class="page" id="page-pengaduan">
+      <div class="card">
+        <div class="card-header"><h3> Pengaduan</h3><button class="btn btn-primary btn-sm" onclick="alert('Form lapor masalah')">＋ Lapor</button></div>
+        <div style="display:flex;align-items:center;gap:13px;padding:14px;border:1px solid #E5E7EB;border-radius:14px">
+          <div style="width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,#FECACA,#FCA5A5);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">🚨</div>
+          <div style="flex:1"><div style="font-size:14px;font-weight:700">Jalan berlubang <span class="badge b-yellow">Baru</span></div><div style="font-size:12px;color:#6B7280;margin-top:4px"><span class="badge" style="background:#F1F5F9;color:#475569">Infrastruktur</span> · Prioritas Sedang</div><div style="font-size:12px;color:#6B7280;margin-top:4px">Ada lubang di jalan depan blok A.</div><div style="font-size:11px;color:#9CA3AF;margin-top:4px">👤 Rina Wulandari · 📅 1 Oktober 2026</div></div>
+          <div style="display:flex;gap:6px"><button class="btn btn-sm" style="background:#EDE9FE;color:#5B21B6" onclick="alert('Edit laporan')">✏️</button><button class="btn btn-sm" style="background:#FEE2E2;color:#DC2626" onclick="alert('Hapus laporan?')">🗑️</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RONDA -->
+    <div class="page" id="page-ronda">
+      <div class="card">
+        <div class="card-header"><h3>🛡️ Jadwal Ronda</h3><button class="btn btn-primary btn-sm" onclick="alert('Form tambah ronda')">＋ Tambah</button></div>
+        <div style="display:flex;align-items:center;gap:13px;padding:14px;border:1px solid #E5E7EB;border-radius:14px">
+          <div style="width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,#C4B5FD,#A78BFA);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">🛡️</div>
+          <div style="flex:1"><div style="font-size:14px;font-weight:700">Malam · 22.00 - 02.00</div><div style="font-size:12px;color:#6B7280;margin-top:4px">📅 6 Oktober 2026</div><div style="font-size:12px;color:#6B7280">👤 Petugas: <b>Dedi Mulyawan</b> (Blok A04)</div><div style="font-size:12px;color:#6B7280">📝 Patroli rutin</div></div>
+          <div style="display:flex;gap:6px"><button class="btn btn-sm" style="background:#EDE9FE;color:#5B21B6" onclick="alert('Edit ronda')">✏️</button><button class="btn btn-sm" style="background:#FEE2E2;color:#DC2626" onclick="alert('Hapus ronda?')">🗑️</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SURAT -->
+    <div class="page" id="page-surat">
+      <div class="card">
+        <div class="card-header"><h3>✉️ Pengajuan Surat</h3><button class="btn btn-primary btn-sm" onclick="alert('Form ajukan surat')">＋ Ajukan</button></div>
+        <div style="display:flex;align-items:center;gap:13px;padding:14px;border:1px solid #E5E7EB;border-radius:14px">
+          <div style="width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,#DDD6FE,#C4B5FD);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">📄</div>
+          <div style="flex:1"><div style="font-size:14px;font-weight:700">Surat Keterangan Domisili <span class="badge b-green">Selesai</span></div><div style="font-size:12px;color:#6B7280;margin-top:4px">👤 Pemohon: <b>Dirham Rozi</b> · No. 001/RT11/X/2026</div><div style="font-size:12px;color:#6B7280">🎯 Persyaratan sekolah anak</div><div style="font-size:11px;color:#9CA3AF;margin-top:4px">📅 1 Oktober 2026</div></div>
+          <div style="display:flex;gap:6px"><button class="btn btn-sm" style="background:#EDE9FE;color:#5B21B6" onclick="alert('Edit surat')">✏️</button><button class="btn btn-sm" style="background:#FEE2E2;color:#DC2626" onclick="alert('Hapus surat?')">🗑️</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAMU -->
+    <div class="page" id="page-tamu">
+      <div class="card">
+        <div class="card-header"><h3>👤 Buku Tamu</h3><button class="btn btn-primary btn-sm" onclick="alert('Form tambah tamu')">＋ Tambah</button></div>
+        <div style="display:flex;align-items:center;gap:13px;padding:14px;border:1px solid #E5E7EB;border-radius:14px">
+          <div style="width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,#FBCFE8,#F9A8D4);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">👤</div>
+          <div style="flex:1"><div style="font-size:14px;font-weight:700">Budi Santoso <span class="badge b-green">Selesai</span></div><div style="font-size:12px;color:#6B7280;margin-top:4px">🏠 Dari <b>Jakarta</b> · Blok A01</div><div style="font-size:12px;color:#6B7280">🎯 Kunjungan keluarga · Penjamin: Dirham Rozi</div><div style="font-size:11px;color:#9CA3AF;margin-top:4px">📅 1 Okt 2026 → 5 Okt 2026</div></div>
+          <div style="display:flex;gap:6px"><button class="btn btn-sm" style="background:#EDE9FE;color:#5B21B6" onclick="alert('Edit tamu')">✏️</button><button class="btn btn-sm" style="background:#FEE2E2;color:#DC2626" onclick="alert('Hapus tamu?')">🗑️</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VOTING -->
+    <div class="page" id="page-voting">
+      <div class="card">
+        <div class="card-header"><h3>️ Jajak Pendapat</h3><button class="btn btn-primary btn-sm" onclick="alert('Form buat voting')">＋ Buat</button></div>
+        <div style="padding:18px;border:1px solid #E5E7EB;border-radius:16px;margin-bottom:14px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px">
+            <h4 style="font-size:15px;font-weight:800;flex:1">Kapan kerja bakti bulan depan?</h4>
+            <span class="badge b-green">Aktif</span>
+          </div>
+          <div style="font-size:12px;color:#9CA3AF;margin-bottom:14px">📅 1 Oktober 2026 · 👥 10 suara</div>
+          <div style="padding:11px 14px;background:#FAFAFF;border:2px solid #E5E7EB;border-radius:11px;margin-bottom:7px;cursor:pointer" onclick="alert('Vote: Sabtu pagi')"><div style="display:flex;justify-content:space-between"><span style="font-weight:600">1. Sabtu pagi</span><span style="font-size:12px;color:#6B7280;font-weight:700">3 suara (30%)</span></div><div style="height:7px;background:#E5E7EB;border-radius:4px;overflow:hidden;margin-top:6px"><div style="height:100%;width:30%;background:linear-gradient(90deg,#7C3AED,#6D28D9)"></div></div></div>
+          <div style="padding:11px 14px;background:#FAFAFF;border:2px solid #E5E7EB;border-radius:11px;margin-bottom:7px;cursor:pointer" onclick="alert('Vote: Minggu pagi')"><div style="display:flex;justify-content:space-between"><span style="font-weight:600">2. Minggu pagi</span><span style="font-size:12px;color:#6B7280;font-weight:700">5 suara (50%)</span></div><div style="height:7px;background:#E5E7EB;border-radius:4px;overflow:hidden;margin-top:6px"><div style="height:100%;width:50%;background:linear-gradient(90deg,#7C3AED,#6D28D9)"></div></div></div>
+          <div style="padding:11px 14px;background:#FAFAFF;border:2px solid #E5E7EB;border-radius:11px;margin-bottom:7px;cursor:pointer" onclick="alert('Vote: Sabtu sore')"><div style="display:flex;justify-content:space-between"><span style="font-weight:600">3. Sabtu sore</span><span style="font-size:12px;color:#6B7280;font-weight:700">2 suara (20%)</span></div><div style="height:7px;background:#E5E7EB;border-radius:4px;overflow:hidden;margin-top:6px"><div style="height:100%;width:20%;background:linear-gradient(90deg,#7C3AED,#6D28D9)"></div></div></div>
+          <div style="display:flex;gap:6px;margin-top:12px"><button class="btn btn-sm" style="background:#FEF3C7;color:#92400E" onclick="alert('Edit voting')">✏️ Edit</button><button class="btn btn-sm" style="background:#FEE2E2;color:#DC2626" onclick="alert('Hapus voting?')">🗑️ Hapus</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AKUN -->
+    <div class="page" id="page-akun">
+      <div class="card">
+        <div class="card-header"><h3>️ Akun Saya</h3><button class="btn btn-sm" style="background:#F3F4F6;color:#374151" onclick="alert('Edit profil')">✏️ Edit Profil</button></div>
+        <div style="text-align:center;padding:20px 0">
+          <div style="width:88px;height:88px;border-radius:24px;background:linear-gradient(135deg,#7C3AED,#6D28D9);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:34px;margin:0 auto 14px">DR</div>
+          <h3 style="font-size:21px;font-weight:800">Dirham Rozi</h3>
+          <p style="color:#6B7280;margin-top:4px"><span class="badge b-purple">Ketua RT</span></p>
+        </div>
+        <div style="padding:12px 0;border-bottom:1px solid #F3F4F6"><div style="font-size:12px;color:#9CA3AF">Blok / Rumah</div><div style="font-size:14px;font-weight:600;margin-top:2px">A01</div></div>
+        <div style="padding:12px 0;border-bottom:1px solid #F3F4F6"><div style="font-size:12px;color:#9CA3AF">No. HP</div><div style="font-size:14px;font-weight:600;margin-top:2px">081234567890</div></div>
+        <div style="padding:12px 0;border-bottom:1px solid #F3F4F6"><div style="font-size:12px;color:#9CA3AF">Pekerjaan</div><div style="font-size:14px;font-weight:600;margin-top:2px">Wiraswasta</div></div>
+        <div style="padding:12px 0"><div style="font-size:12px;color:#9CA3AF">PIN Login</div><div style="font-size:14px;font-weight:600;margin-top:2px">•••• <span class="badge" style="background:#F1F5F9;color:#475569">tersembunyi</span></div></div>
+        <button class="btn" style="width:100%;padding:13px;background:#EF4444;color:#fff;margin-top:16px" onclick="alert('Yakin keluar?')">🚪 Keluar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Data warga
+const warga=[
+  {id:'W001',nama:'Dirham Rozi',blok:'A01',hp:'081234567890',gol:'Ketua RT',status:'Tetap',pekerjaan:'Wiraswasta',pin:'1234'},
+  {id:'W002',nama:'Siti Rahayu',blok:'A02',hp:'081234567891',gol:'Sekretaris',status:'Tetap',pekerjaan:'Ibu Rumah Tangga',pin:'1234'},
+  {id:'W003',nama:'Agus Prasetyo',blok:'A03',hp:'081234567892',gol:'Bendahara',status:'Tetap',pekerjaan:'Karyawan Swasta',pin:'1234'},
+  {id:'W004',nama:'Dedi Mulyawan',blok:'A04',hp:'081234567893',gol:'Anggota Keamanan',status:'Tetap',pekerjaan:'PNS',pin:'1234'},
+  {id:'W005',nama:'Rina Wulandari',blok:'A05',hp:'081234567894',gol:'Warga',status:'Tetap',pekerjaan:'Guru',pin:'1234'}
+];
+
+// Render warga list
+function renderWarga(){
+  const el=document.getElementById('wargaList');
+  el.innerHTML=warga.map(w=>{
+    const inisial=w.nama.split(' ').map(x=>x[0]).join('').substr(0,2).toUpperCase();
+    return `<div style="display:flex;align-items:center;gap:13px;padding:14px;border:1px solid #E5E7EB;border-radius:14px;margin-bottom:10px;background:#fff">
+      <div style="width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,#7C3AED,#6D28D9);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0">${inisial}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:14px;font-weight:700">${w.nama} <span style="font-size:9px;color:#10B981;font-weight:800;background:#D1FAE5;padding:2px 7px;border-radius:8px;margin-left:4px"> PIN</span></div>
+        <div style="font-size:12px;color:#9CA3AF;margin-top:2px"><b style="color:#374151">${w.gol}</b> · Blok ${w.blok} · ${w.status}</div>
+        <div style="font-size:12px;color:#9CA3AF">💼 ${w.pekerjaan} · 📱 ${w.hp}</div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-sm" style="background:#EDE9FE;color:#5B21B6" onclick="alert('Edit ${w.nama}')">✏️</button>
+        <button class="btn btn-sm" style="background:#FEE2E2;color:#DC2626" onclick="alert('Hapus ${w.nama}?')">🗑️</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// Render iuran list
+function renderIuran(){
+  const el=document.getElementById('iuranList');
+  const iuranLunas=['W001','W002'];
+  el.innerHTML=warga.map(w=>{
+    const ok=iuranLunas.includes(w.id);
+    return `<div style="display:flex;align-items:center;gap:12px;padding:14px;border:1px solid ${ok?'#BBF7D0':'#E5E7EB'};border-radius:12px;margin-bottom:10px;background:${ok?'#F0FDF4':'#fff'}">
+      <div style="width:40px;height:40px;border-radius:10px;background:${ok?'linear-gradient(135deg,#10B981,#059669)':'#F3F4F6'};color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">${ok?'✅':'⏳'}</div>
+      <div style="flex:1"><div style="font-size:14px;font-weight:700">${w.nama} (Blok ${w.blok})</div><div style="font-size:12px;color:#6B7280;margin-top:2px">${ok?'Lunas 1 Okt 2026':'Belum membayar'}</div></div>
+      ${ok?'<span class="badge b-green">LUNAS</span>':`<button class="btn btn-sm btn-primary" onclick="alert('Setor iuran ${w.nama}')">💰 Setor</button>`}
+    </div>`;
+  }).join('');
+}
+
+// Render mutasi kas
+function renderMutasi(){
+  const kas=[
+    {tgl:'2026-10-01',tipe:'Masuk',kat:'Iuran Warga',urai:'Iuran Oktober - Ketua RT',nominal:50000},
+    {tgl:'2026-10-02',tipe:'Masuk',kat:'Iuran Warga',urai:'Iuran Oktober - Sekretaris',nominal:50000},
+    {tgl:'2026-10-05',tipe:'Masuk',kat:'Donasi',urai:'Donasi warga kegiatan',nominal:200000},
+    {tgl:'2026-10-10',tipe:'Keluar',kat:'Kebersihan',urai:'Beli sapu & tempat sampah',nominal:150000},
+    {tgl:'2026-10-15',tipe:'Keluar',kat:'Keamanan',urai:'Lampu pos ronda',nominal:85000}
+  ];
+  const el=document.getElementById('mutasiList');
+  el.innerHTML=kas.map(k=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid #F3F4F6">
+    <div style="flex:1"><div style="font-size:14px;font-weight:600">${k.urai} <span class="badge ${k.tipe==='Masuk'?'b-green':'b-red'}">${k.tipe}</span></div><div style="font-size:12px;color:#9CA3AF;margin-top:2px">${k.kat} · ${k.tgl}</div></div>
+    <div style="font-weight:800;font-size:14px;color:${k.tipe==='Masuk'?'#10B981':'#EF4444'}">${k.tipe==='Masuk'?'+':'-'}Rp ${k.nominal.toLocaleString('id-ID')}</div>
+  </div>`).join('');
+}
+
+// Navigasi halaman
+function showPage(page,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const target=document.getElementById('page-'+page);
+  if(target)target.classList.add('active');
+  document.querySelectorAll('.menu-item').forEach(m=>m.classList.remove('active'));
+  if(el)el.classList.add('active');
+  window.scrollTo({top:0});
+}
+
+// Init
+renderWarga();
+renderIuran();
+renderMutasi();
+</script>
+
+</body>
+</html>
