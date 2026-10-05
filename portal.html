@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--p:#7C3AED;--pd:#6D28D9;--pdd:#5B21B6;--pt:#EDE9FE;--pt2:#F5F3FF;--ink:#1F2937;--ink2:#374151;--muted:#6B7280;--muted2:#9CA3AF;--line:#E5E7EB;--line2:#F3F4F6;--bg:#F4F4F8;--card:#fff;--green:#10B981;--red:#EF4444;--blue:#3B82F6;--sbw:250px}
+:root{--p:#7C3AED;--pd:#6D28D9;--pdd:#5B21B6;--pt:#EDE9FE;--pt2:#F5F3FF;--ink:#1F2937;--ink2:#374151;--muted:#6B7280;--muted2:#9CA3AF;--line:#E5E7EB;--line2:#F3F4F6;--bg:#F4F4F8;--card:#fff;--green:#10B981;--red:#EF4444;--blue:#3B82F6;--sbw:260px}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
 button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inherit}
 ::-webkit-scrollbar{width:8px}::-webkit-scrollbar-thumb{background:#C4B5FD;border-radius:8px}
@@ -51,7 +51,7 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 .header{grid-column:1/-1;background:linear-gradient(135deg,var(--p),var(--pd),var(--pdd));color:#fff;padding:20px 28px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 12px rgba(109,40,217,.2);position:relative;overflow:hidden}
 .header::before{content:"";position:absolute;top:-60px;right:-40px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.1)}
 .header-left{display:flex;align-items:center;gap:16px}
-.hamburger{display:none;background:rgba(255,255,255,.2);border:none;border-radius:10px;width:40px;height:40px;font-size:22px;color:#fff;cursor:pointer}
+.hamburger{display:none;background:rgba(255,255,255,.2);border:none;border-radius:10px;width:40px;height:40px;font-size:22px;color:#fff;cursor:pointer;align-items:center;justify-content:center}
 .hamburger:hover{background:rgba(255,255,255,.3)}
 .header-left h1{font-size:22px;font-weight:800;margin-bottom:4px;position:relative}
 .header-left p{font-size:13px;opacity:.95;font-weight:600;position:relative}
@@ -60,14 +60,49 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 .notif-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:800;display:none;align-items:center;justify-content:center;border:2px solid var(--pd)}
 .notif-btn .badge.show{display:flex}
 
+/* SIDEBAR - ICON PASTI TAMPIL */
 .sidebar{background:#fff;border-right:1px solid var(--line);padding:20px 0;overflow-y:auto;grid-row:2}
 .sidebar-header{padding:0 20px 16px;border-bottom:1px solid var(--line);margin-bottom:12px}
 .sidebar-header h2{font-size:18px;font-weight:800}
 .sidebar-header p{font-size:12px;color:var(--muted);margin-top:2px}
-.menu-item{display:flex;align-items:center;gap:12px;padding:12px 20px;cursor:pointer;color:var(--muted);font-weight:600;font-size:14px;transition:all .15s}
+.sidebar-menu{display:flex;flex-direction:column;gap:2px;padding:0 10px 20px}
+
+.menu-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 16px;
+  cursor:pointer;
+  color:var(--muted);
+  font-weight:600;
+  font-size:14px;
+  transition:all .15s;
+  border-radius:10px;
+  min-height:44px;
+}
 .menu-item:hover{background:var(--pt2);color:var(--ink)}
 .menu-item.active{background:var(--pt);color:var(--pdd);border-right:3px solid var(--p)}
-.menu-item .icon{font-size:18px;width:22px;text-align:center}
+
+/* ICON CONTAINER - PASTI TAMPIL */
+.menu-item .icon{
+  font-size:20px;
+  width:28px;
+  height:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  line-height:1;
+}
+
+/* LOGOUT ITEM */
+.menu-item.logout-item{
+  color:var(--red);
+  margin-top:12px;
+  border-top:1px solid var(--line);
+  padding-top:16px;
+}
+.menu-item.logout-item:hover{background:#FEF2F2}
 
 .content{padding:24px 28px;overflow-y:auto;background:var(--bg);grid-row:2}
 
@@ -261,21 +296,79 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 .sync-status.offline .dot{background:var(--red)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
 
-/* BOTTOM NAV (MOBILE) */
-.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);z-index:100;box-shadow:0 -4px 16px rgba(0,0,0,.06);padding:8px 0 calc(8px + env(safe-area-inset-bottom))}
-.bottom-nav-inner{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;max-width:600px;margin:0 auto}
-.bottom-nav button{background:none;border:none;padding:6px 4px;color:var(--muted);font-size:9px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all .15s}
+/* BOTTOM NAV - ICON SELALU TAMPIL */
+.bottom-nav{
+  display:none;
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#fff;
+  border-top:1px solid var(--line);
+  z-index:100;
+  box-shadow:0 -4px 16px rgba(0,0,0,.06);
+  padding:6px 0 calc(6px + env(safe-area-inset-bottom));
+}
+.bottom-nav-inner{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:2px;
+  max-width:600px;
+  margin:0 auto;
+}
+.bottom-nav button{
+  background:none;
+  border:none;
+  padding:4px 2px;
+  color:var(--muted);
+  font-size:9px;
+  font-weight:600;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2px;
+  transition:all .15s;
+  cursor:pointer;
+  min-height:50px;
+  justify-content:center;
+}
 .bottom-nav button.active{color:var(--p)}
-.bottom-nav button .ni{font-size:20px}
+.bottom-nav button .ni{
+  font-size:20px;
+  line-height:1;
+  width:28px;
+  height:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
 .bottom-nav button.logout-btn{color:var(--red)}
-.bottom-nav button.logout-btn .ni{background:#FEE2E2;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.bottom-nav button.logout-btn .ni{
+  background:#FEE2E2;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
 /* RESPONSIVE */
 @media(max-width:1023px){
   .app{grid-template-columns:1fr}
-  .sidebar{position:fixed;left:-100%;top:0;bottom:0;width:280px;z-index:100;transition:left .3s;box-shadow:4px 0 20px rgba(0,0,0,.1)}
+  .sidebar{
+    position:fixed;
+    left:-100%;
+    top:0;
+    bottom:0;
+    width:280px;
+    z-index:100;
+    transition:left .3s;
+    box-shadow:4px 0 20px rgba(0,0,0,.1);
+  }
   .sidebar.open{left:0}
-  .hamburger{display:flex;align-items:center;justify-content:center}
+  .hamburger{display:flex}
   .bottom-nav{display:block}
   .content{padding:16px 14px 100px}
   .finance-grid{grid-template-columns:1fr 1fr}
@@ -293,8 +386,8 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
   .riwayat-stats{grid-template-columns:1fr}
   .login-container{padding:28px 20px}
   .bottom-nav-inner{grid-template-columns:repeat(6,1fr)}
-  .bottom-nav button{font-size:8px}
-  .bottom-nav button .ni{font-size:18px}
+  .bottom-nav button{font-size:8px;padding:3px 1px;min-height:46px}
+  .bottom-nav button .ni{font-size:18px;width:24px;height:24px}
 }
 @media(min-width:1024px){
   .bottom-nav{display:none!important}
@@ -320,12 +413,12 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
     <div class="login-logo">🏘️</div>
     <div class="login-header"><h1>Portal Saung Kebun</h1><p>RT 11 / RW 44 — Sistem Rukun Tetangga Digital</p></div>
     <div class="form-group"><label>👤 Pilih Akun Warga</label><select id="loginWarga"><option value="">— Memuat —</option></select></div>
-    <div class="form-group"><label> PIN (4 digit)</label><input type="password" id="loginPin" placeholder="Masukkan PIN" maxlength="4" inputmode="numeric" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div>
+    <div class="form-group"><label>🔐 PIN (4 digit)</label><input type="password" id="loginPin" placeholder="Masukkan PIN" maxlength="4" inputmode="numeric" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div>
     <div class="form-group"><label class="check-label"><input type="checkbox" id="rememberMe" checked> Ingat saya (auto-login 7 hari)</label></div>
     <button class="btn btn-primary btn-block" onclick="doLogin()">🔓 Masuk ke Portal</button>
-    <button class="btn btn-danger btn-block" style="margin-top:10px" onclick="resetData()">🔄 Reset Data</button>
+    <button class="btn btn-danger btn-block" style="margin-top:10px" onclick="resetData()"> Reset Data</button>
     <button class="btn btn-secondary btn-block" style="margin-top:10px" onclick="showHelp()">❓ Bantuan</button>
-    <div class="login-footer">💡 PIN default: <b>1234</b> · Data tersimpan aman di Firebase Cloud</div>
+    <div class="login-footer"> PIN default: <b>1234</b> · Data tersimpan aman di Firebase Cloud</div>
   </div>
 </div>
 
@@ -345,22 +438,56 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 
   <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
+  <!-- SIDEBAR DENGAN ICON LENGKAP -->
   <div class="sidebar" id="sidebar">
-    <div class="sidebar-header"><h2>🏘️ Saung Kebun</h2><p>RT 11 / RW 44</p></div>
-    <div class="menu-item active" data-page="home" onclick="showPage('home',this)"><span class="icon">🏠</span>Beranda</div>
-    <div class="menu-item" data-page="warga" onclick="showPage('warga',this)"><span class="icon">👥</span>Warga</div>
-    <div class="menu-item" data-page="iuran" onclick="showPage('iuran',this)"><span class="icon">✅</span>Iuran</div>
-    <div class="menu-item" data-page="keuangan" onclick="showPage('keuangan',this)"><span class="icon">💰</span>Keuangan</div>
-    <div class="menu-item" data-page="setoran" onclick="showPage('setoran',this)"><span class="icon"></span>Setoran</div>
-    <div class="menu-item" data-page="pengumuman" onclick="showPage('pengumuman',this)"><span class="icon">📢</span>Pengumuman</div>
-    <div class="menu-item" data-page="kegiatan" onclick="showPage('kegiatan',this)"><span class="icon"></span>Kegiatan</div>
-    <div class="menu-item" data-page="pengaduan" onclick="showPage('pengaduan',this)"><span class="icon">🚨</span>Pengaduan</div>
-    <div class="menu-item" data-page="ronda" onclick="showPage('ronda',this)"><span class="icon">🛡️</span>Ronda</div>
-    <div class="menu-item" data-page="surat" onclick="showPage('surat',this)"><span class="icon">✉️</span>Surat</div>
-    <div class="menu-item" data-page="tamu" onclick="showPage('tamu',this)"><span class="icon">👤</span>Tamu</div>
-    <div class="menu-item" data-page="voting" onclick="showPage('voting',this)"><span class="icon">🗳️</span>Voting</div>
-    <div class="menu-item" data-page="akun" onclick="showPage('akun',this)"><span class="icon">⚙️</span>Akun</div>
-    <div class="menu-item" onclick="doLogout()" style="color:var(--red);margin-top:10px;border-top:1px solid var(--line);padding-top:16px"><span class="icon">🚪</span>Keluar</div>
+    <div class="sidebar-header">
+      <h2>️ Saung Kebun</h2>
+      <p>RT 11 / RW 44</p>
+    </div>
+    <div class="sidebar-menu">
+      <div class="menu-item active" data-page="home" onclick="showPage('home',this)">
+        <span class="icon">🏠</span><span>Beranda</span>
+      </div>
+      <div class="menu-item" data-page="warga" onclick="showPage('warga',this)">
+        <span class="icon">👥</span><span>Warga</span>
+      </div>
+      <div class="menu-item" data-page="iuran" onclick="showPage('iuran',this)">
+        <span class="icon">✅</span><span>Iuran</span>
+      </div>
+      <div class="menu-item" data-page="keuangan" onclick="showPage('keuangan',this)">
+        <span class="icon">💰</span><span>Keuangan</span>
+      </div>
+      <div class="menu-item" data-page="setoran" onclick="showPage('setoran',this)">
+        <span class="icon">📤</span><span>Setoran</span>
+      </div>
+      <div class="menu-item" data-page="pengumuman" onclick="showPage('pengumuman',this)">
+        <span class="icon">📢</span><span>Pengumuman</span>
+      </div>
+      <div class="menu-item" data-page="kegiatan" onclick="showPage('kegiatan',this)">
+        <span class="icon">📅</span><span>Kegiatan</span>
+      </div>
+      <div class="menu-item" data-page="pengaduan" onclick="showPage('pengaduan',this)">
+        <span class="icon"></span><span>Pengaduan</span>
+      </div>
+      <div class="menu-item" data-page="ronda" onclick="showPage('ronda',this)">
+        <span class="icon">🛡️</span><span>Ronda</span>
+      </div>
+      <div class="menu-item" data-page="surat" onclick="showPage('surat',this)">
+        <span class="icon">✉️</span><span>Surat</span>
+      </div>
+      <div class="menu-item" data-page="tamu" onclick="showPage('tamu',this)">
+        <span class="icon">👤</span><span>Tamu</span>
+      </div>
+      <div class="menu-item" data-page="voting" onclick="showPage('voting',this)">
+        <span class="icon">️</span><span>Voting</span>
+      </div>
+      <div class="menu-item" data-page="akun" onclick="showPage('akun',this)">
+        <span class="icon">⚙️</span><span>Akun</span>
+      </div>
+      <div class="menu-item logout-item" onclick="doLogout()">
+        <span class="icon">🚪</span><span>Keluar</span>
+      </div>
+    </div>
   </div>
 
   <div class="content" id="content">
@@ -394,7 +521,7 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
         <div class="finance-grid">
           <div class="finance-item purple"><div class="label">Total Warga</div><div class="value" id="hWarga">0</div><div class="icon">👥</div></div>
           <div class="finance-item green"><div class="label">Iuran Lunas</div><div class="value" id="hIuran">0/0</div><div class="icon">✅</div></div>
-          <div class="finance-item red"><div class="label">Pengaduan Aktif</div><div class="value" id="hLapor">0</div><div class="icon">🚨</div></div>
+          <div class="finance-item red"><div class="label">Pengaduan Aktif</div><div class="value" id="hLapor">0</div><div class="icon"></div></div>
         </div>
         <div style="margin-top:14px">
           <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--ink2);margin-bottom:6px"><span>Progress Iuran Bulan Ini</span><span id="hIuranPct">0%</span></div>
@@ -407,7 +534,7 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 
     <!-- WARGA -->
     <div class="page" id="page-warga">
-      <div class="back-bar"><h2> Data Warga</h2><button class="btn btn-back" onclick="showPage('home',document.querySelector('[data-page=home]'))">← Kembali</button></div>
+      <div class="back-bar"><h2>👥 Data Warga</h2><button class="btn btn-back" onclick="showPage('home',document.querySelector('[data-page=home]'))">← Kembali</button></div>
       <div class="card">
         <div class="card-header"><button class="btn btn-sm btn-primary" onclick="showWargaForm()">＋ Tambah Warga</button></div>
         <div class="search-box"><span class="si">🔍</span><input type="text" id="searchWarga" placeholder="Cari nama, blok, jabatan..." oninput="renderWargaList()"></div>
@@ -420,7 +547,7 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
       <div class="back-bar"><h2>✅ Status Iuran</h2><button class="btn btn-back" onclick="showPage('home',document.querySelector('[data-page=home]'))">← Kembali</button></div>
       <div class="card">
         <div class="card-header"><button class="btn btn-sm btn-secondary" onclick="ubahNominalIuran()">✏️ Ubah Nominal</button></div>
-        <div class="info-box green"><div class="info-box-header"><h4>💡 Info</h4><button onclick="showPage('setoran',document.querySelector('[data-page=setoran]'))">💰 Setor</button></div><p class="note">Nominal: <b id="iuranNominalLabel">Rp 50.000</b>/bulan</p></div>
+        <div class="info-box green"><div class="info-box-header"><h4>💡 Info</h4><button onclick="showPage('setoran',document.querySelector('[data-page=setoran]'))"> Setor</button></div><p class="note">Nominal: <b id="iuranNominalLabel">Rp 50.000</b>/bulan</p></div>
         <div class="filter-row"><select id="iuranBulan" onchange="renderIuranList()"></select></div>
         <div id="iuranList"></div>
       </div>
@@ -432,11 +559,11 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
       <div class="card">
         <div class="card-header"><span class="link" onclick="showRekeningSettings()" id="rekeningLink" style="display:none">⚙️ Pengaturan Rekening</span></div>
         <div class="filter-row"><select id="filterBulan" onchange="applyFilter()"></select><select id="filterPeriode" onchange="applyFilter()"><option value="bulan">Per Bulan</option><option value="semua">Semua</option></select></div>
-        <div class="action-row"><button class="action-btn add" onclick="showTambahTransaksi()">＋ Tambah</button><button class="action-btn reset" onclick="resetFilter()">🔄 Reset</button><button class="action-btn pdf" onclick="window.print()"> PDF</button></div>
+        <div class="action-row"><button class="action-btn add" onclick="showTambahTransaksi()">＋ Tambah</button><button class="action-btn reset" onclick="resetFilter()">🔄 Reset</button><button class="action-btn pdf" onclick="window.print()">🖨️ PDF</button></div>
         <div class="info-box"><div class="info-box-header"><h4>💳 Rekening Iuran</h4><button onclick="salinRekening()">📋 Salin</button></div><div class="bank-info"><div class="bn" id="bankName">Bank Mandiri</div><div class="acc" id="bankAcc">123-00-456789-0</div><div class="an" id="bankAn">A/N Kas RT 11 Saung Kebun</div></div><div id="qrisDisplay" style="display:none;margin-top:10px"><div style="font-size:12px;color:var(--muted);margin-bottom:6px">QRIS:</div><img id="qrisImg" style="max-width:150px;border-radius:8px"></div></div>
         <div class="finance-grid"><div class="finance-item green"><div class="label">Saldo</div><div class="value" id="kSaldo">Rp 0</div></div><div class="finance-item blue"><div class="label">Masuk</div><div class="value" id="kMasuk">Rp 0</div></div><div class="finance-item orange"><div class="label">Keluar</div><div class="value" id="kKeluar">Rp 0</div></div></div>
       </div>
-      <div class="card"><div class="card-header"><h3> Mutasi Kas</h3></div><div id="mutasiList"></div></div>
+      <div class="card"><div class="card-header"><h3>📊 Mutasi Kas</h3></div><div id="mutasiList"></div></div>
     </div>
 
     <!-- SETORAN -->
@@ -460,7 +587,7 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 
     <!-- PENGUMUMAN -->
     <div class="page" id="page-pengumuman">
-      <div class="back-bar"><h2> Pengumuman</h2><button class="btn btn-back" onclick="showPage('home',document.querySelector('[data-page=home]'))">← Kembali</button></div>
+      <div class="back-bar"><h2>📢 Pengumuman</h2><button class="btn btn-back" onclick="showPage('home',document.querySelector('[data-page=home]'))">← Kembali</button></div>
       <div class="card"><div class="card-header"><button class="btn btn-sm btn-primary" onclick="showPengumumanForm()">＋ Tambah</button></div><div id="pengumumanList"></div></div>
     </div>
 
@@ -479,7 +606,7 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 
     <!-- PENGADUAN -->
     <div class="page" id="page-pengaduan">
-      <div class="back-bar"><h2> Pengaduan</h2><button class="btn btn-back" onclick="showPage('home',document.querySelector('[data-page=home]'))">← Kembali</button></div>
+      <div class="back-bar"><h2>🚨 Pengaduan</h2><button class="btn btn-back" onclick="showPage('home',document.querySelector('[data-page=home]'))">← Kembali</button></div>
       <div class="card"><div class="card-header"><button class="btn btn-sm btn-primary" onclick="showLaporForm()">＋ Lapor</button></div><div id="pengaduanList"></div></div>
     </div>
 
@@ -491,7 +618,7 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 
     <!-- SURAT -->
     <div class="page" id="page-surat">
-      <div class="back-bar"><h2>️ Pengajuan Surat</h2><button class="btn btn-back" onclick="showPage('home',document.querySelector('[data-page=home]'))">← Kembali</button></div>
+      <div class="back-bar"><h2>✉️ Pengajuan Surat</h2><button class="btn btn-back" onclick="showPage('home',document.querySelector('[data-page=home]'))">← Kembali</button></div>
       <div class="card"><div class="card-header"><button class="btn btn-sm btn-primary" onclick="showSuratForm()">＋ Ajukan</button></div><div id="suratList"></div></div>
     </div>
 
@@ -509,29 +636,47 @@ button{font-family:inherit;cursor:pointer}input,select,textarea{font-family:inhe
 
     <!-- AKUN -->
     <div class="page" id="page-akun">
-      <div class="back-bar"><h2>⚙️ Akun Saya</h2><button class="btn btn-back" onclick="showPage('home',document.querySelector('[data-page=home]'))">← Kembali</button></div>
+      <div class="back-bar"><h2>️ Akun Saya</h2><button class="btn btn-back" onclick="showPage('home',document.querySelector('[data-page=home]'))">← Kembali</button></div>
       <div class="card"><div class="card-header"><button class="btn btn-sm btn-secondary" onclick="editProfil()">✏️ Edit Profil</button></div><div id="akunInfo"></div><button class="btn btn-danger btn-block" style="margin-top:16px" onclick="doLogout()">🚪 Keluar dari Portal</button></div>
       <div class="card" id="backupCard" style="display:none"><div class="card-header"><h3>💾 Backup & Restore</h3></div><p style="font-size:13px;color:var(--muted);margin-bottom:14px">Data otomatis tersimpan di Firebase Cloud. Download backup JSON untuk cadangan lokal.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-primary" onclick="downloadBackup()">📥 Download Backup</button><button class="btn btn-secondary" onclick="document.getElementById('restoreFile').click()">📤 Restore Backup</button><input type="file" id="restoreFile" accept=".json" style="display:none" onchange="restoreBackup(event)"></div></div>
     </div>
 
   </div>
 
-  <!-- BOTTOM NAV (MOBILE) -->
+  <!-- BOTTOM NAV MOBILE - ICON SELALU TAMPIL -->
   <nav class="bottom-nav" id="bottomNav">
     <div class="bottom-nav-inner">
-      <button data-page="home" onclick="showPage('home',document.querySelector('[data-page=home]'))"><span class="ni">🏠</span>Beranda</button>
-      <button data-page="keuangan" onclick="showPage('keuangan',document.querySelector('[data-page=keuangan]'))"><span class="ni">💰</span>Kas</button>
-      <button data-page="setoran" onclick="showPage('setoran',document.querySelector('[data-page=setoran]'))"><span class="ni"></span>Setor</button>
-      <button data-page="pengaduan" onclick="showPage('pengaduan',document.querySelector('[data-page=pengaduan]'))"><span class="ni">🚨</span>Lapor</button>
-      <button data-page="akun" onclick="showPage('akun',document.querySelector('[data-page=akun]'))"><span class="ni">️</span>Akun</button>
-      <button class="logout-btn" onclick="doLogout()"><span class="ni">🚪</span>Keluar</button>
+      <button data-page="home" onclick="showPage('home',document.querySelector('[data-page=home]'))">
+        <span class="ni">🏠</span>
+        <span>Beranda</span>
+      </button>
+      <button data-page="keuangan" onclick="showPage('keuangan',document.querySelector('[data-page=keuangan]'))">
+        <span class="ni">💰</span>
+        <span>Kas</span>
+      </button>
+      <button data-page="setoran" onclick="showPage('setoran',document.querySelector('[data-page=setoran]'))">
+        <span class="ni">📤</span>
+        <span>Setor</span>
+      </button>
+      <button data-page="pengaduan" onclick="showPage('pengaduan',document.querySelector('[data-page=pengaduan]'))">
+        <span class="ni">🚨</span>
+        <span>Lapor</span>
+      </button>
+      <button data-page="akun" onclick="showPage('akun',document.querySelector('[data-page=akun]'))">
+        <span class="ni">⚙️</span>
+        <span>Akun</span>
+      </button>
+      <button class="logout-btn" onclick="doLogout()">
+        <span class="ni">🚪</span>
+        <span>Keluar</span>
+      </button>
     </div>
   </nav>
 </div>
 
 <div class="toast" id="toast"></div>
 <div class="modal" id="modal"><div class="modal-content" id="modalContent"></div></div>
-<div class="lightbox" id="lightbox" onclick="this.classList.remove('active')"><button class="lb-close" onclick="event.stopPropagation();document.getElementById('lightbox').classList.remove('active')">✕ Tutup</button><img id="lightboxImg" src="" alt="bukti"></div>
+<div class="lightbox" id="lightbox" onclick="this.classList.remove('active')"><button class="lb-close" onclick="event.stopPropagation();document.getElementById('lightbox').classList.remove('active')"> Tutup</button><img id="lightboxImg" src="" alt="bukti"></div>
 <div class="loading" id="loading"><div class="spinner"></div><p>Memuat data dari Firebase...</p></div>
 <div class="sync-status" id="syncStatus"><span class="dot"></span><span id="syncText">Online</span></div>
 
@@ -583,7 +728,7 @@ function doLogin(){const id=$('loginWarga').value,pin=$('loginPin').value.trim()
 function enterApp(){$('loginPage').style.display='none';$('app').style.display='grid';$('loading').style.display='none';$('hRole').textContent=currentUser.gol;$('hName').textContent=currentUser.nama;buildHomeMenu();updateRekeningLink();setupRealtimeListener();showPage('home',document.querySelector('[data-page=home]'));}
 function doLogout(){if(!confirm('Yakin ingin keluar?'))return;currentUser=null;if(firebaseListener)db.ref('/').off('value',firebaseListener);localStorage.removeItem('rtku_sess');$('loginPage').style.display='flex';$('app').style.display='none';$('loginPin').value='';closeSidebar();showToast('Anda telah keluar');}
 function resetData(){if(!confirm('⚠️ Reset semua data di Firebase?'))return;if(!confirm('Yakin 100%? Data akan hilang permanen!'))return;db.ref('/').set(defaultData).then(()=>{appData=JSON.parse(JSON.stringify(defaultData));saveDataToFirebase();populateLoginWarga();showToast('Data direset! PIN: 1234');}).catch(e=>showToast('Gagal reset: '+e.message,'error'));}
-function showHelp(){alert('LOGIN:\n1. Pilih nama\n2. PIN: 1234\n3. Masuk\n\n💾 Data tersimpan aman di Firebase Cloud\n🔄 Real-time sync antar device\n Bisa offline (cache lokal)\n\nHak akses:\n• Ketua RT/Bendahara: semua fitur + backup + edit rekening\n• Warga biasa: setor, lapor, surat, voting');}
+function showHelp(){alert('LOGIN:\n1. Pilih nama\n2. PIN: 1234\n3. Masuk\n\n💾 Data tersimpan aman di Firebase Cloud\n🔄 Real-time sync antar device\n📱 Bisa offline (cache lokal)\n\nHak akses:\n• Ketua RT/Bendahara: semua fitur + backup + edit rekening\n• Warga biasa: setor, lapor, surat, voting');}
 
 /* ================= MOBILE NAV ================= */
 function toggleSidebar(){const sb=$('sidebar'),ov=$('sidebarOverlay');sb.classList.toggle('open');ov.classList.toggle('active');}
@@ -591,7 +736,7 @@ function closeSidebar(){$('sidebar').classList.remove('open');$('sidebarOverlay'
 
 /* ================= NAV ================= */
 const PAGES=['home','warga','iuran','keuangan','setoran','pengumuman','kegiatan','pengaduan','ronda','surat','tamu','voting','akun'];
-const NAV=[{id:'home',i:'🏠',l:'Beranda'},{id:'warga',i:'👥',l:'Warga'},{id:'iuran',i:'✅',l:'Iuran'},{id:'keuangan',i:'💰',l:'Keuangan'},{id:'setoran',i:'📤',l:'Setoran'},{id:'pengumuman',i:'📢',l:'Pengumuman'},{id:'kegiatan',i:'📅',l:'Kegiatan'},{id:'pengaduan',i:'🚨',l:'Pengaduan'},{id:'ronda',i:'🛡️',l:'Ronda'},{id:'surat',i:'✉️',l:'Surat'},{id:'tamu',i:'',l:'Tamu'},{id:'voting',i:'🗳️',l:'Voting'},{id:'akun',i:'️',l:'Akun'}];
+const NAV=[{id:'home',i:'',l:'Beranda'},{id:'warga',i:'👥',l:'Warga'},{id:'iuran',i:'✅',l:'Iuran'},{id:'keuangan',i:'',l:'Keuangan'},{id:'setoran',i:'📤',l:'Setoran'},{id:'pengumuman',i:'📢',l:'Pengumuman'},{id:'kegiatan',i:'📅',l:'Kegiatan'},{id:'pengaduan',i:'🚨',l:'Pengaduan'},{id:'ronda',i:'🛡️',l:'Ronda'},{id:'surat',i:'✉️',l:'Surat'},{id:'tamu',i:'👤',l:'Tamu'},{id:'voting',i:'🗳️',l:'Voting'},{id:'akun',i:'️',l:'Akun'}];
 function buildHomeMenu(){const cls={warga:'mi-1',iuran:'mi-2',keuangan:'mi-3',setoran:'mi-8',pengumuman:'mi-5',kegiatan:'mi-9',pengaduan:'mi-4',ronda:'mi-3',surat:'mi-7',tamu:'mi-6',voting:'mi-2'};$('homeMenu').innerHTML=NAV.filter(n=>n.id!=='home'&&n.id!=='akun').map(n=>`<div class="menu-box" onclick="showPage('${n.id}',document.querySelector('[data-page=${n.id}]'))"><div class="mi ${cls[n.id]||'mi-1'}">${n.i}</div><span>${n.l}</span></div>`).join('');}
 function showPage(p,el){if(!PAGES.includes(p))p='home';currentPage=p;document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));const t=$('page-'+p);if(t)t.classList.add('active');document.querySelectorAll('.menu-item').forEach(m=>m.classList.toggle('active',m.dataset.page===p));document.querySelectorAll('.bottom-nav button[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===p));refreshPage();window.scrollTo({top:0});closeSidebar();}
 function refreshPage(){updateDashboard();switch(currentPage){case 'warga':renderWargaList();break;case 'iuran':buildIuranBulan();renderIuranList();break;case 'keuangan':buildKasBulan();applyFilter();renderRekening();break;case 'setoran':buildSetorBulan();renderSetoran();renderRekening();break;case 'pengumuman':renderPengumuman();break;case 'kegiatan':buildKegiatanFilter();renderKegiatanList();break;case 'pengaduan':renderPengaduan();break;case 'ronda':renderRonda();break;case 'surat':renderSurat();break;case 'tamu':renderTamu();break;case 'voting':renderVoting();break;case 'akun':renderAkun();break;}}
@@ -600,7 +745,7 @@ function updateRekeningLink(){$('rekeningLink').style.display=isBendahara()?'inl
 
 /* ================= REKENING ================= */
 function renderRekening(){const b=appData.rt.bank||{};$('bankName').textContent=b.nama||'-';$('bankAcc').textContent=b.rek||'-';$('bankAn').textContent='A/N '+(b.an||'-');$('bankName2').textContent=b.nama||'-';$('bankAcc2').textContent=b.rek||'-';$('bankAn2').textContent='A/N '+(b.an||'-');if(b.qris){$('qrisDisplay').style.display='block';$('qrisImg').src=b.qris;$('qrisDisplay2').style.display='block';$('qrisImg2').src=b.qris;}else{$('qrisDisplay').style.display='none';$('qrisDisplay2').style.display='none';}}
-function showRekeningSettings(){if(!isBendahara())return showToast('Hanya bendahara','error');const b=appData.rt.bank||{};openModal(`<div class="modal-header"><h3>⚙️ Pengaturan Rekening & QRIS</h3><button class="modal-close" onclick="closeModal()">✕</button></div><p style="font-size:13px;color:var(--muted);margin-bottom:14px">Hanya bendahara yang dapat mengubah.</p><div class="form-group"><label>Nama Bank</label><input id="rBank" value="${esc(b.nama||'')}"></div><div class="form-group"><label>Nomor Rekening</label><input id="rRek" value="${esc(b.rek||'')}"></div><div class="form-group"><label>Atas Nama</label><input id="rAn" value="${esc(b.an||'')}"></div><div class="form-group"><label>QRIS (Upload gambar)</label><input type="file" id="rQris" accept="image/*" onchange="previewQris(this)"><div id="qrisPreview" style="margin-top:10px">${b.qris?`<img src="${b.qris}" style="max-width:150px;border-radius:8px">`:'<div style="color:var(--muted);font-size:13px">Belum ada QRIS</div>'}</div></div><div style="display:flex;gap:8px"><button class="btn btn-primary" style="flex:1" onclick="saveRekening()">💾 Simpan</button>${b.qris?'<button class="btn btn-danger" onclick="hapusQris()">🗑️ Hapus QRIS</button>':''}</div>`);}
+function showRekeningSettings(){if(!isBendahara())return showToast('Hanya bendahara','error');const b=appData.rt.bank||{};openModal(`<div class="modal-header"><h3>⚙️ Pengaturan Rekening & QRIS</h3><button class="modal-close" onclick="closeModal()">✕</button></div><p style="font-size:13px;color:var(--muted);margin-bottom:14px">Hanya bendahara yang dapat mengubah.</p><div class="form-group"><label>Nama Bank</label><input id="rBank" value="${esc(b.nama||'')}"></div><div class="form-group"><label>Nomor Rekening</label><input id="rRek" value="${esc(b.rek||'')}"></div><div class="form-group"><label>Atas Nama</label><input id="rAn" value="${esc(b.an||'')}"></div><div class="form-group"><label>QRIS (Upload gambar)</label><input type="file" id="rQris" accept="image/*" onchange="previewQris(this)"><div id="qrisPreview" style="margin-top:10px">${b.qris?`<img src="${b.qris}" style="max-width:150px;border-radius:8px">`:'<div style="color:var(--muted);font-size:13px">Belum ada QRIS</div>'}</div></div><div style="display:flex;gap:8px"><button class="btn btn-primary" style="flex:1" onclick="saveRekening()">💾 Simpan</button>${b.qris?'<button class="btn btn-danger" onclick="hapusQris()">️ Hapus QRIS</button>':''}</div>`);}
 function previewQris(inp){if(inp.files&&inp.files[0]){const r=new FileReader();r.onload=e=>{$('qrisPreview').innerHTML=`<img src="${e.target.result}" style="max-width:150px;border-radius:8px">`;};r.readAsDataURL(inp.files[0]);}}
 async function saveRekening(){const nama=$('rBank').value.trim(),rek=$('rRek').value.trim(),an=$('rAn').value.trim();if(!nama||!rek||!an)return showToast('Lengkapi semua field','error');const img=$('qrisPreview').querySelector('img');const qris=img?img.src:null;appData.rt.bank={nama,rek,an,qris};await saveDataToFirebase();closeModal();showToast('Rekening & QRIS tersimpan di Firebase');renderRekening();}
 async function hapusQris(){if(!confirm('Hapus QRIS?'))return;appData.rt.bank.qris=null;await saveDataToFirebase();closeModal();showToast('QRIS dihapus');renderRekening();}
@@ -608,7 +753,7 @@ function salinRekening(){const r=(appData.rt.bank||{}).rek||'';if(navigator.clip
 
 /* ================= WARGA ================= */
 function renderWargaList(){const q=($('searchWarga')?$('searchWarga').value:'').toLowerCase();let l=(appData.warga||[]).slice();if(q)l=l.filter(w=>[w.nama,w.blok,w.gol,w.pekerjaan,w.hp].some(v=>String(v||'').toLowerCase().includes(q)));$('wargaList').innerHTML=l.length?l.map(w=>`<div class="data-item"><div class="data-avatar">${initials(w.nama)}</div><div class="data-info"><div class="name">${esc(w.nama)} <span class="pin-tag">🔒PIN</span></div><div class="detail"><b>${esc(w.gol)}</b> · Blok ${esc(w.blok)} · ${esc(w.status)}</div><div class="detail">💼 ${esc(w.pekerjaan||'-')} · 📱 ${esc(w.hp||'-')}</div></div><div class="data-actions"><button class="btn-edit" onclick="editWarga('${w.id}')">✏️</button><button class="btn-del" onclick="deleteWarga('${w.id}')">🗑️</button></div></div>`).join(''):emptyState('👥','Belum ada warga');}
-function showWargaForm(w){const e=!!w;openModal(`<div class="modal-header"><h3>${e?'✏️ Edit':'＋ Tambah'} Warga</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-group"><label>Nama *</label><input id="wNama" value="${e?esc(w.nama):''}"></div><div class="form-row"><div class="form-group"><label>Blok *</label><input id="wBlok" value="${e?esc(w.blok):''}"></div><div class="form-group"><label>HP</label><input id="wHp" value="${e?esc(w.hp||''):''}"></div></div><div class="form-row"><div class="form-group"><label>Jabatan</label><select id="wGol">${['Warga','Ketua RT','Sekretaris','Bendahara','Anggota Keamanan'].map(g=>`<option ${e&&w.gol===g?'selected':''}>${g}</option>`).join('')}</select></div><div class="form-group"><label>Status</label><select id="wStatus">${['Tetap','Kontrak','Kost'].map(s=>`<option ${e&&w.status===s?'selected':''}>${s}</option>`).join('')}</select></div></div><div class="form-group"><label>Pekerjaan</label><input id="wPekerjaan" value="${e?esc(w.pekerjaan||''):''}"></div><div class="form-group"><label>🔐 PIN (4 digit) *</label><input id="wPin" value="${e?(w.pin||'1234'):'1234'}" maxlength="4" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div><button class="btn btn-primary btn-block" onclick="saveWarga('${e?w.id:''}')">💾 Simpan</button>`);}
+function showWargaForm(w){const e=!!w;openModal(`<div class="modal-header"><h3>${e?'✏️ Edit':'＋ Tambah'} Warga</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-group"><label>Nama *</label><input id="wNama" value="${e?esc(w.nama):''}"></div><div class="form-row"><div class="form-group"><label>Blok *</label><input id="wBlok" value="${e?esc(w.blok):''}"></div><div class="form-group"><label>HP</label><input id="wHp" value="${e?esc(w.hp||''):''}"></div></div><div class="form-row"><div class="form-group"><label>Jabatan</label><select id="wGol">${['Warga','Ketua RT','Sekretaris','Bendahara','Anggota Keamanan'].map(g=>`<option ${e&&w.gol===g?'selected':''}>${g}</option>`).join('')}</select></div><div class="form-group"><label>Status</label><select id="wStatus">${['Tetap','Kontrak','Kost'].map(s=>`<option ${e&&w.status===s?'selected':''}>${s}</option>`).join('')}</select></div></div><div class="form-group"><label>Pekerjaan</label><input id="wPekerjaan" value="${e?esc(w.pekerjaan||''):''}"></div><div class="form-group"><label> PIN (4 digit) *</label><input id="wPin" value="${e?(w.pin||'1234'):'1234'}" maxlength="4" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div><button class="btn btn-primary btn-block" onclick="saveWarga('${e?w.id:''}')">💾 Simpan</button>`);}
 async function saveWarga(id){const nama=$('wNama').value.trim(),blok=$('wBlok').value.trim(),hp=$('wHp').value.trim(),gol=$('wGol').value,status=$('wStatus').value,pekerjaan=$('wPekerjaan').value.trim(),pin=$('wPin').value.trim();if(!nama||!blok)return showToast('Nama & Blok wajib','error');if(!/^\d{4}$/.test(pin))return showToast('PIN 4 digit','error');const l=appData.warga||[];if(id){const i=l.findIndex(x=>x.id===id);if(i>-1)l[i]={...l[i],nama,blok,hp,gol,status,pekerjaan,pin};}else l.push({id:uid('W'),nama,blok,hp,gol,status,pekerjaan,pin});appData.warga=l;await saveDataToFirebase();closeModal();showToast('Warga tersimpan di Firebase');populateLoginWarga();renderWargaList();updateDashboard();}
 function editWarga(id){const w=appData.warga.find(x=>x.id===id);if(w)showWargaForm(w);}
 async function deleteWarga(id){const w=appData.warga.find(x=>x.id===id);if(!w||!confirm('Hapus '+w.nama+'?'))return;appData.warga=appData.warga.filter(x=>x.id!==id);await saveDataToFirebase();showToast('Warga dihapus dari Firebase');populateLoginWarga();renderWargaList();updateDashboard();}
@@ -634,7 +779,7 @@ function renderPhotoPreview(){const g=$('buktiPreviewGrid'),c=$('photoCount');if
 function removePhoto(i){uploadedPhotos.splice(i,1);renderPhotoPreview();}
 async function submitSetoran(){const bulan=$('setorBulan').value,nominal=parseInt($('setorNominal').value),metode=$('setorMetode').value,ref=$('setorRef').value.trim(),catatan=$('setorCatatan').value.trim();if(!nominal||nominal<1000)return showToast('Nominal min 1000','error');const l=appData.setoran||[];l.unshift({id:uid('S'),wargaId:currentUser.id,namaWarga:currentUser.nama,blok:currentUser.blok,bulan,nominal,metode,ref,catatan,bukti:uploadedPhotos.map(p=>p.src),status:'Pending',tglSetor:today(),tglKonfirmasi:null,dikonfirmasiOleh:null,alasan:''});appData.setoran=l;await saveDataToFirebase();showToast('Setoran terkirim ke Firebase ('+uploadedPhotos.length+' foto)');$('setorRef').value='';$('setorCatatan').value='';$('setorBukti').value='';uploadedPhotos=[];renderPhotoPreview();renderSetoran();updateDashboard();}
 function renderSetoran(){const cc=$('konfirmasiCard');if(isStaff()){cc.style.display='block';const pd=(appData.setoran||[]).filter(s=>s.status==='Pending');$('pendingCount').textContent=pd.length;$('konfirmasiList').innerHTML=pd.length?pd.map(s=>setoranRow(true,s)).join(''):emptyState('⏳','Tidak ada setoran menunggu');}else cc.style.display='none';const mine=(appData.setoran||[]).filter(s=>s.wargaId===(currentUser?currentUser.id:'-'));$('rsLunas').textContent=mine.filter(s=>s.status==='Dikonfirmasi').length;$('rsPending').textContent=mine.filter(s=>s.status==='Pending').length;$('rsDitolak').textContent=mine.filter(s=>s.status==='Ditolak').length;$('riwayatList').innerHTML=mine.length?mine.map(s=>setoranRow(false,s)).join(''):emptyState('📤','Belum pernah setor');}
-function setoranRow(konf,s){const w=appData.warga.find(x=>x.id===s.wargaId);const bc=s.status==='Pending'?'b-yellow':s.status==='Dikonfirmasi'?'b-green':'b-red';const bi=s.status==='Pending'?'':s.status==='Dikonfirmasi'?'✅':'❌';const fc=Array.isArray(s.bukti)?s.bukti.length:(s.bukti?1:0);let act='';if(konf&&s.status==='Pending')act=`<div class="data-actions"><button class="btn-edit" style="background:#D1FAE5;color:#065F46" onclick="konfirmasiSetoran('${s.id}',1)">✅ Terima</button><button class="btn-del" onclick="konfirmasiSetoran('${s.id}',0)">❌ Tolak</button></div>`;return `<div class="data-item"><div class="data-avatar" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9)">📤</div><div class="data-info"><div class="name">${konf?esc(w?w.nama:s.namaWarga)+' · ':''}${labelBulan(s.bulan)} <span class="badge ${bc}">${bi} ${s.status}</span></div><div class="detail">💰 <b>${rp(s.nominal)}</b> · ${esc(s.metode)}${s.ref?' · '+esc(s.ref):''}</div><div class="detail">📅 ${tglPendek(s.tglSetor)}${s.tglKonfirmasi?' · '+tglPendek(s.tglKonfirmasi)+(s.dikonfirmasiOleh?' oleh '+esc(s.dikonfirmasiOleh):''):''}</div>${fc?`<div class="detail"><span style="color:var(--pd);cursor:pointer;font-weight:700" onclick="viewBuktiGallery('${s.id}','setoran')">🖼️ Lihat ${fc} foto</span></div>`:''}${s.alasan?`<div class="detail" style="color:#DC2626">📝 ${esc(s.alasan)}</div>`:''}${s.catatan?`<div class="detail" style="color:var(--muted)">💬 ${esc(s.catatan)}</div>`:''}</div>${act}</div>`;}
+function setoranRow(konf,s){const w=appData.warga.find(x=>x.id===s.wargaId);const bc=s.status==='Pending'?'b-yellow':s.status==='Dikonfirmasi'?'b-green':'b-red';const bi=s.status==='Pending'?'⏳':s.status==='Dikonfirmasi'?'✅':'❌';const fc=Array.isArray(s.bukti)?s.bukti.length:(s.bukti?1:0);let act='';if(konf&&s.status==='Pending')act=`<div class="data-actions"><button class="btn-edit" style="background:#D1FAE5;color:#065F46" onclick="konfirmasiSetoran('${s.id}',1)">✅ Terima</button><button class="btn-del" onclick="konfirmasiSetoran('${s.id}',0)">❌ Tolak</button></div>`;return `<div class="data-item"><div class="data-avatar" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9)">📤</div><div class="data-info"><div class="name">${konf?esc(w?w.nama:s.namaWarga)+' · ':''}${labelBulan(s.bulan)} <span class="badge ${bc}">${bi} ${s.status}</span></div><div class="detail">💰 <b>${rp(s.nominal)}</b> · ${esc(s.metode)}${s.ref?' · '+esc(s.ref):''}</div><div class="detail">📅 ${tglPendek(s.tglSetor)}${s.tglKonfirmasi?' · '+tglPendek(s.tglKonfirmasi)+(s.dikonfirmasiOleh?' oleh '+esc(s.dikonfirmasiOleh):''):''}</div>${fc?`<div class="detail"><span style="color:var(--pd);cursor:pointer;font-weight:700" onclick="viewBuktiGallery('${s.id}','setoran')">🖼️ Lihat ${fc} foto</span></div>`:''}${s.alasan?`<div class="detail" style="color:#DC2626">📝 ${esc(s.alasan)}</div>`:''}${s.catatan?`<div class="detail" style="color:var(--muted)">💬 ${esc(s.catatan)}</div>`:''}</div>${act}</div>`;}
 function viewBuktiGallery(id,type){let f=[];if(type==='kegiatan'){const k=(appData.kegiatan||[]).find(x=>x.id===id);if(k&&k.dokumentasi)f=k.dokumentasi;}else{const s=(appData.setoran||[]).find(x=>x.id===id);if(s&&s.bukti)f=Array.isArray(s.bukti)?s.bukti:[s.bukti];}if(!f.length)return;let i=0;const show=()=>{$('lightboxImg').src=f[i];$('lightbox').classList.add('active');let n=$('lbNav');if(n)n.remove();if(f.length>1){n=document.createElement('div');n.id='lbNav';n.style.cssText='position:fixed;bottom:100px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:6001';n.innerHTML=`<button onclick="lbMove(-1)" style="background:#fff;border:none;padding:10px 16px;border-radius:10px;font-weight:700">←</button><span style="background:#fff;padding:10px 14px;border-radius:10px;font-weight:700">${i+1}/${f.length}</span><button onclick="lbMove(1)" style="background:#fff;border:none;padding:10px 16px;border-radius:10px;font-weight:700">→</button>`;document.body.appendChild(n);}window.lbMove=d=>{i=Math.max(0,Math.min(f.length-1,i+d));show();};};show();}
 async function konfirmasiSetoran(id,ok){const s=(appData.setoran||[]).find(x=>x.id===id);if(!s)return;if(ok){if(!confirm('Terima setoran '+rp(s.nominal)+' dari '+s.namaWarga+'?'))return;s.status='Dikonfirmasi';s.tglKonfirmasi=today();s.dikonfirmasiOleh=currentUser.nama;appData.kas.unshift({id:uid('K'),tgl:today(),tipe:'Masuk',kat:'Iuran Warga',urai:'Setoran '+labelBulan(s.bulan)+' - '+s.namaWarga,nominal:s.nominal});const ii=appData.iuran.findIndex(x=>x.wargaId===s.wargaId&&x.bulan===s.bulan);if(ii>-1)appData.iuran[ii]={...appData.iuran[ii],status:'Lunas',tgl:today()};else appData.iuran.push({id:uid('I'),wargaId:s.wargaId,bulan:s.bulan,nominal:s.nominal,status:'Lunas',tgl:today()});await saveDataToFirebase();showToast('Setoran diterima & disimpan di Firebase');}else{const al=prompt('Alasan penolakan:');if(!al)return showToast('Alasan wajib','error');s.status='Ditolak';s.tglKonfirmasi=today();s.dikonfirmasiOleh=currentUser.nama;s.alasan=al;await saveDataToFirebase();showToast('Setoran ditolak');}renderSetoran();updateDashboard();}
 
@@ -646,22 +791,22 @@ async function deletePengumuman(id){if(!confirm('Hapus?'))return;appData.pengumu
 
 /* ================= KEGIATAN ================= */
 function buildKegiatanFilter(){const katSet=new Set();(appData.kegiatan||[]).forEach(k=>{if(k.kategori)katSet.add(k.kategori);});const opts=['<option value="semua">Semua Kategori</option>'];['Kerja Bakti','Rapat RT','Posyandu','HUT RT','Pengajian','Sosial','Olahraga','Lainnya'].forEach(k=>{opts.push(`<option>${k}</option>`);});$('kegiatanFilterKategori').innerHTML=opts.join('');}
-function renderKegiatanList(){const kat=$('kegiatanFilterKategori').value;const st=$('kegiatanFilterStatus').value;let l=(appData.kegiatan||[]).slice().sort((a,b)=>(b.tgl||'').localeCompare(a.tgl||''));if(kat!=='semua')l=l.filter(x=>x.kategori===kat);if(st!=='semua')l=l.filter(x=>x.status===st);const el=$('kegiatanList');if(!l.length){el.innerHTML=emptyState('','Tidak ada kegiatan');return;}el.innerHTML=l.map(k=>{const statusColor=k.status==='Selesai'?'b-green':k.status==='Sedang Berlangsung'?'b-blue':k.status==='Dibatalkan'?'b-red':'b-yellow';const docCount=Array.isArray(k.dokumentasi)?k.dokumentasi.length:0;const createdBy=appData.warga.find(w=>w.id===k.createdBy);return `<div class="kegiatan-card"><div class="kegiatan-header"><div style="width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,#C4B5FD,#A78BFA);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">📅</div><div style="flex:1;min-width:0"><h4>${esc(k.judul)} <span class="badge ${statusColor}" style="margin-left:6px">${esc(k.status)}</span></h4><div style="font-size:12px;color:var(--muted);margin-top:4px"><span class="badge b-purple">${esc(k.kategori||'Umum')}</span></div></div><div class="data-actions"><button class="btn-edit" onclick="showKegiatanForm(appData.kegiatan.find(x=>x.id==='${k.id}'))">✏️</button><button class="btn-del" onclick="deleteKegiatan('${k.id}')">🗑️</button></div></div><div class="kegiatan-meta"><span>📅 ${tglIndo(k.tgl)}</span><span>🕐 ${esc(k.waktuMulai||'-')}${k.waktuSelesai?' - '+esc(k.waktuSelesai):''}</span><span>📍 ${esc(k.lokasi||'-')}</span><span> PJ: ${esc(k.penanggungJawab||'-')}</span></div>${k.deskripsi?`<div class="kegiatan-desc">${esc(k.deskripsi)}</div>`:''}${docCount>0?`<div style="margin-top:10px"><div style="font-size:12px;font-weight:700;color:var(--ink2);margin-bottom:6px">📷 Dokumentasi (${docCount} foto)</div><div class="dokumentasi-grid">${k.dokumentasi.slice(0,6).map((d,i)=>`<div class="dokumentasi-item" onclick="viewBuktiGallery('${k.id}','kegiatan')"><img src="${d}" alt="dok ${i+1}"></div>`).join('')}${docCount>6?`<div class="dokumentasi-item" style="display:flex;align-items:center;justify-content:center;background:var(--pt);font-size:13px;font-weight:700;color:var(--pd)">+${docCount-6}</div>`:''}</div></div>`:`<div style="margin-top:10px;font-size:12px;color:var(--muted);font-style:italic">📷 Belum ada dokumentasi</div>`}<div style="font-size:11px;color:var(--muted2);margin-top:10px;padding-top:10px;border-top:1px solid var(--line2)">Dibuat ${tglIndo(k.createdAt)} · oleh ${esc(createdBy?createdBy.nama:'-')}</div></div>`;}).join('');}
-function showKegiatanForm(k){const e=!!k;const docs=e&&k.dokumentasi?k.dokumentasi:[];openModal(`<div class="modal-header"><h3>${e?'✏️ Edit':'＋ Tambah'} Kegiatan</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-group"><label>Judul Kegiatan *</label><input id="kJudul" value="${e?esc(k.judul):''}"></div><div class="form-row"><div class="form-group"><label>Kategori</label><select id="kKategori">${['Kerja Bakti','Rapat RT','Posyandu','HUT RT','Pengajian','Sosial','Olahraga','Lainnya'].map(x=>`<option ${e&&k.kategori===x?'selected':''}>${x}</option>`).join('')}</select></div><div class="form-group"><label>Status</label><select id="kStatus">${['Akan Datang','Sedang Berlangsung','Selesai','Dibatalkan'].map(x=>`<option ${e&&k.status===x?'selected':''}>${x}</option>`).join('')}</select></div></div><div class="form-row"><div class="form-group"><label>Tanggal *</label><input type="date" id="kTgl" value="${e?k.tgl:today()}"></div><div class="form-group"><label>Waktu Mulai</label><input type="time" id="kMulai" value="${e?esc(k.waktuMulai||''):''}"></div></div><div class="form-row"><div class="form-group"><label>Waktu Selesai</label><input type="time" id="kSelesai" value="${e?esc(k.waktuSelesai||''):''}"></div><div class="form-group"><label>Lokasi</label><input id="kLokasi" value="${e?esc(k.lokasi||''):''}" placeholder="Contoh: Balai RT"></div></div><div class="form-group"><label>Penanggung Jawab</label><select id="kPJ">${(appData.warga||[]).map(w=>`<option value="${esc(w.nama)}" ${e&&k.penanggungJawab===w.nama?'selected':''}>${esc(w.nama)} (${esc(w.gol)})</option>`).join('')}</select></div><div class="form-group"><label>Deskripsi</label><textarea id="kDesk" rows="3" placeholder="Deskripsi kegiatan...">${e?esc(k.deskripsi||''):''}</textarea></div><div class="form-group"><label>📷 Dokumentasi (bisa lebih dari 1 foto)</label><div class="photo-upload-area" onclick="document.getElementById('kDok').click()"><div class="ui">📷</div><div class="ut">Klik untuk upload foto dokumentasi</div><input type="file" id="kDok" accept="image/*" multiple onchange="handleKegiatanDocs(this)"></div><div class="photo-preview-grid" id="kegiatanDocPreview">${docs.map((d,i)=>`<div class="photo-preview-item"><img src="${d}" onclick="viewBukti('${d.replace(/'/g,"\\'")}')"><button class="rp" onclick="removeKegiatanDoc(${i})">✕</button></div>`).join('')}</div><div class="photo-count" id="kegiatanDocCount">${docs.length} foto dokumentasi</div></div><button class="btn btn-primary btn-block" onclick="saveKegiatan('${e?k.id:''}')">💾 Simpan Kegiatan</button>`);window._kegiatanTempDocs=[...docs];}
+function renderKegiatanList(){const kat=$('kegiatanFilterKategori').value;const st=$('kegiatanFilterStatus').value;let l=(appData.kegiatan||[]).slice().sort((a,b)=>(b.tgl||'').localeCompare(a.tgl||''));if(kat!=='semua')l=l.filter(x=>x.kategori===kat);if(st!=='semua')l=l.filter(x=>x.status===st);const el=$('kegiatanList');if(!l.length){el.innerHTML=emptyState('📅','Tidak ada kegiatan');return;}el.innerHTML=l.map(k=>{const statusColor=k.status==='Selesai'?'b-green':k.status==='Sedang Berlangsung'?'b-blue':k.status==='Dibatalkan'?'b-red':'b-yellow';const docCount=Array.isArray(k.dokumentasi)?k.dokumentasi.length:0;const createdBy=appData.warga.find(w=>w.id===k.createdBy);return `<div class="kegiatan-card"><div class="kegiatan-header"><div style="width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,#C4B5FD,#A78BFA);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0"></div><div style="flex:1;min-width:0"><h4>${esc(k.judul)} <span class="badge ${statusColor}" style="margin-left:6px">${esc(k.status)}</span></h4><div style="font-size:12px;color:var(--muted);margin-top:4px"><span class="badge b-purple">${esc(k.kategori||'Umum')}</span></div></div><div class="data-actions"><button class="btn-edit" onclick="showKegiatanForm(appData.kegiatan.find(x=>x.id==='${k.id}'))">✏️</button><button class="btn-del" onclick="deleteKegiatan('${k.id}')">🗑️</button></div></div><div class="kegiatan-meta"><span>📅 ${tglIndo(k.tgl)}</span><span>🕐 ${esc(k.waktuMulai||'-')}${k.waktuSelesai?' - '+esc(k.waktuSelesai):''}</span><span>📍 ${esc(k.lokasi||'-')}</span><span> PJ: ${esc(k.penanggungJawab||'-')}</span></div>${k.deskripsi?`<div class="kegiatan-desc">${esc(k.deskripsi)}</div>`:''}${docCount>0?`<div style="margin-top:10px"><div style="font-size:12px;font-weight:700;color:var(--ink2);margin-bottom:6px">📷 Dokumentasi (${docCount} foto)</div><div class="dokumentasi-grid">${k.dokumentasi.slice(0,6).map((d,i)=>`<div class="dokumentasi-item" onclick="viewBuktiGallery('${k.id}','kegiatan')"><img src="${d}" alt="dok ${i+1}"></div>`).join('')}${docCount>6?`<div class="dokumentasi-item" style="display:flex;align-items:center;justify-content:center;background:var(--pt);font-size:13px;font-weight:700;color:var(--pd)">+${docCount-6}</div>`:''}</div></div>`:`<div style="margin-top:10px;font-size:12px;color:var(--muted);font-style:italic">📷 Belum ada dokumentasi</div>`}<div style="font-size:11px;color:var(--muted2);margin-top:10px;padding-top:10px;border-top:1px solid var(--line2)">Dibuat ${tglIndo(k.createdAt)} · oleh ${esc(createdBy?createdBy.nama:'-')}</div></div>`;}).join('');}
+function showKegiatanForm(k){const e=!!k;const docs=e&&k.dokumentasi?k.dokumentasi:[];openModal(`<div class="modal-header"><h3>${e?'✏️ Edit':'＋ Tambah'} Kegiatan</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-group"><label>Judul Kegiatan *</label><input id="kJudul" value="${e?esc(k.judul):''}"></div><div class="form-row"><div class="form-group"><label>Kategori</label><select id="kKategori">${['Kerja Bakti','Rapat RT','Posyandu','HUT RT','Pengajian','Sosial','Olahraga','Lainnya'].map(x=>`<option ${e&&k.kategori===x?'selected':''}>${x}</option>`).join('')}</select></div><div class="form-group"><label>Status</label><select id="kStatus">${['Akan Datang','Sedang Berlangsung','Selesai','Dibatalkan'].map(x=>`<option ${e&&k.status===x?'selected':''}>${x}</option>`).join('')}</select></div></div><div class="form-row"><div class="form-group"><label>Tanggal *</label><input type="date" id="kTgl" value="${e?k.tgl:today()}"></div><div class="form-group"><label>Waktu Mulai</label><input type="time" id="kMulai" value="${e?esc(k.waktuMulai||''):''}"></div></div><div class="form-row"><div class="form-group"><label>Waktu Selesai</label><input type="time" id="kSelesai" value="${e?esc(k.waktuSelesai||''):''}"></div><div class="form-group"><label>Lokasi</label><input id="kLokasi" value="${e?esc(k.lokasi||''):''}" placeholder="Contoh: Balai RT"></div></div><div class="form-group"><label>Penanggung Jawab</label><select id="kPJ">${(appData.warga||[]).map(w=>`<option value="${esc(w.nama)}" ${e&&k.penanggungJawab===w.nama?'selected':''}>${esc(w.nama)} (${esc(w.gol)})</option>`).join('')}</select></div><div class="form-group"><label>Deskripsi</label><textarea id="kDesk" rows="3" placeholder="Deskripsi kegiatan...">${e?esc(k.deskripsi||''):''}</textarea></div><div class="form-group"><label>📷 Dokumentasi (bisa lebih dari 1 foto)</label><div class="photo-upload-area" onclick="document.getElementById('kDok').click()"><div class="ui">📷</div><div class="ut">Klik untuk upload foto dokumentasi</div><input type="file" id="kDok" accept="image/*" multiple onchange="handleKegiatanDocs(this)"></div><div class="photo-preview-grid" id="kegiatanDocPreview">${docs.map((d,i)=>`<div class="photo-preview-item"><img src="${d}" onclick="viewBukti('${d.replace(/'/g,"\\'")}')"><button class="rp" onclick="removeKegiatanDoc(${i})">✕</button></div>`).join('')}</div><div class="photo-count" id="kegiatanDocCount">${docs.length} foto dokumentasi</div></div><button class="btn btn-primary btn-block" onclick="saveKegiatan('${e?k.id:''}')"> Simpan Kegiatan</button>`);window._kegiatanTempDocs=[...docs];}
 function handleKegiatanDocs(inp){const fs=Array.from(inp.files||[]);let done=0;fs.forEach(f=>{if(f.size>1024*1024){showToast(f.name+' > 1MB','error');done++;return;}if(!f.type.startsWith('image/')){showToast(f.name+' bukan gambar','error');done++;return;}const r=new FileReader();r.onload=e=>{if(!window._kegiatanTempDocs)window._kegiatanTempDocs=[];window._kegiatanTempDocs.push(e.target.result);done++;if(done===fs.length)renderKegiatanDocPreview();};r.readAsDataURL(f);});inp.value='';}
-function renderKegiatanDocPreview(){const docs=window._kegiatanTempDocs||[];const g=$('kegiatanDocPreview');const c=$('kegiatanDocCount');if(!docs.length){g.innerHTML='';c.textContent='0 foto dokumentasi';return;}g.innerHTML=docs.map((d,i)=>`<div class="photo-preview-item"><img src="${d}" onclick="viewBukti('${d.replace(/'/g,"\\'")}')"><button class="rp" onclick="removeKegiatanDoc(${i})"></button></div>`).join('');c.textContent=docs.length+' foto dokumentasi';}
+function renderKegiatanDocPreview(){const docs=window._kegiatanTempDocs||[];const g=$('kegiatanDocPreview');const c=$('kegiatanDocCount');if(!docs.length){g.innerHTML='';c.textContent='0 foto dokumentasi';return;}g.innerHTML=docs.map((d,i)=>`<div class="photo-preview-item"><img src="${d}" onclick="viewBukti('${d.replace(/'/g,"\\'")}')"><button class="rp" onclick="removeKegiatanDoc(${i})">✕</button></div>`).join('');c.textContent=docs.length+' foto dokumentasi';}
 function removeKegiatanDoc(i){if(!window._kegiatanTempDocs)return;window._kegiatanTempDocs.splice(i,1);renderKegiatanDocPreview();}
 async function saveKegiatan(id){const judul=$('kJudul').value.trim(),kategori=$('kKategori').value,status=$('kStatus').value,tgl=$('kTgl').value,waktuMulai=$('kMulai').value.trim(),waktuSelesai=$('kSelesai').value.trim(),lokasi=$('kLokasi').value.trim(),penanggungJawab=$('kPJ').value,deskripsi=$('kDesk').value.trim();if(!judul||!tgl)return showToast('Judul & Tanggal wajib','error');const dokumentasi=window._kegiatanTempDocs||[];const l=appData.kegiatan||[];if(id){const i=l.findIndex(x=>x.id===id);if(i>-1)l[i]={...l[i],judul,kategori,status,tgl,waktuMulai,waktuSelesai,lokasi,penanggungJawab,deskripsi,dokumentasi};}else{l.unshift({id:uid('KEG'),judul,kategori,status,tgl,waktuMulai,waktuSelesai,lokasi,penanggungJawab,deskripsi,dokumentasi,createdBy:currentUser.id,createdAt:today()});}appData.kegiatan=l;await saveDataToFirebase();closeModal();window._kegiatanTempDocs=[];showToast('Kegiatan tersimpan di Firebase ('+dokumentasi.length+' foto)');renderKegiatanList();updateDashboard();}
 async function deleteKegiatan(id){const k=appData.kegiatan.find(x=>x.id===id);if(!k||!confirm('Hapus kegiatan "'+k.judul+'"?'))return;appData.kegiatan=appData.kegiatan.filter(x=>x.id!==id);await saveDataToFirebase();showToast('Kegiatan dihapus dari Firebase');renderKegiatanList();updateDashboard();}
 
 /* ================= PENGADUAN ================= */
-function renderPengaduan(){const l=(appData.lapor||[]).slice().sort((a,b)=>(b.tgl||'').localeCompare(a.tgl||''));$('pengaduanList').innerHTML=l.length?l.map(x=>{const w=appData.warga.find(v=>v.id===x.wargaId);const bc=x.status==='Selesai'?'b-green':x.status==='Diproses'?'b-blue':x.status==='Ditolak'?'b-red':'b-yellow';return `<div class="data-item"><div class="data-avatar" style="background:linear-gradient(135deg,#FECACA,#FCA5A5)">🚨</div><div class="data-info"><div class="name">${esc(x.judul)} <span class="badge ${bc}">${esc(x.status)}</span></div><div class="detail"><span class="badge b-gray">${esc(x.kat)}</span> · ${esc(x.prio||'Sedang')}</div><div class="detail" style="color:var(--ink2);margin-top:4px">${esc(x.isi)}</div><div class="detail">👤 ${esc(w?w.nama:'Warga')} ·  ${tglIndo(x.tgl)}</div></div><div class="data-actions"><button class="btn-edit" onclick="showLaporForm(appData.lapor.find(v=>v.id==='${x.id}'))">✏️</button><button class="btn-del" onclick="deleteLapor('${x.id}')">🗑️</button></div></div>`;}).join(''):emptyState('🚨','Belum ada pengaduan');}
-function showLaporForm(l){const e=!!l;openModal(`<div class="modal-header"><h3>${e?'✏️ Edit':'🚨 Lapor'} Masalah</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-row"><div class="form-group"><label>Kategori</label><select id="lKat">${['Infrastruktur','Keamanan','Kebersihan','Sosial','Penerangan','Lainnya'].map(k=>`<option ${e&&l.kat===k?'selected':''}>${k}</option>`).join('')}</select></div><div class="form-group"><label>Prioritas</label><select id="lPrio">${['Rendah','Sedang','Tinggi','Darurat'].map(p=>`<option ${e&&l.prio===p?'selected':''} ${!e&&p==='Sedang'?'selected':''}>${p}</option>`).join('')}</select></div></div><div class="form-group"><label>Judul *</label><input id="lJudul" value="${e?esc(l.judul):''}"></div><div class="form-group"><label>Deskripsi *</label><textarea id="lIsi" rows="4">${e?esc(l.isi):''}</textarea></div>${isStaff()?`<div class="form-group"><label>Status</label><select id="lStatus">${['Baru','Diproses','Selesai','Ditolak'].map(s=>`<option ${e&&l.status===s?'selected':''}>${s}</option>`).join('')}</select></div>`:''}<button class="btn btn-primary btn-block" onclick="saveLapor('${e?l.id:''}')"> Kirim</button>`);}
+function renderPengaduan(){const l=(appData.lapor||[]).slice().sort((a,b)=>(b.tgl||'').localeCompare(a.tgl||''));$('pengaduanList').innerHTML=l.length?l.map(x=>{const w=appData.warga.find(v=>v.id===x.wargaId);const bc=x.status==='Selesai'?'b-green':x.status==='Diproses'?'b-blue':x.status==='Ditolak'?'b-red':'b-yellow';return `<div class="data-item"><div class="data-avatar" style="background:linear-gradient(135deg,#FECACA,#FCA5A5)">🚨</div><div class="data-info"><div class="name">${esc(x.judul)} <span class="badge ${bc}">${esc(x.status)}</span></div><div class="detail"><span class="badge b-gray">${esc(x.kat)}</span> · ${esc(x.prio||'Sedang')}</div><div class="detail" style="color:var(--ink2);margin-top:4px">${esc(x.isi)}</div><div class="detail">👤 ${esc(w?w.nama:'Warga')} · 📅 ${tglIndo(x.tgl)}</div></div><div class="data-actions"><button class="btn-edit" onclick="showLaporForm(appData.lapor.find(v=>v.id==='${x.id}'))">✏️</button><button class="btn-del" onclick="deleteLapor('${x.id}')">🗑️</button></div></div>`;}).join(''):emptyState('','Belum ada pengaduan');}
+function showLaporForm(l){const e=!!l;openModal(`<div class="modal-header"><h3>${e?'✏️ Edit':'🚨 Lapor'} Masalah</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-row"><div class="form-group"><label>Kategori</label><select id="lKat">${['Infrastruktur','Keamanan','Kebersihan','Sosial','Penerangan','Lainnya'].map(k=>`<option ${e&&l.kat===k?'selected':''}>${k}</option>`).join('')}</select></div><div class="form-group"><label>Prioritas</label><select id="lPrio">${['Rendah','Sedang','Tinggi','Darurat'].map(p=>`<option ${e&&l.prio===p?'selected':''} ${!e&&p==='Sedang'?'selected':''}>${p}</option>`).join('')}</select></div></div><div class="form-group"><label>Judul *</label><input id="lJudul" value="${e?esc(l.judul):''}"></div><div class="form-group"><label>Deskripsi *</label><textarea id="lIsi" rows="4">${e?esc(l.isi):''}</textarea></div>${isStaff()?`<div class="form-group"><label>Status</label><select id="lStatus">${['Baru','Diproses','Selesai','Ditolak'].map(s=>`<option ${e&&l.status===s?'selected':''}>${s}</option>`).join('')}</select></div>`:''}<button class="btn btn-primary btn-block" onclick="saveLapor('${e?l.id:''}')">📤 Kirim</button>`);}
 async function saveLapor(id){const kat=$('lKat').value,prio=$('lPrio').value,judul=$('lJudul').value.trim(),isi=$('lIsi').value.trim();const st=$('lStatus')?$('lStatus').value:(id?(appData.lapor.find(x=>x.id===id)||{}).status:'Baru')||'Baru';if(!judul||!isi)return showToast('Lengkapi field','error');const l=appData.lapor||[];if(id){const i=l.findIndex(x=>x.id===id);if(i>-1)l[i]={...l[i],kat,prio,judul,isi,status:st};}else l.unshift({id:uid('L'),wargaId:currentUser.id,kat,prio,judul,isi,status:'Baru',tgl:today()});appData.lapor=l;await saveDataToFirebase();closeModal();showToast('Laporan tersimpan di Firebase');renderPengaduan();updateDashboard();}
 async function deleteLapor(id){if(!confirm('Hapus?'))return;appData.lapor=appData.lapor.filter(x=>x.id!==id);await saveDataToFirebase();showToast('Dihapus dari Firebase');renderPengaduan();updateDashboard();}
 
 /* ================= RONDA ================= */
-function renderRonda(){const l=(appData.ronda||[]).slice().sort((a,b)=>(a.tgl||'').localeCompare(b.tgl||''));$('rondaList').innerHTML=l.length?l.map(r=>`<div class="data-item"><div class="data-avatar" style="background:linear-gradient(135deg,#C4B5FD,#A78BFA)">🛡️</div><div class="data-info"><div class="name">${esc(r.shift)} · ${esc(r.waktu||'-')}</div><div class="detail">📅 ${tglIndo(r.tgl)} · 👤 <b>${esc(r.petugas)}</b>${r.blok?' (Blok '+esc(r.blok)+')':''}</div>${r.catatan?`<div class="detail"> ${esc(r.catatan)}</div>`:''}</div><div class="data-actions"><button class="btn-edit" onclick="showRondaForm(appData.ronda.find(x=>x.id==='${r.id}'))">✏️</button><button class="btn-del" onclick="deleteRonda('${r.id}')">🗑️</button></div></div>`).join(''):emptyState('🛡️','Belum ada jadwal');}
+function renderRonda(){const l=(appData.ronda||[]).slice().sort((a,b)=>(a.tgl||'').localeCompare(b.tgl||''));$('rondaList').innerHTML=l.length?l.map(r=>`<div class="data-item"><div class="data-avatar" style="background:linear-gradient(135deg,#C4B5FD,#A78BFA)">🛡️</div><div class="data-info"><div class="name">${esc(r.shift)} · ${esc(r.waktu||'-')}</div><div class="detail">📅 ${tglIndo(r.tgl)} · 👤 <b>${esc(r.petugas)}</b>${r.blok?' (Blok '+esc(r.blok)+')':''}</div>${r.catatan?`<div class="detail">📝 ${esc(r.catatan)}</div>`:''}</div><div class="data-actions"><button class="btn-edit" onclick="showRondaForm(appData.ronda.find(x=>x.id==='${r.id}'))">✏️</button><button class="btn-del" onclick="deleteRonda('${r.id}')">🗑️</button></div></div>`).join(''):emptyState('🛡️','Belum ada jadwal');}
 function showRondaForm(r){const e=!!r;openModal(`<div class="modal-header"><h3>${e?'✏️ Edit':'＋ Tambah'} Ronda</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-row"><div class="form-group"><label>Tanggal *</label><input type="date" id="rTgl" value="${e?r.tgl:today()}"></div><div class="form-group"><label>Shift</label><select id="rShift">${['Malam','Dini Hari','Pagi','Sore'].map(s=>`<option ${e&&r.shift===s?'selected':''}>${s}</option>`).join('')}</select></div></div><div class="form-group"><label>Waktu</label><input id="rWaktu" value="${e?esc(r.waktu||''):''}" placeholder="22.00-02.00"></div><div class="form-group"><label>Petugas</label><select id="rPetugas">${(appData.warga||[]).map(w=>`<option value="${esc(w.nama)}" data-blok="${esc(w.blok)}" ${e&&r.petugas===w.nama?'selected':''}>${esc(w.nama)} (Blok ${esc(w.blok)})</option>`).join('')}</select></div><div class="form-group"><label>Catatan</label><textarea id="rCatatan" rows="2">${e?esc(r.catatan||''):''}</textarea></div><button class="btn btn-primary btn-block" onclick="saveRonda('${e?r.id:''}')">💾 Simpan</button>`);}
 async function saveRonda(id){const tgl=$('rTgl').value,shift=$('rShift').value,waktu=$('rWaktu').value.trim(),sel=$('rPetugas'),petugas=sel.value,blok=sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].dataset.blok:'',catatan=$('rCatatan').value.trim();if(!tgl)return showToast('Tanggal wajib','error');const l=appData.ronda||[];if(id){const i=l.findIndex(x=>x.id===id);if(i>-1)l[i]={...l[i],tgl,shift,waktu,petugas,blok,catatan};}else l.unshift({id:uid('R'),tgl,shift,waktu,petugas,blok,catatan});appData.ronda=l;await saveDataToFirebase();closeModal();showToast('Ronda tersimpan di Firebase');renderRonda();}
 async function deleteRonda(id){if(!confirm('Hapus?'))return;appData.ronda=appData.ronda.filter(x=>x.id!==id);await saveDataToFirebase();showToast('Dihapus dari Firebase');renderRonda();}
@@ -674,12 +819,12 @@ async function deleteSurat(id){if(!confirm('Hapus?'))return;appData.surat=appDat
 
 /* ================= TAMU ================= */
 function renderTamu(){const l=(appData.tamu||[]).slice().sort((a,b)=>(b.tglMasuk||'').localeCompare(a.tglMasuk||''));$('tamuList').innerHTML=l.length?l.map(t=>{const bc=t.status==='Menginap'?'b-yellow':'b-green';return `<div class="data-item"><div class="data-avatar" style="background:linear-gradient(135deg,#FBCFE8,#F9A8D4)">👤</div><div class="data-info"><div class="name">${esc(t.nama)} <span class="badge ${bc}">${esc(t.status)}</span></div><div class="detail">🏠 Dari <b>${esc(t.asal)}</b>${t.alamat?' · '+esc(t.alamat):''}</div><div class="detail">🎯 ${esc(t.keperluan||'-')} · Penjamin: ${esc(t.penjamin||'-')}</div><div class="detail">📅 ${tglPendek(t.tglMasuk)}${t.tglKeluar?' → '+tglPendek(t.tglKeluar):''}</div></div><div class="data-actions"><button class="btn-edit" onclick="showTamuForm(appData.tamu.find(x=>x.id==='${t.id}'))">✏️</button><button class="btn-del" onclick="deleteTamu('${t.id}')">🗑️</button></div></div>`;}).join(''):emptyState('👤','Belum ada tamu');}
-function showTamuForm(t){const e=!!t;openModal(`<div class="modal-header"><h3>${e?'✏️ Edit':'＋ Catat'} Tamu</h3><button class="modal-close" onclick="closeModal()"></button></div><div class="form-row"><div class="form-group"><label>Nama *</label><input id="tNama" value="${e?esc(t.nama):''}"></div><div class="form-group"><label>Asal *</label><input id="tAsal" value="${e?esc(t.asal):''}"></div></div><div class="form-group"><label>Alamat</label><input id="tAlamat" value="${e?esc(t.alamat||''):''}"></div><div class="form-row"><div class="form-group"><label>Keperluan</label><select id="tKeperluan">${['Menginap','Kunjungan','Kost','Bekerja','Lainnya'].map(k=>`<option ${e&&t.keperluan===k?'selected':''}>${k}</option>`).join('')}</select></div><div class="form-group"><label>Penjamin</label><select id="tPenjamin">${(appData.warga||[]).map(w=>`<option ${e&&t.penjamin===w.nama?'selected':''}>${esc(w.nama)}</option>`).join('')}</select></div></div><div class="form-row"><div class="form-group"><label>Tgl Masuk *</label><input type="date" id="tMasuk" value="${e?t.tglMasuk:today()}"></div><div class="form-group"><label>Tgl Keluar</label><input type="date" id="tKeluar" value="${e?(t.tglKeluar||''):''}"></div></div><div class="form-group"><label>Status</label><select id="tStatus"><option value="Menginap" ${e&&t.status==='Menginap'?'selected':''}>Menginap</option><option value="Selesai" ${e&&t.status==='Selesai'?'selected':''}>Selesai</option></select></div><button class="btn btn-primary btn-block" onclick="saveTamu('${e?t.id:''}')">💾 Simpan</button>`);}
+function showTamuForm(t){const e=!!t;openModal(`<div class="modal-header"><h3>${e?'✏️ Edit':'＋ Catat'} Tamu</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-row"><div class="form-group"><label>Nama *</label><input id="tNama" value="${e?esc(t.nama):''}"></div><div class="form-group"><label>Asal *</label><input id="tAsal" value="${e?esc(t.asal):''}"></div></div><div class="form-group"><label>Alamat</label><input id="tAlamat" value="${e?esc(t.alamat||''):''}"></div><div class="form-row"><div class="form-group"><label>Keperluan</label><select id="tKeperluan">${['Menginap','Kunjungan','Kost','Bekerja','Lainnya'].map(k=>`<option ${e&&t.keperluan===k?'selected':''}>${k}</option>`).join('')}</select></div><div class="form-group"><label>Penjamin</label><select id="tPenjamin">${(appData.warga||[]).map(w=>`<option ${e&&t.penjamin===w.nama?'selected':''}>${esc(w.nama)}</option>`).join('')}</select></div></div><div class="form-row"><div class="form-group"><label>Tgl Masuk *</label><input type="date" id="tMasuk" value="${e?t.tglMasuk:today()}"></div><div class="form-group"><label>Tgl Keluar</label><input type="date" id="tKeluar" value="${e?(t.tglKeluar||''):''}"></div></div><div class="form-group"><label>Status</label><select id="tStatus"><option value="Menginap" ${e&&t.status==='Menginap'?'selected':''}>Menginap</option><option value="Selesai" ${e&&t.status==='Selesai'?'selected':''}>Selesai</option></select></div><button class="btn btn-primary btn-block" onclick="saveTamu('${e?t.id:''}')">💾 Simpan</button>`);}
 async function saveTamu(id){const nama=$('tNama').value.trim(),asal=$('tAsal').value.trim(),alamat=$('tAlamat').value.trim(),keperluan=$('tKeperluan').value,penjamin=$('tPenjamin').value,tglMasuk=$('tMasuk').value,tglKeluar=$('tKeluar').value,status=$('tStatus').value;if(!nama||!asal||!tglMasuk)return showToast('Lengkapi field wajib','error');const l=appData.tamu||[];if(id){const i=l.findIndex(x=>x.id===id);if(i>-1)l[i]={...l[i],nama,asal,alamat,keperluan,penjamin,tglMasuk,tglKeluar,status};}else l.unshift({id:uid('T'),nama,asal,alamat,keperluan,penjamin,tglMasuk,tglKeluar,status});appData.tamu=l;await saveDataToFirebase();closeModal();showToast('Tamu tersimpan di Firebase');renderTamu();}
 async function deleteTamu(id){if(!confirm('Hapus?'))return;appData.tamu=appData.tamu.filter(x=>x.id!==id);await saveDataToFirebase();showToast('Dihapus dari Firebase');renderTamu();}
 
 /* ================= VOTING ================= */
-function renderVoting(){const l=(appData.voting||[]).slice().sort((a,b)=>(b.tgl||'').localeCompare(a.tgl||''));$('votingList').innerHTML=l.length?l.map(v=>{const tot=v.pilihan.reduce((s,p)=>s+(p.votes||0),0);return `<div class="card" style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;gap:10px;margin-bottom:6px"><h4 style="font-size:15px;font-weight:800;flex:1">${esc(v.pertanyaan)}</h4><span class="badge ${v.status==='Aktif'?'b-green':'b-gray'}">${esc(v.status)}</span></div><div style="font-size:12px;color:var(--muted2);margin-bottom:12px">📅 ${tglIndo(v.tgl)} · 👥 ${tot} suara</div>${v.pilihan.map((p,i)=>{const pc=tot?Math.round((p.votes||0)/tot*100):0;return `<div class="voting-option" onclick="voteVoting('${v.id}',${i})"><span style="font-weight:600">${i+1}. ${esc(p.text)}</span><span style="font-size:12px;color:var(--muted);font-weight:700">${p.votes||0} (${pc}%)</span></div><div class="vbar"><div style="width:${pc}%"></div></div>`;}).join('')}<div style="display:flex;gap:6px;margin-top:10px"><button class="btn btn-sm btn-warning" onclick="showVotingForm(appData.voting.find(x=>x.id==='${v.id}'))">✏️ Edit</button><button class="btn btn-sm btn-danger" onclick="deleteVoting('${v.id}')">️ Hapus</button></div></div>`;}).join(''):emptyState('🗳️','Belum ada voting');}
+function renderVoting(){const l=(appData.voting||[]).slice().sort((a,b)=>(b.tgl||'').localeCompare(a.tgl||''));$('votingList').innerHTML=l.length?l.map(v=>{const tot=v.pilihan.reduce((s,p)=>s+(p.votes||0),0);return `<div class="card" style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;gap:10px;margin-bottom:6px"><h4 style="font-size:15px;font-weight:800;flex:1">${esc(v.pertanyaan)}</h4><span class="badge ${v.status==='Aktif'?'b-green':'b-gray'}">${esc(v.status)}</span></div><div style="font-size:12px;color:var(--muted2);margin-bottom:12px">📅 ${tglIndo(v.tgl)} · 👥 ${tot} suara</div>${v.pilihan.map((p,i)=>{const pc=tot?Math.round((p.votes||0)/tot*100):0;return `<div class="voting-option" onclick="voteVoting('${v.id}',${i})"><span style="font-weight:600">${i+1}. ${esc(p.text)}</span><span style="font-size:12px;color:var(--muted);font-weight:700">${p.votes||0} (${pc}%)</span></div><div class="vbar"><div style="width:${pc}%"></div></div>`;}).join('')}<div style="display:flex;gap:6px;margin-top:10px"><button class="btn btn-sm btn-warning" onclick="showVotingForm(appData.voting.find(x=>x.id==='${v.id}'))">✏️ Edit</button><button class="btn btn-sm btn-danger" onclick="deleteVoting('${v.id}')">🗑️ Hapus</button></div></div>`;}).join(''):emptyState('🗳️','Belum ada voting');}
 function showVotingForm(v){const e=!!v;openModal(`<div class="modal-header"><h3>${e?'✏️ Edit':'＋ Buat'} Voting</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-group"><label>Pertanyaan *</label><input id="vQ" value="${e?esc(v.pertanyaan):''}"></div><div class="form-group"><label>Pilihan 1 *</label><input id="vP1" value="${e?esc((v.pilihan[0]||{}).text||''):''}"></div><div class="form-group"><label>Pilihan 2 *</label><input id="vP2" value="${e?esc((v.pilihan[1]||{}).text||''):''}"></div><div class="form-row"><div class="form-group"><label>Pilihan 3</label><input id="vP3" value="${e?esc((v.pilihan[2]||{}).text||''):''}"></div><div class="form-group"><label>Pilihan 4</label><input id="vP4" value="${e?esc((v.pilihan[3]||{}).text||''):''}"></div></div><div class="form-group"><label>Status</label><select id="vStatus"><option value="Aktif" ${e&&v.status==='Aktif'?'selected':''}>Aktif</option><option value="Selesai" ${e&&v.status==='Selesai'?'selected':''}>Selesai</option></select></div><button class="btn btn-primary btn-block" onclick="saveVoting('${e?v.id:''}')">💾 Simpan</button>`);}
 async function saveVoting(id){const q=$('vQ').value.trim(),p1=$('vP1').value.trim(),p2=$('vP2').value.trim(),p3=$('vP3').value.trim(),p4=$('vP4').value.trim(),st=$('vStatus').value;if(!q||!p1||!p2)return showToast('Min 2 pilihan','error');const pil=[{text:p1,votes:0},{text:p2,votes:0}];if(p3)pil.push({text:p3,votes:0});if(p4)pil.push({text:p4,votes:0});const l=appData.voting||[];if(id){const i=l.findIndex(x=>x.id===id);if(i>-1){pil.forEach((p,j)=>{if(l[i].pilihan[j])p.votes=l[i].pilihan[j].votes||0;});l[i]={...l[i],pertanyaan:q,pilihan:pil,status:st};}}else l.unshift({id:uid('V'),pertanyaan:q,pilihan:pil,status:st,tgl:today(),createdBy:currentUser.id});appData.voting=l;await saveDataToFirebase();closeModal();showToast('Voting tersimpan di Firebase');renderVoting();}
 async function deleteVoting(id){if(!confirm('Hapus?'))return;appData.voting=appData.voting.filter(x=>x.id!==id);await saveDataToFirebase();showToast('Dihapus dari Firebase');renderVoting();}
@@ -690,7 +835,7 @@ function renderAkun(){if(!currentUser)return;const w=currentUser;$('akunInfo').i
 function editProfil(){const w=currentUser;openModal(`<div class="modal-header"><h3>✏️ Edit Profil</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-group"><label>Nama</label><input id="pfNama" value="${esc(w.nama)}"></div><div class="form-row"><div class="form-group"><label>Blok</label><input id="pfBlok" value="${esc(w.blok)}"></div><div class="form-group"><label>HP</label><input id="pfHp" value="${esc(w.hp||'')}"></div></div><div class="form-group"><label>Pekerjaan</label><input id="pfPekerjaan" value="${esc(w.pekerjaan||'')}"></div><div class="form-group"><label>Ganti PIN (kosongkan jika tidak)</label><input id="pfPin" maxlength="4" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div><button class="btn btn-primary btn-block" onclick="saveProfil()">💾 Simpan</button>`);}
 async function saveProfil(){const nama=$('pfNama').value.trim(),blok=$('pfBlok').value.trim(),hp=$('pfHp').value.trim(),pek=$('pfPekerjaan').value.trim(),pin=$('pfPin').value.trim();if(!nama||!blok)return showToast('Nama & Blok wajib','error');if(pin&&!/^\d{4}$/.test(pin))return showToast('PIN 4 digit','error');const i=appData.warga.findIndex(x=>x.id===currentUser.id);if(i>-1){appData.warga[i]={...appData.warga[i],nama,blok,hp,pekerjaan:pek,...(pin?{pin}:{})};currentUser=appData.warga[i];}await saveDataToFirebase();$('hName').textContent=currentUser.nama;closeModal();showToast('Profil tersimpan di Firebase');renderAkun();populateLoginWarga();}
 function downloadBackup(){const data={version:'2.0',exportDate:new Date().toISOString(),firebase:true,data:appData};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='backup-saung-kebon-firebase-'+today()+'.json';a.click();URL.revokeObjectURL(url);showToast('Backup JSON didownload!');}
-function restoreBackup(e){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=ev=>{try{const data=JSON.parse(ev.target.result);if(!data.data)throw new Error('Format salah');if(!confirm('️ Restore akan MENGGANTI semua data di Firebase.\n\nLanjutkan?'))return;appData=data.data;normalize();db.ref('/').set(appData).then(()=>{showToast('Backup di-restore ke Firebase!');populateLoginWarga();updateDashboard();refreshPage();}).catch(err=>showToast('Gagal restore: '+err.message,'error'));}catch(err){showToast('File backup tidak valid','error');}};reader.readAsText(file);e.target.value='';}
+function restoreBackup(e){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=ev=>{try{const data=JSON.parse(ev.target.result);if(!data.data)throw new Error('Format salah');if(!confirm('⚠️ Restore akan MENGGANTI semua data di Firebase.\n\nLanjutkan?'))return;appData=data.data;normalize();db.ref('/').set(appData).then(()=>{showToast('Backup di-restore ke Firebase!');populateLoginWarga();updateDashboard();refreshPage();}).catch(err=>showToast('Gagal restore: '+err.message,'error'));}catch(err){showToast('File backup tidak valid','error');}};reader.readAsText(file);e.target.value='';}
 
 /* ================= NOTIF ================= */
 function showNotif(){const pd=(appData.setoran||[]).filter(s=>s.status==='Pending').length;const br=(appData.lapor||[]).filter(s=>s.status==='Baru').length;const kg=(appData.kegiatan||[]).filter(k=>k.status==='Akan Datang').length;openModal(`<div class="modal-header"><h3>🔔 Notifikasi</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div style="display:flex;flex-direction:column;gap:10px">${pd&&isStaff()?`<div style="padding:12px;background:var(--pt);border-radius:12px;border-left:4px solid var(--p);cursor:pointer" onclick="closeModal();showPage('setoran',document.querySelector('[data-page=setoran]'))"><b>📤 ${pd} setoran menunggu</b></div>`:''}${br?`<div style="padding:12px;background:#FEF2F2;border-radius:12px;border-left:4px solid var(--red);cursor:pointer" onclick="closeModal();showPage('pengaduan',document.querySelector('[data-page=pengaduan]'))"><b>🚨 ${br} pengaduan baru</b></div>`:''}${kg?`<div style="padding:12px;background:#FEF3C7;border-radius:12px;border-left:4px solid #F59E0B;cursor:pointer" onclick="closeModal();showPage('kegiatan',document.querySelector('[data-page=kegiatan]'))"><b>📅 ${kg} kegiatan akan datang</b></div>`:''}<div style="padding:12px;background:#EFF6FF;border-radius:12px;border-left:4px solid var(--blue)"><b>📢 Pengumuman terbaru</b><div style="font-size:12px;color:var(--muted)">${esc(((appData.pengumuman||[]).find(p=>p.pin)||(appData.pengumuman||[])[0]||{}).judul||'-')}</div></div>${!pd&&!br&&!kg?'<div class="empty" style="padding:20px"><div class="empty-icon">🎉</div><p>Tidak ada notifikasi</p></div>':''}</div>`);}
