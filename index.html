@@ -214,6 +214,11 @@ button{font-family:inherit}
 .empty-icon{font-size:50px;margin-bottom:12px;opacity:.45}
 .empty p{font-size:14px;font-weight:500}
 
+/* ===================== PAGES / TABS HIDE-SHOW ===================== */
+.page { display: none; animation: fadeIn 0.3s ease; }
+.page.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
 /* ===================== BOTTOM NAV (mobile) ===================== */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:9px 0 calc(9px + env(safe-area-inset-bottom));z-index:100;box-shadow:0 -4px 16px rgba(0,0,0,.06)}
 .bottom-nav button{background:none;border:none;padding:7px 4px;cursor:pointer;color:var(--muted2);font-size:10px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:4px;transition:color .15s}
@@ -324,7 +329,7 @@ button{font-family:inherit}
 
   <!-- SIDEBAR -->
   <div class="sidebar">
-    <div class="sidebar-header"><h2>🏘️ Saung Kebun</h2><p>RT 11 / RW 44</p></div>
+    <div class="sidebar-header"><h2>🏘️️ Saung Kebun</h2><p>RT 11 / RW 44</p></div>
     <div class="sidebar-menu" id="sidebarMenu"></div>
   </div>
 
@@ -520,7 +525,7 @@ button{font-family:inherit}
     <div class="page" id="pageSurat">
       <div class="card">
         <div class="card-header">
-            <h3>✉️ Pengajuan Surat</h3>
+            <h3>✉️️ Pengajuan Surat</h3>
             <button class="btn btn-sm btn-primary no-print" onclick="showSuratForm()">＋ Ajukan</button>
         </div>
         <div id="suratList"></div>
@@ -600,8 +605,13 @@ const firebaseConfig={
   messagingSenderId:"496701101163",
   appId:"1:496701101163:web:386496736c57b6f45d0d2e"
 };
-firebase.initializeApp(firebaseConfig);
-const db=firebase.database();
+let db = null;
+try {
+  firebase.initializeApp(firebaseConfig);
+  db = firebase.database();
+} catch(e) {
+  console.error("Firebase SDK failed.", e);
+}
 
 /* ---------- DATA DEFAULT (seed) ---------- */
 const defaultData={
@@ -665,8 +675,9 @@ const labelBulan=k=>{if(!k)return'-';const[y,m]=k.split('-');return BULAN[Number
 const initials=n=>String(n||'?').trim().split(/\s+/).map(x=>x[0]).join('').substr(0,2).toUpperCase();
 const showToast=(msg,type='success')=>{const t=$('toast');t.textContent=(type==='error'?'❌ ':type==='info'?'ℹ️ ':'✅ ')+msg;t.className='toast show '+type;clearTimeout(showToast._t);showToast._t=setTimeout(()=>t.className='toast',3200);};
 const showUpdateIndicator=()=>{const i=$('updateIndicator');i.classList.add('show');clearTimeout(showUpdateIndicator._t);showUpdateIndicator._t=setTimeout(()=>i.classList.remove('show'),2200);};
+
 const roleLevel=r=>({'Ketua RT':4,'Bendahara':3,'Sekretaris':3,'Anggota Keamanan':2,'Warga':1}[r]||1);
-const isStaff=()=>currentUser&&roleLevel(currentUser.gol)>=3; // Bendahara/Sekretaris/Ketua
+const isStaff=()=>currentUser&&roleLevel(currentUser.gol)>=3;
 
 /* ---------- NORMALIZE DATA ---------- */
 function normalizeData(){
@@ -733,7 +744,6 @@ function enterApp(){
   $('loading').style.display='none';
   $('headerRole').textContent=currentUser.gol;
   $('headerName').textContent=currentUser.nama;
-  buildSidebar();buildBottomNav();buildHomeMenu();
   setupRealtimeListener();
   refreshBankInfo();
   showPage(currentPage||'home');
@@ -773,50 +783,67 @@ const NAV_ITEMS=[
   {id:'iuran',icon:'✅',label:'Iuran'},
   {id:'keuangan',icon:'💰',label:'Keuangan'},
   {id:'setoran',icon:'📤',label:'Setoran'},
-  {id:'kegiatan',icon:'📸',label:'Kegiatan'},
   {id:'pengumuman',icon:'📢',label:'Pengumuman'},
   {id:'pengaduan',icon:'🚨',label:'Pengaduan'},
   {id:'ronda',icon:'🛡️',label:'Ronda'},
   {id:'surat',icon:'✉️',label:'Surat'},
   {id:'tamu',icon:'👤',label:'Tamu'},
   {id:'voting',icon:'🗳️',label:'Voting'},
+  {id:'kegiatan',icon:'📸',label:'Kegiatan'},
   {id:'akun',icon:'⚙️',label:'Akun'}
 ];
+
 function badgeCount(id){
   if(id==='pengaduan')return (appData.lapor||[]).filter(l=>l.status!=='Selesai'&&l.status!=='Ditolak').length;
   if(id==='setoran')return isStaff()?(appData.setoran||[]).filter(s=>s.status==='Pending').length:0;
   return 0;
 }
+
 function buildSidebar(){
   $('sidebarMenu').innerHTML=NAV_ITEMS.map(n=>{
     const c=badgeCount(n.id);
-    return `<div class="sidebar-item" data-page="${n.id}" onclick="showPage('${n.id}')"><span class="icon">${n.icon}</span>${n.label}${c?`<span class="cnt">${c}</span>`:''}</div>`;
+    const active = n.id === currentPage ? 'active' : '';
+    return `<div class="sidebar-item ${active}" data-page="${n.id}" onclick="showPage('${n.id}')"><span class="icon">${n.icon}</span>${n.label}${c?`<span class="cnt">${c}</span>`:''}</div>`;
   }).join('');
 }
+
 function buildBottomNav(){
   const items=[{id:'home',icon:'🏠',label:'Beranda'},{id:'keuangan',icon:'💰',label:'Keuangan'},{id:'kegiatan',icon:'📸',label:'Kegiatan'},{id:'pengaduan',icon:'🚨',label:'Lapor'},{id:'akun',icon:'⚙️',label:'Akun'}];
-  $('bottomNav').innerHTML=items.map(n=>`<button data-page="${n.id}" onclick="showPage('${n.id}')"><span class="ni">${n.icon}</span><span>${n.label}</span></button>`).join('');
+  $('bottomNav').innerHTML=items.map(n=>{
+    const active = n.id === currentPage ? 'active' : '';
+    return `<button class="${active}" data-page="${n.id}" onclick="showPage('${n.id}')"><span class="ni">${n.icon}</span><span>${n.label}</span></button>`;
+  }).join('');
 }
+
 function buildHomeMenu(){
   $('homeMenu').innerHTML=NAV_ITEMS.filter(n=>n.id!=='home'&&n.id!=='akun').map(n=>{
     const cls={warga:'mi-blue',iuran:'mi-green',keuangan:'mi-orange',setoran:'mi-indigo',pengumuman:'mi-yellow',pengaduan:'mi-red',ronda:'mi-purple',surat:'mi-teal',tamu:'mi-pink',voting:'mi-lime',kegiatan:'mi-teal'}[n.id]||'mi-blue';
     return `<div class="menu-item" onclick="showPage('${n.id}')"><div class="menu-icon ${cls}">${n.icon}</div><span>${n.label}</span></div>`;
   }).join('');
 }
+
 function showPage(page){
   if(!PAGES.includes(page))page='home';
   currentPage=page;
+  
+  // Hide all pages, show active
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   const el=$('page'+page.charAt(0).toUpperCase()+page.slice(1));
   if(el)el.classList.add('active');
-  document.querySelectorAll('.sidebar-item').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
-  document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+
+  // Trigger content render and nav highlight
   refreshCurrentPage();
+  
   window.scrollTo({top:0,behavior:'smooth'});
   if(currentUser){try{const s=JSON.parse(localStorage.getItem('rtku_session')||'{}');s.lastPage=page;localStorage.setItem('rtku_session',JSON.stringify(s));}catch(e){}}
 }
+
 function refreshCurrentPage(){
-  updateDashboard();buildSidebar();checkRoleAccess();
+  buildSidebar();
+  buildBottomNav();
+  checkRoleAccess();
+  updateDashboard();
+  
   switch(currentPage){
     case 'home':break;
     case 'warga':renderWargaList();break;
@@ -1226,14 +1253,11 @@ function deleteKegiatan(id){if(!confirm('Hapus dokumentasi ini?'))return;const l
 function renderPengumuman(){
   const list=(appData.pengumuman||[]).slice().sort((a,b)=>(b.pin?1:0)-(a.pin?1:0)||(b.tgl||'').localeCompare(a.tgl||''));
   $('pengumumanList').innerHTML=list.length?list.map(p=>`
-    <div class="data-item">
-      <div class="data-avatar" style="background:linear-gradient(135deg,#FDBA74,#FB923C)">📢</div>
-      <div class="data-info">
-        <div class="name">${esc(p.judul)} ${p.pin?'📌':''} <span class="badge b-yellow">${esc(p.kat||'Pengumuman')}</span></div>
-        <div class="detail" style="color:var(--ink2);margin-top:4px">${esc(p.isi)}</div>
-        <div class="detail">📅 ${tglIndo(p.tgl)} · 👤 ${esc(p.oleh||'Pengurus')}</div>
-      </div>
-      ${isStaff()?`<div class="data-actions no-print"><button class="btn-edit" onclick="editPengumuman('${p.id}')">✏️</button><button class="btn-del" onclick="deletePengumuman('${p.id}')">🗑️</button></div>`:''}
+    <div class="data-item" style="flex-direction:column;align-items:flex-start">
+      <div style="display:flex;justify-content:space-between;width:100%"><span class="badge b-yellow">${esc(p.kat||'Pengumuman')}</span>
+      ${isStaff()?`<div class="data-actions no-print"><button class="btn-edit" onclick="editPengumuman('${p.id}')">✏️</button><button class="btn-del" onclick="deletePengumuman('${p.id}')">🗑️</button></div>`:''}</div>
+      <h4 style="margin:8px 0 4px">${esc(p.judul)} ${p.pin?'📌':''}</h4><p style="font-size:13px;color:var(--muted);line-height:1.4">${esc(p.isi)}</p>
+      <div class="detail" style="margin-top:6px">📅 ${tglIndo(p.tgl)} · 👤 ${esc(p.oleh||'Pengurus')}</div>
     </div>`).join(''):emptyState('📢','Belum ada pengumuman');
 }
 function showPengumumanForm(p=null){
@@ -1314,7 +1338,7 @@ function renderRonda(){
   const list=(appData.ronda||[]).slice().sort((a,b)=>(a.tgl||'').localeCompare(b.tgl||''));
   $('rondaList').innerHTML=list.length?list.map(r=>`
     <div class="data-item">
-      <div class="data-avatar" style="background:linear-gradient(135deg,#BFDBFE,#93C5FD)">🛡️</div>
+      <div class="data-avatar" style="background:linear-gradient(135deg,#BFDBFE,#93C5FD)">🛡️️</div>
       <div class="data-info">
         <div class="name">${esc(r.shift)} · ${esc(r.waktu||'-')}</div>
         <div class="detail">📅 ${tglIndo(r.tgl)}</div>
@@ -1322,7 +1346,7 @@ function renderRonda(){
         ${r.catatan?`<div class="detail" style="color:var(--ink2)">📝 ${esc(r.catatan)}</div>`:''}
       </div>
       ${isStaff()?`<div class="data-actions no-print"><button class="btn-edit" onclick="editRonda('${r.id}')">✏️</button><button class="btn-del" onclick="deleteRonda('${r.id}')">🗑️</button></div>`:''}
-    </div>`).join(''):emptyState('🛡️️','Belum ada jadwal ronda');
+    </div>`).join(''):emptyState('🛡️','Belum ada jadwal ronda');
 }
 function showRondaForm(r=null){
   const e=r!==null;
@@ -1333,7 +1357,7 @@ function showRondaForm(r=null){
       <div class="form-group"><label>Shift</label><select id="rShift">${['Malam','Dini Hari','Pagi','Sore'].map(s=>`<option ${e&&r.shift===s?'selected':''}>${s}</option>`).join('')}</select></div>
     </div>
     <div class="form-group"><label>Waktu</label><input type="text" id="rWaktu" value="${e?esc(r.waktu||''):''}" placeholder="22.00 - 02.00"></div>
-    <div class="form-group"><label>Petugas</label><select id="rPetugas">${(appData.warga||[]).map(w=>`<option value="${esc(w.nama)}" data-blok="${esc(w.blok)}" ${e&&r.petugas===w.nama?'selected':''}>${esc(w.nama)} (Blok${esc(w.blok)})</option>`).join('')}</select></div>
+    <div class="form-group"><label>Petugas</label><select id="rPetugas">${(appData.warga||[]).map(w=>`<option value="${esc(w.nama)}" data-blok="${esc(w.blok)}" ${e&&r.petugas===w.nama?'selected':''}>${esc(w.nama)} (Blok ${esc(w.blok)})</option>`).join('')}</select></div>
     <div class="form-group"><label>Catatan</label><textarea id="rCatatan" rows="2" placeholder="Catatan patroli...">${e?esc(r.catatan||''):''}</textarea></div>
     <button class="btn btn-primary btn-block" onclick="saveRonda('${e?r.id:''}')">💾 Simpan Jadwal</button>
   `);
@@ -1474,7 +1498,7 @@ function renderVoting(){
         return `<div class="voting-option" onclick="voteVoting('${v.id}',${i})"><span class="ot">${i+1}.${esc(p.text)}</span><span class="ov">${p.votes\vert{}\vert{}0} suara · ${pct}%</span></div><div class="vbar"><div style="width:${pct}%"></div></div>`;
       }).join('')}
       <div class="voting-foot"><span>📊 Total ${total} suara</span>
-        ${isStaff()?`<span class="sp no-print"><button class="btn btn-sm btn-warning" onclick="editVoting('${v.id}')">✏️ Edit</button><button class="btn btn-sm btn-danger" onclick="deleteVoting('${v.id}')">🗑️️</button></span>`:''}
+        ${isStaff()?`<span class="sp no-print"><button class="btn btn-sm btn-warning" onclick="editVoting('${v.id}')">✏️ Edit</button><button class="btn btn-sm btn-danger" onclick="deleteVoting('${v.id}')">🗑</button></span>`:''}
       </div>
     </div>`;
   }).join(''):emptyState('🗳️','Belum ada polling aktif');
@@ -1482,7 +1506,7 @@ function renderVoting(){
 function showVotingForm(v=null){
   const e=v!==null;
   openModal(`
-    <div class="modal-header"><h3>${e?'✏️ Edit Polling':'＋ Buat Polling Baru'}</h3><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-header"><h3>${e?'✏️️ Edit Polling':'＋ Buat Polling Baru'}</h3><button class="modal-close" onclick="closeModal()">✕</button></div>
     <div class="form-group"><label>Pertanyaan *</label><input type="text" id="vQ" value="${e?esc(v.pertanyaan):''}" placeholder="Contoh: Lokasi kerja bakti berikutnya?"></div>
     <div class="form-group"><label>Pilihan 1 *</label><input type="text" id="vP1" value="${e?esc(v.pilihan[0]?v.pilihan[0].text:''):''}"></div>
     <div class="form-group"><label>Pilihan 2 *</label><input type="text" id="vP2" value="${e?esc(v.pilihan[1]?v.pilihan[1].text:''):''}"></div>
@@ -1545,6 +1569,13 @@ function renderAkun(){
           </div>`).join('');
       })()}
     </div>
+    
+    ${isStaff()?`
+    <div style="margin-top:24px;padding:20px;background:#FEF2F2;border-radius:12px;border:1px solid #FECACA">
+      <h4 style="color:#DC2626;margin-bottom:10px;font-size:14px">⚠️ Pengaturan Khusus Pengurus</h4>
+      <p style="color:#991B1B;font-size:12px;margin-bottom:12px">Mengembalikan semua data ke pengaturan awal. Semua transaksi dan input warga akan terhapus secara permanen.</p>
+      <button class="btn btn-danger btn-block" onclick="resetData()">🔄 Reset Database ke Default</button>
+    </div>`:''}
   `;
 }
 function editProfil(){
@@ -1576,13 +1607,26 @@ function saveProfil(){
 }
 
 /* ======================================================================
-   MODAL / LIGHTBOX / EMPTY STATE
+   MODAL / LIGHTBOX / EMPTY STATE / NOTIF
    ====================================================================== */
 function openModal(html){$('modalContent').innerHTML=html;$('modal').classList.add('active');}
 function closeModal(){$('modal').classList.remove('active');}
 function viewBukti(src){$('lightboxImg').src=src;$('lightbox').classList.add('active');}
 function emptyState(icon,text){return `<div class="empty"><div class="empty-icon">${icon}</div><p>${esc(text)}</p></div>`;}
 function showAnnouncementDetail(){const p=(appData.pengumuman||[]).find(x=>x.pin)||(appData.pengumuman||[])[0];if(!p)return;openModal(`<div class="modal-header"><h3>📢 ${esc(p.judul)}</h3><button class="modal-close" onclick="closeModal()">✕</button></div><span class="badge b-yellow" style="margin-bottom:12px">${esc(p.kat||'Pengumuman')}</span><p style="font-size:14px;color:#4B5563;line-height:1.7;margin:12px 0 16px">${esc(p.isi)}</p><div style="font-size:12px;color:#9CA3AF;padding-top:12px;border-top:1px solid var(--line)">📅 ${tglIndo(p.tgl)} · 👤 ${esc(p.oleh||'Pengurus')}</div>`);}
+function showNotif(){
+  const pending=(appData.setoran||[]).filter(s=>s.status==='Pending').length;
+  const baru=(appData.lapor||[]).filter(l=>l.status==='Baru').length;
+  openModal(`
+    <div class="modal-header"><h3>🔔 Notifikasi</h3><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      ${pending&&isStaff()?`<div style="padding:13px;background:#FEF3C7;border-radius:12px;border-left:4px solid var(--orange);cursor:pointer" onclick="closeModal();showPage('setoran')"><b style="font-size:13px">📤 ${pending} setoran menunggu konfirmasi</b><div style="font-size:12px;color:var(--muted)">Buka menu Setoran untuk memverifikasi</div></div>`:''}
+      ${baru&&isStaff()?`<div style="padding:13px;background:#FEE2E2;border-radius:12px;border-left:4px solid var(--red);cursor:pointer" onclick="closeModal();showPage('pengaduan')"><b style="font-size:13px">🚨 ${baru} pengaduan baru</b><div style="font-size:12px;color:var(--muted)">Perlu tindak lanjut pengurus</div></div>`:''}
+      <div style="padding:13px;background:#DBEAFE;border-radius:12px;border-left:4px solid var(--blue);cursor:pointer" onclick="closeModal();showPage('pengumuman')"><b style="font-size:13px">📢 Pengumuman terbaru</b><div style="font-size:12px;color:var(--muted)">${esc(((appData.pengumuman||[]).find(p=>p.pin)||(appData.pengumuman||[])[0]||{}).judul||'-')}</div></div>
+      ${(!pending||!isStaff())&&(!baru||!isStaff())?`<div class="empty" style="padding:24px"><div class="empty-icon">🎉</div><p>Tidak ada notifikasi baru untuk Anda</p></div>`:''}
+    </div>
+  `);
+}
 
 /* ======================================================================
    INIT
