@@ -7,11 +7,9 @@
 <title>Portal Saung Kebun RT 11 RW 44</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* ========== RESET & VARIABEL UNGU ========== */
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
-  --p:#7C3AED;--pd:#6D28D9;--pdd:#5B21B6;--pl:#A78BFA;
-  --tint:#F5F3FF;--tint2:#EDE9FE;
+  --p:#7C3AED;--pd:#6D28D9;--pdd:#5B21B6;--pl:#A78BFA;--pt:#EDE9FE;--pt2:#F5F3FF;
   --ink:#1F2937;--ink2:#374151;--muted:#6B7280;--muted2:#9CA3AF;
   --line:#E5E7EB;--line2:#F3F4F6;--bg:#F4F4F8;--card:#fff;
   --green:#10B981;--red:#EF4444;--blue:#3B82F6;
@@ -22,7 +20,7 @@ button{font-family:inherit;cursor:pointer}
 input,select,textarea{font-family:inherit}
 ::-webkit-scrollbar{width:8px}::-webkit-scrollbar-thumb{background:#C4B5FD;border-radius:8px}
 
-/* ========== LOGIN ========== */
+/* LOGIN */
 .login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#8B5CF6 0%,#6D28D9 60%,#5B21B6 100%);padding:20px;position:relative;overflow:hidden}
 .login-page::before{content:"";position:absolute;inset:-50%;background:radial-gradient(circle,rgba(255,255,255,.12) 1px,transparent 1px);background-size:42px 42px;animation:gm 18s linear infinite}
 @keyframes gm{to{transform:translate(42px,42px)}}
@@ -35,14 +33,14 @@ input,select,textarea{font-family:inherit}
 .login-footer{text-align:center;margin-top:20px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
 .login-footer b{color:var(--pd)}
 
-/* ========== FORM & TOMBOL ========== */
+/* FORM */
 .form-group{margin-bottom:15px}
 .form-group label{display:block;font-size:11.5px;font-weight:700;color:var(--ink2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
 .form-group select,.form-group input,.form-group textarea{width:100%;padding:13px 15px;border:2px solid var(--line);border-radius:12px;font-size:15px;background:#fff;color:var(--ink)}
 .form-group textarea{resize:vertical;min-height:60px}
 .form-group select:focus,.form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--p);box-shadow:0 0 0 3px rgba(124,58,237,.15)}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.check-label{display:flex;align-items:center;gap:9px;text-transform:none!important;font-size:14px!important;font-weight:500!important;color:var(--ink2)!important;cursor:pointer;letter-spacing:0!important}
+.check-label{display:flex;align-items:center;gap:9px;text-transform:none!important;font-size:14px!important;font-weight:500!important;color:var(--ink2)!important;cursor:pointer}
 .check-label input{width:18px;height:18px;accent-color:var(--p)}
 .btn{padding:13px 20px;border:none;border-radius:12px;font-weight:700;font-size:15px;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all .2s}
 .btn:active{transform:scale(.98)}
@@ -54,20 +52,20 @@ input,select,textarea{font-family:inherit}
 .btn-sm{padding:8px 14px;font-size:12.5px;border-radius:10px}
 .btn-block{width:100%}
 
-/* ========== LAYOUT UTAMA (FLEX PRESISI) ========== */
+/* LAYOUT */
 .app{display:flex;min-height:100vh}
 .sidebar{width:var(--sbw);flex:0 0 var(--sbw);background:#fff;border-right:1px solid var(--line);position:sticky;top:0;height:100vh;overflow-y:auto;z-index:40}
 .sidebar-header{padding:20px 20px 16px;border-bottom:1px solid var(--line);margin-bottom:12px}
-.sidebar-header h2{font-size:18px;font-weight:800;color:var(--ink)}
+.sidebar-header h2{font-size:18px;font-weight:800}
 .sidebar-header p{font-size:12px;color:var(--muted);margin-top:3px}
 .sidebar-menu{display:flex;flex-direction:column;gap:2px;padding:0 10px 20px}
-.sidebar-item{display:flex;align-items:center;gap:12px;padding:11px 14px;cursor:pointer;border-radius:10px;color:var(--muted);font-weight:600;font-size:14px;transition:all .15s;flex-shrink:0}
-.sidebar-item:hover{background:var(--tint);color:var(--ink)}
-.sidebar-item.active{background:var(--tint2);color:var(--pdd)}
+.sidebar-item{display:flex;align-items:center;gap:12px;padding:11px 14px;cursor:pointer;border-radius:10px;color:var(--muted);font-weight:600;font-size:14px;transition:all .15s}
+.sidebar-item:hover{background:var(--pt2);color:var(--ink)}
+.sidebar-item.active{background:var(--pt);color:var(--pdd)}
 .sidebar-item .icon{font-size:19px;width:24px;text-align:center;flex-shrink:0}
 .main{flex:1;min-width:0;display:flex;flex-direction:column}
 
-/* ========== HEADER UNGU ========== */
+/* HEADER */
 .header{background:linear-gradient(135deg,var(--p) 0%,var(--pd) 55%,var(--pdd) 100%);color:#fff;padding:22px 28px;position:relative;overflow:hidden;flex-shrink:0}
 .header::before{content:"";position:absolute;top:-60px;right:-40px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.1);pointer-events:none}
 .header-top{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1;gap:12px}
@@ -79,22 +77,22 @@ input,select,textarea{font-family:inherit}
 .notif-btn .badge{position:absolute;top:-6px;right:-6px;min-width:22px;height:22px;padding:0 6px;background:var(--red);border-radius:50%;font-size:11px;font-weight:800;display:none;align-items:center;justify-content:center;border:2px solid var(--pd);color:#fff}
 .notif-btn .badge.show{display:flex}
 
-/* ========== KONTEN ========== */
+/* CONTENT */
 .content{flex:1;padding:24px 28px 90px;width:100%;max-width:1280px;margin:0 auto}
 .page{display:none}
 .page.active{display:block;animation:fadein .25s ease}
 @keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-/* ========== KARTU ========== */
+/* CARD */
 .card{background:var(--card);border-radius:18px;padding:22px;margin-bottom:16px;box-shadow:0 3px 12px rgba(31,41,55,.06);border:1px solid #ECECF3}
 .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px}
 .card-header h3{font-size:17px;font-weight:700;display:flex;align-items:center;gap:9px}
 .card-header .link{font-size:13px;color:var(--pd);font-weight:700;cursor:pointer}
 .section-title{font-size:15px;font-weight:800;color:var(--ink);margin:6px 0 12px;display:flex;align-items:center;gap:8px}
 .section-title::before{content:"";width:4px;height:18px;background:linear-gradient(180deg,var(--p),var(--pd));border-radius:3px}
-.form-box{border:1px dashed #C4B5FD;border-radius:14px;padding:16px;background:var(--tint)}
+.form-box{border:1px dashed #C4B5FD;border-radius:14px;padding:16px;background:var(--pt2)}
 
-/* ========== SEARCH / FILTER / AKSI ========== */
+/* SEARCH / FILTER */
 .search-box{position:relative;margin-bottom:14px}
 .search-box input{width:100%;padding:12px 16px 12px 44px;border:2px solid var(--line);border-radius:12px;font-size:14px}
 .search-box input:focus{outline:none;border-color:var(--p)}
@@ -108,8 +106,8 @@ input,select,textarea{font-family:inherit}
 .action-btn.reset{background:var(--line2);color:var(--ink2)}
 .action-btn.pdf{background:var(--red);color:#fff}
 
-/* ========== INFO BOX ========== */
-.info-box{background:var(--tint);border:1px solid #DDD6FE;border-radius:14px;padding:16px;margin-bottom:16px}
+/* INFO BOX */
+.info-box{background:var(--pt);border:1px solid #DDD6FE;border-radius:14px;padding:16px;margin-bottom:16px}
 .info-box.green{background:#F0FDF4;border-color:#BBF7D0}
 .info-box-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px}
 .info-box-header h4{font-size:14px;font-weight:700}
@@ -120,19 +118,19 @@ input,select,textarea{font-family:inherit}
 .bank-info .an{font-size:12px;color:var(--muted);margin-top:3px}
 .info-box .note{font-size:11.5px;color:var(--muted);margin-top:8px;line-height:1.5}
 
-/* ========== GRID KEUANGAN ========== */
+/* FINANCE GRID */
 .finance-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .finance-item{padding:15px;border-radius:14px;border:1px solid transparent}
 .finance-item.green{background:#F0FDF4;border-color:#DCFCE7}
 .finance-item.blue{background:#EFF6FF;border-color:#DBEAFE}
 .finance-item.orange{background:#FFF7ED;border-color:#FFEDD5}
 .finance-item.red{background:#FEF2F2;border-color:#FEE2E2}
-.finance-item.purple{background:var(--tint);border-color:var(--tint2)}
+.finance-item.purple{background:var(--pt);border-color:var(--pt2)}
 .finance-item .label{font-size:11px;color:var(--muted);font-weight:700;margin-bottom:5px;text-transform:uppercase}
 .finance-item .value{font-size:17px;font-weight:800;color:var(--ink)}
 .finance-item .icon-box{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;margin-top:10px;background:rgba(255,255,255,.7)}
 
-/* ========== MENU GRID ========== */
+/* MENU GRID */
 .menu-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
 .menu-item{display:flex;flex-direction:column;align-items:center;gap:9px;cursor:pointer;padding:6px 2px;transition:transform .15s}
 .menu-item:active{transform:scale(.94)}
@@ -148,7 +146,7 @@ input,select,textarea{font-family:inherit}
 .mi-h{background:linear-gradient(135deg,#E0E7FF,#C7D2FE)}
 .menu-item span{font-size:11.5px;color:var(--ink2);font-weight:600;text-align:center}
 
-/* ========== LIST ITEM ========== */
+/* DATA ITEM */
 .data-item{display:flex;align-items:center;gap:13px;padding:14px;border:1px solid var(--line);border-radius:14px;margin-bottom:10px;background:#fff;transition:all .18s}
 .data-item:hover{box-shadow:0 6px 16px rgba(31,41,55,.08);border-color:#C4B5FD}
 .data-avatar{width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,var(--p),var(--pd));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0}
@@ -163,24 +161,26 @@ input,select,textarea{font-family:inherit}
 .btn-del{background:#FEE2E2;color:#DC2626}
 .pin-tag{font-size:9.5px;color:var(--green);font-weight:800;background:#D1FAE5;padding:2px 7px;border-radius:8px}
 
-/* ========== BADGE ========== */
+/* BADGE */
 .badge{display:inline-flex;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
 .b-green{background:#D1FAE5;color:#065F46}
 .b-yellow{background:#FEF3C7;color:#92400E}
 .b-red{background:#FEE2E2;color:#991B1B}
 .b-blue{background:#DBEAFE;color:#1E40AF}
 .b-gray{background:#F1F5F9;color:#475569}
-.b-purple{background:var(--tint2);color:var(--pdd)}
+.b-purple{background:var(--pt);color:var(--pdd)}
 
-/* ========== ROW / VOTING / PROGRESS ========== */
+/* ROW */
 .row-item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line2)}
 .row-item:last-child{border-bottom:none}
 .row-item .ri-title{font-size:14px;font-weight:600}
 .row-item .ri-meta{font-size:12px;color:var(--muted2);margin-top:2px}
 .row-item .ri-amt{font-weight:800;font-size:14.5px;white-space:nowrap}
 .amt-in{color:var(--green)}.amt-out{color:var(--red)}
+
+/* VOTING / PROGRESS */
 .voting-option{padding:11px 14px;background:#FAFAFF;border:2px solid var(--line);border-radius:11px;margin-bottom:7px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px}
-.voting-option:hover{border-color:var(--p);background:var(--tint)}
+.voting-option:hover{border-color:var(--p);background:var(--pt)}
 .vbar{height:7px;background:#E5E7EB;border-radius:4px;overflow:hidden;margin:0 0 9px}
 .vbar>div{height:100%;background:linear-gradient(90deg,var(--p),var(--pd));transition:width .6s}
 .progress{height:9px;background:#E5E7EB;border-radius:5px;overflow:hidden;margin-top:10px}
@@ -188,13 +188,13 @@ input,select,textarea{font-family:inherit}
 .empty{text-align:center;padding:46px 20px;color:var(--muted2)}
 .empty-icon{font-size:50px;margin-bottom:12px;opacity:.45}
 
-/* ========== BOTTOM NAV (MOBILE) ========== */
+/* BOTTOM NAV */
 .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);grid-template-columns:repeat(5,1fr);padding:9px 0 calc(9px + env(safe-area-inset-bottom));z-index:100;box-shadow:0 -4px 16px rgba(0,0,0,.06)}
 .bottom-nav button{background:none;border:none;padding:7px 4px;color:var(--muted2);font-size:10px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:4px}
 .bottom-nav button.active{color:var(--pd)}
 .bottom-nav button .ni{font-size:22px}
 
-/* ========== OVERLAY ========== */
+/* OVERLAY */
 .toast{position:fixed;top:22px;left:50%;transform:translateX(-50%) translateY(-130px);background:var(--pd);color:#fff;padding:14px 24px;border-radius:13px;font-size:14px;font-weight:700;z-index:4000;opacity:0;transition:all .4s;box-shadow:0 14px 30px rgba(0,0,0,.25);max-width:90vw;text-align:center}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .toast.error{background:var(--red)}.toast.info{background:var(--blue)}
@@ -210,12 +210,12 @@ input,select,textarea{font-family:inherit}
 .lightbox img{max-width:100%;max-height:88vh;border-radius:14px}
 .lightbox .lb-close{position:absolute;top:18px;right:18px;background:#fff;border:none;padding:10px 18px;border-radius:10px;font-weight:800}
 .loading{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:5000;flex-direction:column}
-.spinner{width:50px;height:50px;border:4px solid var(--tint2);border-top-color:var(--p);border-radius:50%;animation:sp .9s linear infinite}
+.spinner{width:50px;height:50px;border:4px solid var(--pt);border-top-color:var(--p);border-radius:50%;animation:sp .9s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 
-/* ========== UPLOAD FOTO ========== */
+/* PHOTO UPLOAD */
 .photo-upload-area{border:2px dashed #C4B5FD;border-radius:12px;padding:18px;text-align:center;cursor:pointer;background:#fff}
-.photo-upload-area:hover{border-color:var(--p);background:var(--tint)}
+.photo-upload-area:hover{border-color:var(--p);background:var(--pt2)}
 .photo-upload-area input{display:none}
 .photo-upload-area .ui{font-size:30px;margin-bottom:6px}
 .photo-upload-area .ut{font-size:13px;color:var(--muted);font-weight:600}
@@ -232,7 +232,7 @@ input,select,textarea{font-family:inherit}
 .riwayat-stat.yellow{background:#FFFBEB;border:1px solid #FDE68A}
 .riwayat-stat.red{background:#FEF2F2;border:1px solid #FECACA}
 
-/* ========== RESPONSIVE ========== */
+/* RESPONSIVE */
 @media(max-width:1023px){
   .sidebar{display:none}
   .bottom-nav{display:grid}
@@ -249,10 +249,12 @@ input,select,textarea{font-family:inherit}
   .login-container{padding:28px 20px}
   .riwayat-stats{grid-template-columns:1fr}
 }
+
 @media print{
   .sidebar,.bottom-nav,.notif-btn,.action-row,.filter-row,.search-box,.info-box,.data-actions,.toast,.modal,.form-box{display:none!important}
   body,.app,.main,.content{background:#fff!important}
   .header{background:#fff!important;color:#000!important;border-bottom:2px solid #000;padding:0 0 12px!important}
+  .header::before{display:none}
   .card{box-shadow:none!important;border:1px solid #ddd!important;break-inside:avoid}
   .content{padding:0!important;max-width:100%!important}
 }
@@ -260,22 +262,20 @@ input,select,textarea{font-family:inherit}
 </head>
 <body>
 
-<!-- LOGIN -->
 <div class="login-page" id="loginPage">
   <div class="login-container">
     <div class="login-logo">🏘️</div>
     <div class="login-header"><h1>Portal Saung Kebun</h1><p>RT 11 / RW 44 — Sistem Rukun Tetangga Digital</p></div>
-    <div class="form-group"><label>👤 Pilih Akun Warga</label><select id="loginWarga"><option value="">— Memuat —</option></select></div>
+    <div class="form-group"><label> Pilih Akun Warga</label><select id="loginWarga"><option value="">— Memuat —</option></select></div>
     <div class="form-group"><label>🔐 PIN (4 digit)</label><input type="password" id="loginPin" placeholder="Masukkan PIN" maxlength="4" inputmode="numeric" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div>
     <div class="form-group"><label class="check-label"><input type="checkbox" id="rememberMe" checked> Ingat saya (auto-login 7 hari)</label></div>
     <button class="btn btn-primary btn-block" onclick="doLogin()">🔓 Masuk ke Portal</button>
-    <button class="btn btn-danger btn-block" style="margin-top:10px" onclick="resetData()">🔄 Reset Data</button>
+    <button class="btn btn-danger btn-block" style="margin-top:10px" onclick="resetData()"> Reset Data</button>
     <button class="btn btn-secondary btn-block" style="margin-top:10px" onclick="showHelp()">❓ Bantuan</button>
-    <div class="login-footer">💡 PIN default: <b>1234</b></div>
+    <div class="login-footer"> PIN default: <b>1234</b></div>
   </div>
 </div>
 
-<!-- APP -->
 <div class="app" id="app" style="display:none">
   <aside class="sidebar">
     <div class="sidebar-header"><h2>🏘️ Saung Kebun</h2><p>RT 11 / RW 44</p></div>
@@ -295,7 +295,6 @@ input,select,textarea{font-family:inherit}
     </div>
 
     <div class="content" id="content">
-      <!-- BERANDA -->
       <div class="page active" id="pageHome">
         <div class="card">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px">
@@ -335,21 +334,19 @@ input,select,textarea{font-family:inherit}
         <div class="menu-grid" id="homeMenu"></div>
       </div>
 
-      <!-- WARGA -->
       <div class="page" id="pageWarga">
         <div class="card">
-          <div class="card-header"><h3>👥 Data Warga <span class="badge b-blue" id="wargaCount">0</span></h3><button class="btn btn-sm btn-primary" onclick="showWargaForm()">＋ Tambah Warga</button></div>
+          <div class="card-header"><h3>👥 Data Warga <span class="badge b-blue" id="wargaCount">0</span></h3><button class="btn btn-sm btn-primary" onclick="showWargaForm()">＋ Tambah</button></div>
           <div class="search-box"><span class="si">🔍</span><input type="text" id="searchWarga" placeholder="Cari nama, blok, jabatan..." oninput="renderWargaList()"></div>
           <div id="wargaList"></div>
         </div>
       </div>
 
-      <!-- IURAN -->
       <div class="page" id="pageIuran">
         <div class="card">
           <div class="card-header"><h3>✅ Status Iuran Warga</h3><button class="btn btn-sm btn-secondary" onclick="ubahNominalIuran()">✏️ Ubah Nominal</button></div>
           <div class="info-box green">
-            <div class="info-box-header"><h4>💡 Info</h4><button onclick="showPage('setoran')">💰 Setor Iuran</button></div>
+            <div class="info-box-header"><h4>💡 Info</h4><button onclick="showPage('setoran')">💰 Setor</button></div>
             <p class="note">Nominal iuran: <b id="iuranNominalLabel">Rp 50.000</b>/bulan. Tandai lunas setelah warga membayar.</p>
           </div>
           <div class="filter-row"><select id="iuranBulan" onchange="renderIuranList()"></select></div>
@@ -357,13 +354,12 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- KEUANGAN -->
       <div class="page" id="pageKeuangan">
         <div class="card">
           <div class="card-header"><h3>💰 Keuangan</h3></div>
           <div class="filter-row">
             <select id="filterBulan" onchange="applyFilter()"></select>
-            <select id="filterPeriode" onchange="applyFilter()"><option value="bulan">Per Bulan</option><option value="semua">Semua Waktu</option></select>
+            <select id="filterPeriode" onchange="applyFilter()"><option value="bulan">Per Bulan</option><option value="semua">Semua</option></select>
           </div>
           <div class="action-row">
             <button class="action-btn add" onclick="showTambahTransaksi()">＋ Tambah</button>
@@ -383,7 +379,6 @@ input,select,textarea{font-family:inherit}
         <div class="card"><div class="card-header"><h3>📊 Mutasi Kas</h3></div><div id="mutasiList"></div></div>
       </div>
 
-      <!-- SETORAN -->
       <div class="page" id="pageSetoran">
         <div class="card">
           <div class="card-header"><h3>📤 Setoran Online</h3></div>
@@ -404,7 +399,7 @@ input,select,textarea{font-family:inherit}
             <div class="form-group">
               <label>📷 Bukti Transfer (boleh lebih dari 1 foto)</label>
               <div class="photo-upload-area" onclick="document.getElementById('setorBukti').click()">
-                <div class="ui">📷</div><div class="ut">Klik untuk pilih foto (bisa banyak)</div>
+                <div class="ui"></div><div class="ut">Klik untuk pilih foto (bisa banyak)</div>
                 <input type="file" id="setorBukti" accept="image/*" multiple onchange="handleMultiplePhotos(this)">
               </div>
               <div class="photo-preview-grid" id="buktiPreviewGrid"></div>
@@ -429,14 +424,13 @@ input,select,textarea{font-family:inherit}
         </div>
       </div>
 
-      <!-- MODUL LAIN -->
       <div class="page" id="pagePengumuman"><div class="card"><div class="card-header"><h3>📢 Pengumuman</h3><button class="btn btn-sm btn-primary" onclick="showPengumumanForm()">＋ Tambah</button></div><div id="pengumumanList"></div></div></div>
-      <div class="page" id="pagePengaduan"><div class="card"><div class="card-header"><h3>🚨 Pengaduan</h3><button class="btn btn-sm btn-primary" onclick="showLaporForm()">＋ Lapor</button></div><div id="pengaduanList"></div></div></div>
+      <div class="page" id="pagePengaduan"><div class="card"><div class="card-header"><h3> Pengaduan</h3><button class="btn btn-sm btn-primary" onclick="showLaporForm()">＋ Lapor</button></div><div id="pengaduanList"></div></div></div>
       <div class="page" id="pageRonda"><div class="card"><div class="card-header"><h3>🛡️ Jadwal Ronda</h3><button class="btn btn-sm btn-primary" onclick="showRondaForm()">＋ Tambah</button></div><div id="rondaList"></div></div></div>
       <div class="page" id="pageSurat"><div class="card"><div class="card-header"><h3>✉️ Pengajuan Surat</h3><button class="btn btn-sm btn-primary" onclick="showSuratForm()">＋ Ajukan</button></div><div id="suratList"></div></div></div>
-      <div class="page" id="pageTamu"><div class="card"><div class="card-header"><h3>👤 Buku Tamu</h3><button class="btn btn-sm btn-primary" onclick="showTamuForm()">＋ Tambah</button></div><div id="tamuList"></div></div></div>
+      <div class="page" id="pageTamu"><div class="card"><div class="card-header"><h3> Buku Tamu</h3><button class="btn btn-sm btn-primary" onclick="showTamuForm()">＋ Tambah</button></div><div id="tamuList"></div></div></div>
       <div class="page" id="pageVoting"><div class="card"><div class="card-header"><h3>🗳️ Jajak Pendapat</h3><button class="btn btn-sm btn-primary" onclick="showVotingForm()">＋ Buat Polling</button></div><div id="votingList"></div></div></div>
-      <div class="page" id="pageAkun"><div class="card"><div class="card-header"><h3>⚙️ Akun Saya</h3><button class="btn btn-sm btn-secondary" onclick="editProfil()">✏️ Edit Profil</button></div><div id="akunInfo"></div><button class="btn btn-danger btn-block" style="margin-top:16px" onclick="doLogout()">🚪 Keluar</button></div></div>
+      <div class="page" id="pageAkun"><div class="card"><div class="card-header"><h3>️ Akun Saya</h3><button class="btn btn-sm btn-secondary" onclick="editProfil()">️ Edit Profil</button></div><div id="akunInfo"></div><button class="btn btn-danger btn-block" style="margin-top:16px" onclick="doLogout()">🚪 Keluar</button></div></div>
     </div>
   </div>
 
@@ -455,7 +449,6 @@ input,select,textarea{font-family:inherit}
 <div class="loading" id="loading"><div class="spinner"></div><p>Memuat data…</p></div>
 
 <script>
-/* ================= DATA DEFAULT ================= */
 const defaultData={
   rt:{nama:'Portal Saung Kebun RT 11 RW 44',iuranNominal:50000,bank:{nama:'Bank Mandiri',rek:'123-00-456789-0',an:'Kas RT 11 Saung Kebun'}},
   warga:[
@@ -476,7 +469,6 @@ const defaultData={
   ronda:[{id:'R001',tgl:'2026-10-06',shift:'Malam',waktu:'22.00 - 02.00',petugas:'Dedi Mulyawan',blok:'A04',catatan:'Patroli rutin'}]
 };
 
-/* ================= STATE & UTIL ================= */
 let appData,currentUser=null,currentPage='home',uploadedPhotos=[];
 const $=id=>document.getElementById(id);
 const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -500,101 +492,87 @@ const loadData=()=>{try{const d=localStorage.getItem('saungkebon_v4');appData=d?
 const saveData=()=>{try{localStorage.setItem('saungkebon_v4',JSON.stringify(appData));}catch(e){}};
 const normalize=()=>{if(!appData.rt)appData.rt=defaultData.rt;if(!appData.rt.bank)appData.rt.bank=defaultData.rt.bank;if(appData.rt.iuranNominal==null)appData.rt.iuranNominal=50000;if(!Array.isArray(appData.warga))appData.warga=[];appData.warga.forEach(w=>{if(!w.pin)w.pin='1234';});['iuran','kas','setoran','pengumuman','lapor','tamu','surat','voting','ronda'].forEach(k=>{if(!Array.isArray(appData[k]))appData[k]=[];});};
 
-/* ================= AUTH ================= */
 const populateLoginWarga=()=>$('loginWarga').innerHTML='<option value="">— Pilih Warga —</option>'+(appData.warga||[]).map(w=>`<option value="${w.id}">${esc(w.nama)} (${esc(w.gol)}) · Blok ${esc(w.blok)}</option>`).join('');
 function doLogin(){const id=$('loginWarga').value,pin=$('loginPin').value.trim();if(!id)return showToast('Pilih akun','error');if(!/^\d{4}$/.test(pin))return showToast('PIN 4 digit','error');const w=appData.warga.find(x=>x.id===id);if(!w)return showToast('Akun tidak ada','error');if(pin!==(w.pin||'1234'))return showToast('PIN salah!','error');currentUser=w;if($('rememberMe').checked)localStorage.setItem('rtku_sess',JSON.stringify({id:w.id,t:Date.now(),p:currentPage}));enterApp();showToast('Selamat datang, '+w.nama.split(' ')[0]+'!');}
 function enterApp(){$('loginPage').style.display='none';$('app').style.display='flex';$('loading').style.display='none';$('headerRole').textContent=currentUser.gol;$('headerName').textContent=currentUser.nama;buildSidebar();buildHomeMenu();showPage(currentPage||'home');}
 function doLogout(){if(!confirm('Yakin keluar?'))return;currentUser=null;localStorage.removeItem('rtku_sess');$('loginPage').style.display='flex';$('app').style.display='none';$('loginPin').value='';}
-function resetData(){if(!confirm('Reset semua data ke bawaan?'))return;if(!confirm('Yakin 100%?'))return;appData=JSON.parse(JSON.stringify(defaultData));saveData();populateLoginWarga();showToast('Data direset! PIN: 1234');}
+function resetData(){if(!confirm('⚠️ Reset semua data?'))return;if(!confirm('Yakin 100%?'))return;appData=JSON.parse(JSON.stringify(defaultData));saveData();populateLoginWarga();showToast('Data direset! PIN: 1234');}
 function showHelp(){alert('LOGIN:\n1. Pilih nama\n2. PIN: 1234\n3. Masuk\n\nHak akses:\n• Ketua RT/Bendahara/Sekretaris: konfirmasi setoran & kelola data\n• Warga: setor, lapor, surat, voting');}
 
-/* ================= NAV ================= */
 const PAGES=['home','warga','iuran','keuangan','setoran','pengumuman','pengaduan','ronda','surat','tamu','voting','akun'];
-const NAV=[{id:'home',i:'🏠',l:'Beranda'},{id:'warga',i:'👥',l:'Warga'},{id:'iuran',i:'✅',l:'Iuran'},{id:'keuangan',i:'💰',l:'Keuangan'},{id:'setoran',i:'📤',l:'Setoran'},{id:'pengumuman',i:'📢',l:'Pengumuman'},{id:'pengaduan',i:'🚨',l:'Pengaduan'},{id:'ronda',i:'🛡️',l:'Ronda'},{id:'surat',i:'✉️',l:'Surat'},{id:'tamu',i:'👤',l:'Tamu'},{id:'voting',i:'🗳️',l:'Voting'},{id:'akun',i:'⚙️',l:'Akun'}];
+const NAV=[{id:'home',i:'',l:'Beranda'},{id:'warga',i:'👥',l:'Warga'},{id:'iuran',i:'✅',l:'Iuran'},{id:'keuangan',i:'💰',l:'Keuangan'},{id:'setoran',i:'📤',l:'Setoran'},{id:'pengumuman',i:'',l:'Pengumuman'},{id:'pengaduan',i:'🚨',l:'Pengaduan'},{id:'ronda',i:'️',l:'Ronda'},{id:'surat',i:'✉️',l:'Surat'},{id:'tamu',i:'👤',l:'Tamu'},{id:'voting',i:'🗳️',l:'Voting'},{id:'akun',i:'⚙️',l:'Akun'}];
 function buildSidebar(){$('sidebarMenu').innerHTML=NAV.map(n=>`<div class="sidebar-item" data-page="${n.id}" onclick="showPage('${n.id}')"><span class="icon">${n.i}</span>${n.l}</div>`).join('');}
 function buildHomeMenu(){const cls={warga:'mi-a',iuran:'mi-b',keuangan:'mi-c',setoran:'mi-h',pengumuman:'mi-e',pengaduan:'mi-d',ronda:'mi-c',surat:'mi-g',tamu:'mi-f',voting:'mi-b'};$('homeMenu').innerHTML=NAV.filter(n=>n.id!=='home'&&n.id!=='akun').map(n=>`<div class="menu-item" onclick="showPage('${n.id}')"><div class="menu-icon ${cls[n.id]||'mi-a'}">${n.i}</div><span>${n.l}</span></div>`).join('');}
 function showPage(p){if(!PAGES.includes(p))p='home';currentPage=p;document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));const el=$('page'+p[0].toUpperCase()+p.slice(1));if(el)el.classList.add('active');document.querySelectorAll('.sidebar-item').forEach(b=>b.classList.toggle('active',b.dataset.page===p));document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===p));refreshPage();window.scrollTo({top:0});}
 function refreshPage(){updateDashboard();switch(currentPage){case 'warga':renderWargaList();break;case 'iuran':buildIuranBulan();renderIuranList();break;case 'keuangan':buildKasBulan();applyFilter();break;case 'setoran':buildSetorBulan();renderSetoran();break;case 'pengumuman':renderPengumuman();break;case 'pengaduan':renderPengaduan();break;case 'ronda':renderRonda();break;case 'surat':renderSurat();break;case 'tamu':renderTamu();break;case 'voting':renderVoting();break;case 'akun':renderAkun();break;}}
-function updateDashboard(){const kas=appData.kas||[];const sal=kas.reduce((s,k)=>s+(k.tipe==='Masuk'?k.nominal:-k.nominal),0);const mk=kas.filter(k=>k.tipe==='Masuk').reduce((s,k)=>s+ +k.nominal,0);const kl=kas.filter(k=>k.tipe==='Keluar').reduce((s,k)=>s+ +k.nominal,0);$('hSaldo').textContent=rp(sal);$('hMasuk').textContent=rp(mk);$('hKeluar').textContent=rp(kl);$('hWarga').textContent=(appData.warga||[]).length;const b=bulanIni();const ln=(appData.iuran||[]).filter(i=>i.bulan===b&&i.status==='Lunas').length;const tt=(appData.warga||[]).length;$('hIuran').textContent=ln+'/'+tt;const pc=tt?Math.round(ln/tt*100):0;$('hIuranPct').textContent=pc+'%';$('hIuranBar').style.width=pc+'%';$('hLapor').textContent=(appData.lapor||[]).filter(l=>l.status!=='Selesai'&&l.status!=='Ditolak').length;const p=(appData.pengumuman||[]).find(x=>x.pin)||(appData.pengumuman||[])[0];if(p){$('annCategory').textContent=p.kat||'Pengumuman';$('annTitle').textContent=p.judul;$('annDesc').textContent=p.isi;$('annDate').textContent='📅 '+tglIndo(p.tgl)+(p.oleh?' · 👤 '+p.oleh:'');}const c=(appData.lapor||[]).filter(l=>l.status==='Baru').length+(isStaff()?(appData.setoran||[]).filter(s=>s.status==='Pending').length:0);const bd=$('notifBadge');bd.textContent=c;bd.classList.toggle('show',c>0);$('iuranNominalLabel').textContent=rp(appData.rt.iuranNominal);}
+function updateDashboard(){const kas=appData.kas||[];const sal=kas.reduce((s,k)=>s+(k.tipe==='Masuk'?k.nominal:-k.nominal),0);const mk=kas.filter(k=>k.tipe==='Masuk').reduce((s,k)=>s+ +k.nominal,0);const kl=kas.filter(k=>k.tipe==='Keluar').reduce((s,k)=>s+ +k.nominal,0);$('hSaldo').textContent=rp(sal);$('hMasuk').textContent=rp(mk);$('hKeluar').textContent=rp(kl);$('hWarga').textContent=(appData.warga||[]).length;const b=bulanIni();const ln=(appData.iuran||[]).filter(i=>i.bulan===b&&i.status==='Lunas').length;const tt=(appData.warga||[]).length;$('hIuran').textContent=ln+'/'+tt;const pc=tt?Math.round(ln/tt*100):0;$('hIuranPct').textContent=pc+'%';$('hIuranBar').style.width=pc+'%';$('hLapor').textContent=(appData.lapor||[]).filter(l=>l.status!=='Selesai'&&l.status!=='Ditolak').length;const p=(appData.pengumuman||[]).find(x=>x.pin)||(appData.pengumuman||[])[0];if(p){$('annCategory').textContent=p.kat||'Pengumuman';$('annTitle').textContent=p.judul;$('annDesc').textContent=p.isi;$('annDate').textContent='📅 '+tglIndo(p.tgl)+(p.oleh?' ·  '+p.oleh:'');}const c=(appData.lapor||[]).filter(l=>l.status==='Baru').length+(isStaff()?(appData.setoran||[]).filter(s=>s.status==='Pending').length:0);const bd=$('notifBadge');bd.textContent=c;bd.classList.toggle('show',c>0);$('iuranNominalLabel').textContent=rp(appData.rt.iuranNominal);}
 
-/* ================= WARGA ================= */
 function renderWargaList(){const q=($('searchWarga')?$('searchWarga').value:'').toLowerCase();let l=(appData.warga||[]).slice();if(q)l=l.filter(w=>[w.nama,w.blok,w.gol,w.pekerjaan,w.hp].some(v=>String(v||'').toLowerCase().includes(q)));$('wargaCount').textContent=l.length+' warga';$('wargaList').innerHTML=l.length?l.map(w=>`<div class="data-item"><div class="data-avatar">${initials(w.nama)}</div><div class="data-info"><div class="name">${esc(w.nama)} <span class="pin-tag">🔒 PIN</span></div><div class="detail"><b>${esc(w.gol)}</b> · Blok ${esc(w.blok)} · ${esc(w.status)}</div><div class="detail">💼 ${esc(w.pekerjaan||'-')} · 📱 ${esc(w.hp||'-')}</div></div><div class="data-actions"><button class="btn-edit" onclick="editWarga('${w.id}')">✏️</button><button class="btn-del" onclick="deleteWarga('${w.id}')">🗑️</button></div></div>`).join(''):emptyState('👥','Belum ada warga');}
-function showWargaForm(w){const e=!!w;openModal(`<div class="modal-header"><h3>${e?'✏️ Edit':'＋ Tambah'} Warga</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-group"><label>Nama *</label><input id="wNama" value="${e?esc(w.nama):''}"></div><div class="form-row"><div class="form-group"><label>Blok *</label><input id="wBlok" value="${e?esc(w.blok):''}"></div><div class="form-group"><label>HP</label><input id="wHp" value="${e?esc(w.hp||''):''}"></div></div><div class="form-row"><div class="form-group"><label>Jabatan</label><select id="wGol">${['Warga','Ketua RT','Sekretaris','Bendahara','Anggota Keamanan'].map(g=>`<option ${e&&w.gol===g?'selected':''}>${g}</option>`).join('')}</select></div><div class="form-group"><label>Status</label><select id="wStatus">${['Tetap','Kontrak','Kost'].map(s=>`<option ${e&&w.status===s?'selected':''}>${s}</option>`).join('')}</select></div></div><div class="form-group"><label>Pekerjaan</label><input id="wPekerjaan" value="${e?esc(w.pekerjaan||''):''}"></div><div class="form-group"><label>🔐 PIN (4 digit) *</label><input id="wPin" value="${e?(w.pin||'1234'):'1234'}" maxlength="4" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div><button class="btn btn-primary btn-block" onclick="saveWarga('${e?w.id:''}')">💾 Simpan</button>`);}
+function showWargaForm(w){const e=!!w;openModal(`<div class="modal-header"><h3>${e?'️ Edit':'＋ Tambah'} Warga</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-group"><label>Nama *</label><input id="wNama" value="${e?esc(w.nama):''}"></div><div class="form-row"><div class="form-group"><label>Blok *</label><input id="wBlok" value="${e?esc(w.blok):''}"></div><div class="form-group"><label>HP</label><input id="wHp" value="${e?esc(w.hp||''):''}"></div></div><div class="form-row"><div class="form-group"><label>Jabatan</label><select id="wGol">${['Warga','Ketua RT','Sekretaris','Bendahara','Anggota Keamanan'].map(g=>`<option ${e&&w.gol===g?'selected':''}>${g}</option>`).join('')}</select></div><div class="form-group"><label>Status</label><select id="wStatus">${['Tetap','Kontrak','Kost'].map(s=>`<option ${e&&w.status===s?'selected':''}>${s}</option>`).join('')}</select></div></div><div class="form-group"><label>Pekerjaan</label><input id="wPekerjaan" value="${e?esc(w.pekerjaan||''):''}"></div><div class="form-group"><label>🔐 PIN (4 digit) *</label><input id="wPin" value="${e?(w.pin||'1234'):'1234'}" maxlength="4" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div><button class="btn btn-primary btn-block" onclick="saveWarga('${e?w.id:''}')">💾 Simpan</button>`);}
 function saveWarga(id){const nama=$('wNama').value.trim(),blok=$('wBlok').value.trim(),hp=$('wHp').value.trim(),gol=$('wGol').value,status=$('wStatus').value,pekerjaan=$('wPekerjaan').value.trim(),pin=$('wPin').value.trim();if(!nama||!blok)return showToast('Nama & Blok wajib','error');if(!/^\d{4}$/.test(pin))return showToast('PIN 4 digit','error');const l=appData.warga||[];if(id){const i=l.findIndex(x=>x.id===id);if(i>-1)l[i]={...l[i],nama,blok,hp,gol,status,pekerjaan,pin};}else l.push({id:uid('W'),nama,blok,hp,gol,status,pekerjaan,pin});appData.warga=l;saveData();closeModal();showToast('Warga tersimpan');populateLoginWarga();renderWargaList();updateDashboard();}
 function editWarga(id){const w=appData.warga.find(x=>x.id===id);if(w)showWargaForm(w);}
 function deleteWarga(id){const w=appData.warga.find(x=>x.id===id);if(!w||!confirm('Hapus '+w.nama+'?'))return;appData.warga=appData.warga.filter(x=>x.id!==id);saveData();showToast('Warga dihapus');populateLoginWarga();renderWargaList();updateDashboard();}
 
-/* ================= IURAN ================= */
 function buildIuranBulan(){const s=new Set([bulanIni()]);(appData.iuran||[]).forEach(i=>s.add(i.bulan));$('iuranBulan').innerHTML=[...s].sort().reverse().map(b=>`<option value="${b}">${labelBulan(b)}</option>`).join('');}
-function renderIuranList(){const b=$('iuranBulan').value||bulanIni();const nom=+appData.rt.iuranNominal||50000;const m={};(appData.iuran||[]).filter(i=>i.bulan===b).forEach(i=>m[i.wargaId]=i);const l=appData.warga||[];const ln=l.filter(w=>m[w.id]&&m[w.id].status==='Lunas').length;$('iuranList').innerHTML=(l.length?`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding:12px 14px;background:var(--tint);border-radius:12px"><div style="font-size:13px;font-weight:700;color:var(--ink2)">${labelBulan(b)} · ${rp(nom)}/warga</div><span class="badge ${ln===l.length?'b-green':'b-yellow'}">${ln}/${l.length} lunas</span></div>`:'')+l.map(w=>{const r=m[w.id],ok=r&&r.status==='Lunas';return `<div class="data-item" style="${ok?'border-color:#BBF7D0;background:#F0FDF4':''}"><div class="data-avatar" style="${ok?'background:linear-gradient(135deg,#10B981,#059669)':''}">${ok?'✅':'⏳'}</div><div class="data-info"><div class="name">${esc(w.nama)} (Blok ${esc(w.blok)})</div><div class="detail">${ok?'Lunas '+tglPendek(r.tgl):'Belum membayar'}</div></div>${ok?`<span class="badge b-green">LUNAS</span>`:`<button class="btn btn-sm btn-success" onclick="toggleIuran('${w.id}','${b}',${nom})">✔ Tandai Lunas</button>`}</div>`;}).join('')||emptyState('✅','Belum ada warga');}
+function renderIuranList(){const b=$('iuranBulan').value||bulanIni();const nom=+appData.rt.iuranNominal||50000;const m={};(appData.iuran||[]).filter(i=>i.bulan===b).forEach(i=>m[i.wargaId]=i);const l=appData.warga||[];const ln=l.filter(w=>m[w.id]&&m[w.id].status==='Lunas').length;$('iuranList').innerHTML=(l.length?`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding:12px 14px;background:var(--pt);border-radius:12px"><div style="font-size:13px;font-weight:700;color:var(--ink2)">${labelBulan(b)} · ${rp(nom)}/warga</div><span class="badge ${ln===l.length?'b-green':'b-yellow'}">${ln}/${l.length} lunas</span></div>`:'')+l.map(w=>{const r=m[w.id],ok=r&&r.status==='Lunas';return `<div class="data-item" style="${ok?'border-color:#BBF7D0;background:#F0FDF4':''}"><div class="data-avatar" style="${ok?'background:linear-gradient(135deg,#10B981,#059669)':''}">${ok?'✅':'⏳'}</div><div class="data-info"><div class="name">${esc(w.nama)} (Blok ${esc(w.blok)})</div><div class="detail">${ok?'Lunas '+tglPendek(r.tgl):'Belum membayar'}</div></div>${ok?`<span class="badge b-green">LUNAS</span>`:`<button class="btn btn-sm btn-success" onclick="toggleIuran('${w.id}','${b}',${nom})">✔ Tandai Lunas</button>`}</div>`;}).join('')||emptyState('✅','Belum ada warga');}
 function toggleIuran(wid,b,nom){const l=appData.iuran||[];const i=l.findIndex(x=>x.wargaId===wid&&x.bulan===b);if(i>-1){if(l[i].status==='Lunas'){if(!confirm('Batalkan status lunas?'))return;l[i]={...l[i],status:'Belum',tgl:null};}else l[i]={...l[i],status:'Lunas',tgl:today()};}else l.push({id:uid('I'),wargaId:wid,bulan:b,nominal:nom,status:'Lunas',tgl:today()});appData.iuran=l;saveData();showToast('Status iuran diperbarui');renderIuranList();updateDashboard();}
 function ubahNominalIuran(){const v=prompt('Nominal iuran baru:',appData.rt.iuranNominal);if(v===null)return;const n=parseInt(String(v).replace(/[^0-9]/g,''));if(!n||n<1000)return showToast('Nominal tidak valid','error');appData.rt.iuranNominal=n;saveData();showToast('Nominal diubah');renderIuranList();updateDashboard();}
 
-/* ================= KEUANGAN ================= */
 function buildKasBulan(){const s=new Set([bulanIni()]);(appData.kas||[]).forEach(k=>{if(k.tgl)s.add(k.tgl.slice(0,7));});$('filterBulan').innerHTML=[...s].sort().reverse().map(b=>`<option value="${b}" ${b===bulanIni()?'selected':''}>${labelBulan(b)}</option>`).join('');}
-function applyFilter(){const b=$('filterBulan').value,p=$('filterPeriode').value;const f=(appData.kas||[]).filter(k=>k.tgl&&(p==='semua'||k.tgl.startsWith(b))).sort((a,c)=>(c.tgl||'').localeCompare(a.tgl||''));const sal=f.reduce((s,k)=>s+(k.tipe==='Masuk'?k.nominal:-k.nominal),0);$('kSaldo').textContent=rp(sal);$('kMasuk').textContent=rp(f.filter(k=>k.tipe==='Masuk').reduce((s,k)=>s+ +k.nominal,0));$('kKeluar').textContent=rp(f.filter(k=>k.tipe==='Keluar').reduce((s,k)=>s+ +k.nominal,0));$('mutasiList').innerHTML=f.length?f.map(k=>`<div class="row-item"><div><div class="ri-title">${esc(k.urai)} <span class="badge ${k.tipe==='Masuk'?'b-green':'b-red'}">${k.tipe}</span></div><div class="ri-meta">${esc(k.kat)} · ${tglPendek(k.tgl)}</div></div><div style="display:flex;align-items:center;gap:8px"><div class="ri-amt ${k.tipe==='Masuk'?'amt-in':'amt-out'}">${k.tipe==='Masuk'?'+':'-'}${rp(k.nominal)}</div><button class="btn-edit" style="padding:5px 9px;border:none;border-radius:8px" onclick="showTambahTransaksi(appData.kas.find(x=>x.id==='${k.id}'))">✏️</button><button class="btn-del" style="padding:5px 9px;border:none;border-radius:8px" onclick="deleteTransaksi('${k.id}')">🗑️</button></div></div>`).join(''):emptyState('📊','Tidak ada transaksi');}
+function applyFilter(){const b=$('filterBulan').value,p=$('filterPeriode').value;const f=(appData.kas||[]).filter(k=>k.tgl&&(p==='semua'||k.tgl.startsWith(b))).sort((a,c)=>(c.tgl||'').localeCompare(a.tgl||''));const sal=f.reduce((s,k)=>s+(k.tipe==='Masuk'?k.nominal:-k.nominal),0);$('kSaldo').textContent=rp(sal);$('kMasuk').textContent=rp(f.filter(k=>k.tipe==='Masuk').reduce((s,k)=>s+ +k.nominal,0));$('kKeluar').textContent=rp(f.filter(k=>k.tipe==='Keluar').reduce((s,k)=>s+ +k.nominal,0));$('mutasiList').innerHTML=f.length?f.map(k=>`<div class="row-item"><div><div class="ri-title">${esc(k.urai)} <span class="badge ${k.tipe==='Masuk'?'b-green':'b-red'}">${k.tipe}</span></div><div class="ri-meta">${esc(k.kat)} · ${tglPendek(k.tgl)}</div></div><div style="display:flex;align-items:center;gap:8px"><div class="ri-amt ${k.tipe==='Masuk'?'amt-in':'amt-out'}">${k.tipe==='Masuk'?'+':'-'}${rp(k.nominal)}</div><button class="btn-edit" style="padding:5px 9px;border:none;border-radius:8px" onclick="showTambahTransaksi(appData.kas.find(x=>x.id==='${k.id}'))">️</button><button class="btn-del" style="padding:5px 9px;border:none;border-radius:8px" onclick="deleteTransaksi('${k.id}')">🗑️</button></div></div>`).join(''):emptyState('📊','Tidak ada transaksi');}
 function resetFilter(){$('filterBulan').value=bulanIni();$('filterPeriode').value='bulan';applyFilter();}
 function showTambahTransaksi(e){e=e||null;openModal(`<div class="modal-header"><h3>${e?'✏️ Edit':'＋ Tambah'} Transaksi</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-row"><div class="form-group"><label>Tipe</label><select id="tTipe"><option value="Masuk" ${e&&e.tipe==='Masuk'?'selected':''}>Pemasukan</option><option value="Keluar" ${e&&e.tipe==='Keluar'?'selected':''}>Pengeluaran</option></select></div><div class="form-group"><label>Kategori</label><select id="tKat">${['Iuran Warga','Donasi','Kebersihan','Keamanan','Kegiatan','Administrasi','Lainnya'].map(k=>`<option ${e&&e.kat===k?'selected':''}>${k}</option>`).join('')}</select></div></div><div class="form-group"><label>Uraian *</label><input id="tUrai" value="${e?esc(e.urai):''}"></div><div class="form-row"><div class="form-group"><label>Nominal *</label><input type="number" id="tNominal" value="${e?e.nominal:''}"></div><div class="form-group"><label>Tanggal</label><input type="date" id="tTgl" value="${e?e.tgl:today()}"></div></div><button class="btn btn-primary btn-block" onclick="saveTransaksi('${e?e.id:''}')">💾 Simpan</button>`);}
 function saveTransaksi(id){const tipe=$('tTipe').value,kat=$('tKat').value,urai=$('tUrai').value.trim(),nominal=parseInt($('tNominal').value),tgl=$('tTgl').value;if(!urai||!nominal||!tgl)return showToast('Lengkapi field','error');const l=appData.kas||[];if(id){const i=l.findIndex(x=>x.id===id);if(i>-1)l[i]={...l[i],tipe,kat,urai,nominal,tgl};}else l.unshift({id:uid('K'),tgl,tipe,kat,urai,nominal});appData.kas=l;saveData();closeModal();showToast('Transaksi tersimpan');buildKasBulan();applyFilter();updateDashboard();}
 function deleteTransaksi(id){if(!confirm('Hapus transaksi?'))return;appData.kas=appData.kas.filter(x=>x.id!==id);saveData();showToast('Dihapus');applyFilter();updateDashboard();}
 function salinRekening(){const r=(appData.rt.bank||{}).rek||'';if(navigator.clipboard)navigator.clipboard.writeText(r).then(()=>showToast('Rekening disalin'));else showToast('Gagal salin','error');}
 
-/* ================= SETORAN + MULTI FOTO ================= */
 function buildSetorBulan(){const s=new Set([bulanIni()]);const d=new Date();for(let i=-2;i<6;i++){const x=new Date(d.getFullYear(),d.getMonth()+i,1);s.add(x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0'));}(appData.setoran||[]).forEach(x=>s.add(x.bulan));$('setorBulan').innerHTML=[...s].sort().reverse().map(b=>`<option value="${b}" ${b===bulanIni()?'selected':''}>${labelBulan(b)}</option>`).join('');$('setorNominal').value=appData.rt.iuranNominal||50000;uploadedPhotos=[];renderPhotoPreview();}
 function handleMultiplePhotos(inp){const fs=Array.from(inp.files||[]);let done=0;fs.forEach(f=>{if(f.size>1024*1024){showToast(f.name+' > 1MB','error');done++;return;}if(!f.type.startsWith('image/')){showToast(f.name+' bukan gambar','error');done++;return;}const r=new FileReader();r.onload=e=>{uploadedPhotos.push({name:f.name,src:e.target.result});done++;if(done===fs.length)renderPhotoPreview();};r.readAsDataURL(f);});inp.value='';}
 function renderPhotoPreview(){const g=$('buktiPreviewGrid'),c=$('photoCount');if(!uploadedPhotos.length){g.innerHTML='';c.textContent='0 foto dipilih';return;}g.innerHTML=uploadedPhotos.map((p,i)=>`<div class="photo-preview-item"><img src="${p.src}" onclick="viewBukti(this.src)"><button class="rp" onclick="removePhoto(${i})">✕</button></div>`).join('');c.textContent=uploadedPhotos.length+' foto dipilih';}
 function removePhoto(i){uploadedPhotos.splice(i,1);renderPhotoPreview();}
 function submitSetoran(){const bulan=$('setorBulan').value,nominal=parseInt($('setorNominal').value),metode=$('setorMetode').value,ref=$('setorRef').value.trim(),catatan=$('setorCatatan').value.trim();if(!nominal||nominal<1000)return showToast('Nominal min Rp 1.000','error');const l=appData.setoran||[];l.unshift({id:uid('S'),wargaId:currentUser.id,namaWarga:currentUser.nama,blok:currentUser.blok,bulan,nominal,metode,ref,catatan,bukti:uploadedPhotos.map(p=>p.src),status:'Pending',tglSetor:today(),tglKonfirmasi:null,dikonfirmasiOleh:null,alasan:''});appData.setoran=l;saveData();showToast('Setoran terkirim ('+uploadedPhotos.length+' foto)');$('setorRef').value='';$('setorCatatan').value='';$('setorBukti').value='';uploadedPhotos=[];renderPhotoPreview();renderSetoran();updateDashboard();}
-function renderSetoran(){const cc=$('konfirmasiCard');if(isStaff()){cc.style.display='block';const pd=(appData.setoran||[]).filter(s=>s.status==='Pending');$('pendingCount').textContent=pd.length;$('konfirmasiList').innerHTML=pd.length?pd.map(s=>setoranRow(true,s)).join(''):emptyState('⏳','Tidak ada setoran menunggu');}else cc.style.display='none';const mine=(appData.setoran||[]).filter(s=>s.wargaId===(currentUser?currentUser.id:'-'));$('rsLunas').textContent=mine.filter(s=>s.status==='Dikonfirmasi').length;$('rsPending').textContent=mine.filter(s=>s.status==='Pending').length;$('rsDitolak').textContent=mine.filter(s=>s.status==='Ditolak').length;$('riwayatList').innerHTML=mine.length?mine.map(s=>setoranRow(false,s)).join(''):emptyState('📤','Anda belum pernah setor');}
-function setoranRow(konf,s){const w=appData.warga.find(x=>x.id===s.wargaId);const bc=s.status==='Pending'?'b-yellow':s.status==='Dikonfirmasi'?'b-green':'b-red';const bi=s.status==='Pending'?'⏳':s.status==='Dikonfirmasi'?'✅':'❌';const fc=Array.isArray(s.bukti)?s.bukti.length:(s.bukti?1:0);let act='';if(konf&&s.status==='Pending')act=`<div class="data-actions"><button class="btn-edit" style="background:#D1FAE5;color:#065F46" onclick="konfirmasiSetoran('${s.id}',1)">✅ Terima</button><button class="btn-del" onclick="konfirmasiSetoran('${s.id}',0)">❌ Tolak</button></div>`;return `<div class="data-item"><div class="data-avatar" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9)">📤</div><div class="data-info"><div class="name">${konf?esc(w?w.nama:s.namaWarga)+' · ':''}${labelBulan(s.bulan)} <span class="badge ${bc}">${bi} ${s.status}</span></div><div class="detail">💰 <b>${rp(s.nominal)}</b> · ${esc(s.metode)}${s.ref?' · '+esc(s.ref):''}</div><div class="detail">📅 ${tglPendek(s.tglSetor)}${s.tglKonfirmasi?' · '+tglPendek(s.tglKonfirmasi)+(s.dikonfirmasiOleh?' oleh '+esc(s.dikonfirmasiOleh):''):''}</div>${fc?`<div class="detail"><span style="color:var(--pd);cursor:pointer;font-weight:700" onclick="viewBuktiGallery('${s.id}')">🖼️ Lihat ${fc} foto bukti</span></div>`:''}${s.alasan?`<div class="detail" style="color:#DC2626">📝 ${esc(s.alasan)}</div>`:''}</div>${act}</div>`;}
+function renderSetoran(){const cc=$('konfirmasiCard');if(isStaff()){cc.style.display='block';const pd=(appData.setoran||[]).filter(s=>s.status==='Pending');$('pendingCount').textContent=pd.length;$('konfirmasiList').innerHTML=pd.length?pd.map(s=>setoranRow(true,s)).join(''):emptyState('⏳','Tidak ada setoran menunggu');}else cc.style.display='none';const mine=(appData.setoran||[]).filter(s=>s.wargaId===(currentUser?currentUser.id:'-'));$('rsLunas').textContent=mine.filter(s=>s.status==='Dikonfirmasi').length;$('rsPending').textContent=mine.filter(s=>s.status==='Pending').length;$('rsDitolak').textContent=mine.filter(s=>s.status==='Ditolak').length;$('riwayatList').innerHTML=mine.length?mine.map(s=>setoranRow(false,s)).join(''):emptyState('','Anda belum pernah setor');}
+function setoranRow(konf,s){const w=appData.warga.find(x=>x.id===s.wargaId);const bc=s.status==='Pending'?'b-yellow':s.status==='Dikonfirmasi'?'b-green':'b-red';const bi=s.status==='Pending'?'':s.status==='Dikonfirmasi'?'✅':'❌';const fc=Array.isArray(s.bukti)?s.bukti.length:(s.bukti?1:0);let act='';if(konf&&s.status==='Pending')act=`<div class="data-actions"><button class="btn-edit" style="background:#D1FAE5;color:#065F46" onclick="konfirmasiSetoran('${s.id}',1)">✅ Terima</button><button class="btn-del" onclick="konfirmasiSetoran('${s.id}',0)">❌ Tolak</button></div>`;return `<div class="data-item"><div class="data-avatar" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9)">📤</div><div class="data-info"><div class="name">${konf?esc(w?w.nama:s.namaWarga)+' · ':''}${labelBulan(s.bulan)} <span class="badge ${bc}">${bi} ${s.status}</span></div><div class="detail">💰 <b>${rp(s.nominal)}</b> · ${esc(s.metode)}${s.ref?' · '+esc(s.ref):''}</div><div class="detail">📅 ${tglPendek(s.tglSetor)}${s.tglKonfirmasi?' · '+tglPendek(s.tglKonfirmasi)+(s.dikonfirmasiOleh?' oleh '+esc(s.dikonfirmasiOleh):''):''}</div>${fc?`<div class="detail"><span style="color:var(--pd);cursor:pointer;font-weight:700" onclick="viewBuktiGallery('${s.id}')">🖼️ Lihat ${fc} foto bukti</span></div>`:''}${s.alasan?`<div class="detail" style="color:#DC2626">📝 ${esc(s.alasan)}</div>`:''}</div>${act}</div>`;}
 function viewBuktiGallery(id){const s=(appData.setoran||[]).find(x=>x.id===id);if(!s||!s.bukti)return;const f=Array.isArray(s.bukti)?s.bukti:[s.bukti];let i=0;const show=()=>{$('lightboxImg').src=f[i];$('lightbox').classList.add('active');let n=$('lbNav');if(n)n.remove();if(f.length>1){n=document.createElement('div');n.id='lbNav';n.style.cssText='position:fixed;bottom:26px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:6001';n.innerHTML=`<button onclick="lbMove(-1)" style="background:#fff;border:none;padding:10px 16px;border-radius:10px;font-weight:700">←</button><span style="background:#fff;padding:10px 14px;border-radius:10px;font-weight:700">${i+1}/${f.length}</span><button onclick="lbMove(1)" style="background:#fff;border:none;padding:10px 16px;border-radius:10px;font-weight:700">→</button>`;document.body.appendChild(n);}window.lbMove=d=>{i=Math.max(0,Math.min(f.length-1,i+d));show();};};show();}
 function konfirmasiSetoran(id,ok){const s=(appData.setoran||[]).find(x=>x.id===id);if(!s)return;if(ok){if(!confirm('Terima setoran '+rp(s.nominal)+' dari '+s.namaWarga+'? Kas & iuran akan otomatis terupdate.'))return;s.status='Dikonfirmasi';s.tglKonfirmasi=today();s.dikonfirmasiOleh=currentUser.nama;appData.kas.unshift({id:uid('K'),tgl:today(),tipe:'Masuk',kat:'Iuran Warga',urai:'Setoran '+labelBulan(s.bulan)+' - '+s.namaWarga,nominal:s.nominal});const ii=appData.iuran.findIndex(x=>x.wargaId===s.wargaId&&x.bulan===s.bulan);if(ii>-1)appData.iuran[ii]={...appData.iuran[ii],status:'Lunas',tgl:today()};else appData.iuran.push({id:uid('I'),wargaId:s.wargaId,bulan:s.bulan,nominal:s.nominal,status:'Lunas',tgl:today()});saveData();showToast('Setoran diterima');}else{const al=prompt('Alasan penolakan:');if(!al)return showToast('Alasan wajib','error');s.status='Ditolak';s.tglKonfirmasi=today();s.dikonfirmasiOleh=currentUser.nama;s.alasan=al;saveData();showToast('Setoran ditolak');}renderSetoran();updateDashboard();}
 
-/* ================= PENGUMUMAN ================= */
-function renderPengumuman(){const l=(appData.pengumuman||[]).slice().sort((a,b)=>(b.pin?1:0)-(a.pin?1:0));$('pengumumanList').innerHTML=l.length?l.map(p=>`<div class="data-item"><div class="data-avatar" style="background:linear-gradient(135deg,#C4B5FD,#A78BFA)">📢</div><div class="data-info"><div class="name">${esc(p.judul)} ${p.pin?'📌':''} <span class="badge b-purple">${esc(p.kat||'Pengumuman')}</span></div><div class="detail" style="color:var(--ink2);margin-top:4px">${esc(p.isi)}</div><div class="detail">📅 ${tglIndo(p.tgl)} · 👤 ${esc(p.oleh||'')}</div></div><div class="data-actions"><button class="btn-edit" onclick="showPengumumanForm(appData.pengumuman.find(x=>x.id==='${p.id}'))">✏️</button><button class="btn-del" onclick="deletePengumuman('${p.id}')">🗑️</button></div></div>`).join(''):emptyState('📢','Belum ada pengumuman');}
-function showPengumumanForm(p){const e=!!p;openModal(`<div class="modal-header"><h3>${e?'✏️ Edit':'＋ Tambah'} Pengumuman</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-group"><label>Judul *</label><input id="pJudul" value="${e?esc(p.judul):''}"></div><div class="form-group"><label>Kategori</label><select id="pKat">${['Pengumuman','Keuangan','Kerja Bakti','Keamanan','Kegiatan','Kesehatan'].map(k=>`<option ${e&&p.kat===k?'selected':''}>${k}</option>`).join('')}</select></div><div class="form-group"><label>Isi *</label><textarea id="pIsi" rows="4">${e?esc(p.isi):''}</textarea></div><div class="form-group"><label class="check-label"><input type="checkbox" id="pPin" ${e&&p.pin?'checked':''}> 📌 Pin di beranda</label></div><button class="btn btn-primary btn-block" onclick="savePengumuman('${e?p.id:''}')">💾 Simpan</button>`);}
+function renderPengumuman(){const l=(appData.pengumuman||[]).slice().sort((a,b)=>(b.pin?1:0)-(a.pin?1:0));$('pengumumanList').innerHTML=l.length?l.map(p=>`<div class="data-item"><div class="data-avatar" style="background:linear-gradient(135deg,#C4B5FD,#A78BFA)">📢</div><div class="data-info"><div class="name">${esc(p.judul)} ${p.pin?'📌':''} <span class="badge b-purple">${esc(p.kat||'Pengumuman')}</span></div><div class="detail" style="color:var(--ink2);margin-top:4px">${esc(p.isi)}</div><div class="detail"> ${tglIndo(p.tgl)} ·  ${esc(p.oleh||'')}</div></div><div class="data-actions"><button class="btn-edit" onclick="showPengumumanForm(appData.pengumuman.find(x=>x.id==='${p.id}'))">✏️</button><button class="btn-del" onclick="deletePengumuman('${p.id}')">🗑️</button></div></div>`).join(''):emptyState('📢','Belum ada pengumuman');}
+function showPengumumanForm(p){const e=!!p;openModal(`<div class="modal-header"><h3>${e?'️ Edit':'＋ Tambah'} Pengumuman</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-group"><label>Judul *</label><input id="pJudul" value="${e?esc(p.judul):''}"></div><div class="form-group"><label>Kategori</label><select id="pKat">${['Pengumuman','Keuangan','Kerja Bakti','Keamanan','Kegiatan','Kesehatan'].map(k=>`<option ${e&&p.kat===k?'selected':''}>${k}</option>`).join('')}</select></div><div class="form-group"><label>Isi *</label><textarea id="pIsi" rows="4">${e?esc(p.isi):''}</textarea></div><div class="form-group"><label class="check-label"><input type="checkbox" id="pPin" ${e&&p.pin?'checked':''}> 📌 Pin di beranda</label></div><button class="btn btn-primary btn-block" onclick="savePengumuman('${e?p.id:''}')">💾 Simpan</button>`);}
 function savePengumuman(id){const judul=$('pJudul').value.trim(),kat=$('pKat').value,isi=$('pIsi').value.trim(),pin=$('pPin').checked;if(!judul||!isi)return showToast('Judul & isi wajib','error');const l=appData.pengumuman||[];if(id){const i=l.findIndex(x=>x.id===id);if(i>-1)l[i]={...l[i],judul,kat,isi,pin};}else l.unshift({id:uid('P'),judul,kat,isi,pin,tgl:today(),oleh:currentUser.nama});appData.pengumuman=l;saveData();closeModal();showToast('Pengumuman tersimpan');renderPengumuman();updateDashboard();}
 function deletePengumuman(id){if(!confirm('Hapus pengumuman?'))return;appData.pengumuman=appData.pengumuman.filter(x=>x.id!==id);saveData();showToast('Dihapus');renderPengumuman();updateDashboard();}
 
-/* ================= PENGADUAN ================= */
-function renderPengaduan(){const l=(appData.lapor||[]).slice().sort((a,b)=>(b.tgl||'').localeCompare(a.tgl||''));$('pengaduanList').innerHTML=l.length?l.map(x=>{const w=appData.warga.find(v=>v.id===x.wargaId);const bc=x.status==='Selesai'?'b-green':x.status==='Diproses'?'b-blue':x.status==='Ditolak'?'b-red':'b-yellow';return `<div class="data-item"><div class="data-avatar" style="background:linear-gradient(135deg,#FECACA,#FCA5A5)">🚨</div><div class="data-info"><div class="name">${esc(x.judul)} <span class="badge ${bc}">${esc(x.status)}</span></div><div class="detail"><span class="badge b-gray">${esc(x.kat)}</span> · Prioritas ${esc(x.prio||'Sedang')}</div><div class="detail" style="color:var(--ink2);margin-top:4px">${esc(x.isi)}</div><div class="detail">👤 ${esc(w?w.nama:'Warga')} · 📅 ${tglIndo(x.tgl)}</div></div><div class="data-actions"><button class="btn-edit" onclick="showLaporForm(appData.lapor.find(v=>v.id==='${x.id}'))">✏️</button><button class="btn-del" onclick="deleteLapor('${x.id}')">🗑️</button></div></div>`;}).join(''):emptyState('🚨','Belum ada pengaduan');}
-function showLaporForm(l){const e=!!l;openModal(`<div class="modal-header"><h3>${e?'✏️ Edit':'🚨 Lapor'} Masalah</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-row"><div class="form-group"><label>Kategori</label><select id="lKat">${['Infrastruktur','Keamanan','Kebersihan','Sosial','Penerangan','Lainnya'].map(k=>`<option ${e&&l.kat===k?'selected':''}>${k}</option>`).join('')}</select></div><div class="form-group"><label>Prioritas</label><select id="lPrio">${['Rendah','Sedang','Tinggi','Darurat'].map(p=>`<option ${e&&l.prio===p?'selected':''} ${!e&&p==='Sedang'?'selected':''}>${p}</option>`).join('')}</select></div></div><div class="form-group"><label>Judul *</label><input id="lJudul" value="${e?esc(l.judul):''}"></div><div class="form-group"><label>Deskripsi *</label><textarea id="lIsi" rows="4">${e?esc(l.isi):''}</textarea></div>${isStaff()?`<div class="form-group"><label>Status</label><select id="lStatus">${['Baru','Diproses','Selesai','Ditolak'].map(s=>`<option ${e&&l.status===s?'selected':''}>${s}</option>`).join('')}</select></div>`:''}<button class="btn btn-primary btn-block" onclick="saveLapor('${e?l.id:''}')">📤 Kirim</button>`);}
+function renderPengaduan(){const l=(appData.lapor||[]).slice().sort((a,b)=>(b.tgl||'').localeCompare(a.tgl||''));$('pengaduanList').innerHTML=l.length?l.map(x=>{const w=appData.warga.find(v=>v.id===x.wargaId);const bc=x.status==='Selesai'?'b-green':x.status==='Diproses'?'b-blue':x.status==='Ditolak'?'b-red':'b-yellow';return `<div class="data-item"><div class="data-avatar" style="background:linear-gradient(135deg,#FECACA,#FCA5A5)">🚨</div><div class="data-info"><div class="name">${esc(x.judul)} <span class="badge ${bc}">${esc(x.status)}</span></div><div class="detail"><span class="badge b-gray">${esc(x.kat)}</span> · Prioritas ${esc(x.prio||'Sedang')}</div><div class="detail" style="color:var(--ink2);margin-top:4px">${esc(x.isi)}</div><div class="detail">👤 ${esc(w?w.nama:'Warga')} · 📅 ${tglIndo(x.tgl)}</div></div><div class="data-actions"><button class="btn-edit" onclick="showLaporForm(appData.lapor.find(v=>v.id==='${x.id}'))">✏️</button><button class="btn-del" onclick="deleteLapor('${x.id}')">️</button></div></div>`;}).join(''):emptyState('🚨','Belum ada pengaduan');}
+function showLaporForm(l){const e=!!l;openModal(`<div class="modal-header"><h3>${e?'️ Edit':'🚨 Lapor'} Masalah</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-row"><div class="form-group"><label>Kategori</label><select id="lKat">${['Infrastruktur','Keamanan','Kebersihan','Sosial','Penerangan','Lainnya'].map(k=>`<option ${e&&l.kat===k?'selected':''}>${k}</option>`).join('')}</select></div><div class="form-group"><label>Prioritas</label><select id="lPrio">${['Rendah','Sedang','Tinggi','Darurat'].map(p=>`<option ${e&&l.prio===p?'selected':''} ${!e&&p==='Sedang'?'selected':''}>${p}</option>`).join('')}</select></div></div><div class="form-group"><label>Judul *</label><input id="lJudul" value="${e?esc(l.judul):''}"></div><div class="form-group"><label>Deskripsi *</label><textarea id="lIsi" rows="4">${e?esc(l.isi):''}</textarea></div>${isStaff()?`<div class="form-group"><label>Status</label><select id="lStatus">${['Baru','Diproses','Selesai','Ditolak'].map(s=>`<option ${e&&l.status===s?'selected':''}>${s}</option>`).join('')}</select></div>`:''}<button class="btn btn-primary btn-block" onclick="saveLapor('${e?l.id:''}')"> Kirim</button>`);}
 function saveLapor(id){const kat=$('lKat').value,prio=$('lPrio').value,judul=$('lJudul').value.trim(),isi=$('lIsi').value.trim();const st=$('lStatus')?$('lStatus').value:(id?(appData.lapor.find(x=>x.id===id)||{}).status:'Baru')||'Baru';if(!judul||!isi)return showToast('Lengkapi field','error');const l=appData.lapor||[];if(id){const i=l.findIndex(x=>x.id===id);if(i>-1)l[i]={...l[i],kat,prio,judul,isi,status:st};}else l.unshift({id:uid('L'),wargaId:currentUser.id,kat,prio,judul,isi,status:'Baru',tgl:today()});appData.lapor=l;saveData();closeModal();showToast('Laporan tersimpan');renderPengaduan();updateDashboard();}
 function deleteLapor(id){if(!confirm('Hapus laporan?'))return;appData.lapor=appData.lapor.filter(x=>x.id!==id);saveData();showToast('Dihapus');renderPengaduan();updateDashboard();}
 
-/* ================= RONDA ================= */
-function renderRonda(){const l=(appData.ronda||[]).slice().sort((a,b)=>(a.tgl||'').localeCompare(b.tgl||''));$('rondaList').innerHTML=l.length?l.map(r=>`<div class="data-item"><div class="data-avatar" style="background:linear-gradient(135deg,#C4B5FD,#A78BFA)">🛡️</div><div class="data-info"><div class="name">${esc(r.shift)} · ${esc(r.waktu||'-')}</div><div class="detail">📅 ${tglIndo(r.tgl)} · 👤 <b>${esc(r.petugas)}</b>${r.blok?' (Blok '+esc(r.blok)+')':''}</div>${r.catatan?`<div class="detail">📝 ${esc(r.catatan)}</div>`:''}</div><div class="data-actions"><button class="btn-edit" onclick="showRondaForm(appData.ronda.find(x=>x.id==='${r.id}'))">✏️</button><button class="btn-del" onclick="deleteRonda('${r.id}')">🗑️</button></div></div>`).join(''):emptyState('🛡️','Belum ada jadwal');}
-function showRondaForm(r){const e=!!r;openModal(`<div class="modal-header"><h3>${e?'✏️ Edit':'＋ Tambah'} Jadwal Ronda</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-row"><div class="form-group"><label>Tanggal *</label><input type="date" id="rTgl" value="${e?r.tgl:today()}"></div><div class="form-group"><label>Shift</label><select id="rShift">${['Malam','Dini Hari','Pagi','Sore'].map(s=>`<option ${e&&r.shift===s?'selected':''}>${s}</option>`).join('')}</select></div></div><div class="form-group"><label>Waktu</label><input id="rWaktu" value="${e?esc(r.waktu||''):''}" placeholder="22.00 - 02.00"></div><div class="form-group"><label>Petugas</label><select id="rPetugas">${(appData.warga||[]).map(w=>`<option value="${esc(w.nama)}" data-blok="${esc(w.blok)}" ${e&&r.petugas===w.nama?'selected':''}>${esc(w.nama)} (Blok ${esc(w.blok)})</option>`).join('')}</select></div><div class="form-group"><label>Catatan</label><textarea id="rCatatan" rows="2">${e?esc(r.catatan||''):''}</textarea></div><button class="btn btn-primary btn-block" onclick="saveRonda('${e?r.id:''}')">💾 Simpan</button>`);}
+function renderRonda(){const l=(appData.ronda||[]).slice().sort((a,b)=>(a.tgl||'').localeCompare(b.tgl||''));$('rondaList').innerHTML=l.length?l.map(r=>`<div class="data-item"><div class="data-avatar" style="background:linear-gradient(135deg,#C4B5FD,#A78BFA)">️</div><div class="data-info"><div class="name">${esc(r.shift)} · ${esc(r.waktu||'-')}</div><div class="detail">📅 ${tglIndo(r.tgl)} · 👤 <b>${esc(r.petugas)}</b>${r.blok?' (Blok '+esc(r.blok)+')':''}</div>${r.catatan?`<div class="detail">📝 ${esc(r.catatan)}</div>`:''}</div><div class="data-actions"><button class="btn-edit" onclick="showRondaForm(appData.ronda.find(x=>x.id==='${r.id}'))">️</button><button class="btn-del" onclick="deleteRonda('${r.id}')">🗑️</button></div></div>`).join(''):emptyState('🛡️','Belum ada jadwal');}
+function showRondaForm(r){const e=!!r;openModal(`<div class="modal-header"><h3>${e?'️ Edit':'＋ Tambah'} Jadwal Ronda</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-row"><div class="form-group"><label>Tanggal *</label><input type="date" id="rTgl" value="${e?r.tgl:today()}"></div><div class="form-group"><label>Shift</label><select id="rShift">${['Malam','Dini Hari','Pagi','Sore'].map(s=>`<option ${e&&r.shift===s?'selected':''}>${s}</option>`).join('')}</select></div></div><div class="form-group"><label>Waktu</label><input id="rWaktu" value="${e?esc(r.waktu||''):''}" placeholder="22.00 - 02.00"></div><div class="form-group"><label>Petugas</label><select id="rPetugas">${(appData.warga||[]).map(w=>`<option value="${esc(w.nama)}" data-blok="${esc(w.blok)}" ${e&&r.petugas===w.nama?'selected':''}>${esc(w.nama)} (Blok ${esc(w.blok)})</option>`).join('')}</select></div><div class="form-group"><label>Catatan</label><textarea id="rCatatan" rows="2">${e?esc(r.catatan||''):''}</textarea></div><button class="btn btn-primary btn-block" onclick="saveRonda('${e?r.id:''}')">💾 Simpan</button>`);}
 function saveRonda(id){const tgl=$('rTgl').value,shift=$('rShift').value,waktu=$('rWaktu').value.trim(),sel=$('rPetugas'),petugas=sel.value,blok=sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].dataset.blok:'',catatan=$('rCatatan').value.trim();if(!tgl)return showToast('Tanggal wajib','error');const l=appData.ronda||[];if(id){const i=l.findIndex(x=>x.id===id);if(i>-1)l[i]={...l[i],tgl,shift,waktu,petugas,blok,catatan};}else l.unshift({id:uid('R'),tgl,shift,waktu,petugas,blok,catatan});appData.ronda=l;saveData();closeModal();showToast('Jadwal tersimpan');renderRonda();}
 function deleteRonda(id){if(!confirm('Hapus jadwal?'))return;appData.ronda=appData.ronda.filter(x=>x.id!==id);saveData();showToast('Dihapus');renderRonda();}
 
-/* ================= SURAT ================= */
-function renderSurat(){const l=(appData.surat||[]).slice().sort((a,b)=>(b.tgl||'').localeCompare(a.tgl||''));$('suratList').innerHTML=l.length?l.map(s=>{const w=appData.warga.find(x=>x.id===s.wargaId);const bc=s.status==='Selesai'?'b-green':s.status==='Diproses'?'b-blue':s.status==='Ditolak'?'b-red':'b-yellow';return `<div class="data-item"><div class="data-avatar" style="background:linear-gradient(135deg,#DDD6FE,#C4B5FD)">📄</div><div class="data-info"><div class="name">${esc(s.jenis)} <span class="badge ${bc}">${esc(s.status)}</span></div><div class="detail">👤 <b>${esc(w?w.nama:'-')}</b>${s.noSurat?' · No. '+esc(s.noSurat):''}</div><div class="detail">🎯 ${esc(s.keperluan||'-')}</div><div class="detail">📅 ${tglIndo(s.tgl)}</div></div><div class="data-actions"><button class="btn-edit" onclick="showSuratForm(appData.surat.find(x=>x.id==='${s.id}'))">✏️</button><button class="btn-del" onclick="deleteSurat('${s.id}')">🗑️</button></div></div>`;}).join(''):emptyState('📄','Belum ada surat');}
-function showSuratForm(s){const e=!!s;openModal(`<div class="modal-header"><h3>${e?'✏️ Edit':'＋ Ajukan'} Surat</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-group"><label>Pemohon</label><select id="sWarga">${(appData.warga||[]).map(w=>`<option value="${w.id}" ${e&&s.wargaId===w.id?'selected':''} ${!e&&currentUser&&w.id===currentUser.id?'selected':''}>${esc(w.nama)} (Blok ${esc(w.blok)})</option>`).join('')}</select></div><div class="form-group"><label>Jenis</label><select id="sJenis">${['Surat Keterangan Domisili','Surat Tidak Mampu (SKTM)','Pengantar KTP','Pengantar KK','Pengantar SKCK','Pengantar Usaha','Izin Keramaian','Lainnya'].map(j=>`<option ${e&&s.jenis===j?'selected':''}>${j}</option>`).join('')}</select></div><div class="form-group"><label>Keperluan *</label><textarea id="sKeperluan" rows="3">${e?esc(s.keperluan||''):''}</textarea></div><div class="form-row"><div class="form-group"><label>Status</label><select id="sStatus">${['Diajukan','Diproses','Selesai','Ditolak'].map(x=>`<option ${e&&s.status===x?'selected':''}>${x}</option>`).join('')}</select></div><div class="form-group"><label>No. Surat</label><input id="sNo" value="${e?esc(s.noSurat||''):''}"></div></div><button class="btn btn-primary btn-block" onclick="saveSurat('${e?s.id:''}')">💾 Simpan</button>`);}
+function renderSurat(){const l=(appData.surat||[]).slice().sort((a,b)=>(b.tgl||'').localeCompare(a.tgl||''));$('suratList').innerHTML=l.length?l.map(s=>{const w=appData.warga.find(x=>x.id===s.wargaId);const bc=s.status==='Selesai'?'b-green':s.status==='Diproses'?'b-blue':s.status==='Ditolak'?'b-red':'b-yellow';return `<div class="data-item"><div class="data-avatar" style="background:linear-gradient(135deg,#DDD6FE,#C4B5FD)">📄</div><div class="data-info"><div class="name">${esc(s.jenis)} <span class="badge ${bc}">${esc(s.status)}</span></div><div class="detail">👤 <b>${esc(w?w.nama:'-')}</b>${s.noSurat?' · No. '+esc(s.noSurat):''}</div><div class="detail">🎯 ${esc(s.keperluan||'-')}</div><div class="detail"> ${tglIndo(s.tgl)}</div></div><div class="data-actions"><button class="btn-edit" onclick="showSuratForm(appData.surat.find(x=>x.id==='${s.id}'))">️</button><button class="btn-del" onclick="deleteSurat('${s.id}')">🗑️</button></div></div>`;}).join(''):emptyState('📄','Belum ada surat');}
+function showSuratForm(s){const e=!!s;openModal(`<div class="modal-header"><h3>${e?'️ Edit':'＋ Ajukan'} Surat</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-group"><label>Pemohon</label><select id="sWarga">${(appData.warga||[]).map(w=>`<option value="${w.id}" ${e&&s.wargaId===w.id?'selected':''} ${!e&&currentUser&&w.id===currentUser.id?'selected':''}>${esc(w.nama)} (Blok ${esc(w.blok)})</option>`).join('')}</select></div><div class="form-group"><label>Jenis</label><select id="sJenis">${['Surat Keterangan Domisili','Surat Tidak Mampu (SKTM)','Pengantar KTP','Pengantar KK','Pengantar SKCK','Pengantar Usaha','Izin Keramaian','Lainnya'].map(j=>`<option ${e&&s.jenis===j?'selected':''}>${j}</option>`).join('')}</select></div><div class="form-group"><label>Keperluan *</label><textarea id="sKeperluan" rows="3">${e?esc(s.keperluan||''):''}</textarea></div><div class="form-row"><div class="form-group"><label>Status</label><select id="sStatus">${['Diajukan','Diproses','Selesai','Ditolak'].map(x=>`<option ${e&&s.status===x?'selected':''}>${x}</option>`).join('')}</select></div><div class="form-group"><label>No. Surat</label><input id="sNo" value="${e?esc(s.noSurat||''):''}"></div></div><button class="btn btn-primary btn-block" onclick="saveSurat('${e?s.id:''}')">💾 Simpan</button>`);}
 function saveSurat(id){const wargaId=$('sWarga').value,jenis=$('sJenis').value,keperluan=$('sKeperluan').value.trim(),status=$('sStatus').value,noSurat=$('sNo').value.trim();if(!keperluan)return showToast('Keperluan wajib','error');const l=appData.surat||[];if(id){const i=l.findIndex(x=>x.id===id);if(i>-1)l[i]={...l[i],wargaId,jenis,keperluan,status,noSurat};}else l.unshift({id:uid('S'),wargaId,jenis,keperluan,status,noSurat,tgl:today()});appData.surat=l;saveData();closeModal();showToast('Surat tersimpan');renderSurat();}
 function deleteSurat(id){if(!confirm('Hapus surat?'))return;appData.surat=appData.surat.filter(x=>x.id!==id);saveData();showToast('Dihapus');renderSurat();}
 
-/* ================= TAMU ================= */
-function renderTamu(){const l=(appData.tamu||[]).slice().sort((a,b)=>(b.tglMasuk||'').localeCompare(a.tglMasuk||''));$('tamuList').innerHTML=l.length?l.map(t=>{const bc=t.status==='Menginap'?'b-yellow':'b-green';return `<div class="data-item"><div class="data-avatar" style="background:linear-gradient(135deg,#FBCFE8,#F9A8D4)">👤</div><div class="data-info"><div class="name">${esc(t.nama)} <span class="badge ${bc}">${esc(t.status)}</span></div><div class="detail">🏠 Dari <b>${esc(t.asal)}</b>${t.alamat?' · '+esc(t.alamat):''}</div><div class="detail">🎯 ${esc(t.keperluan||'-')} · Penjamin: ${esc(t.penjamin||'-')}</div><div class="detail">📅 ${tglPendek(t.tglMasuk)}${t.tglKeluar?' → '+tglPendek(t.tglKeluar):''}</div></div><div class="data-actions"><button class="btn-edit" onclick="showTamuForm(appData.tamu.find(x=>x.id==='${t.id}'))">✏️</button><button class="btn-del" onclick="deleteTamu('${t.id}')">🗑️</button></div></div>`;}).join(''):emptyState('👤','Belum ada tamu');}
+function renderTamu(){const l=(appData.tamu||[]).slice().sort((a,b)=>(b.tglMasuk||'').localeCompare(a.tglMasuk||''));$('tamuList').innerHTML=l.length?l.map(t=>{const bc=t.status==='Menginap'?'b-yellow':'b-green';return `<div class="data-item"><div class="data-avatar" style="background:linear-gradient(135deg,#FBCFE8,#F9A8D4)">👤</div><div class="data-info"><div class="name">${esc(t.nama)} <span class="badge ${bc}">${esc(t.status)}</span></div><div class="detail"> Dari <b>${esc(t.asal)}</b>${t.alamat?' · '+esc(t.alamat):''}</div><div class="detail">🎯 ${esc(t.keperluan||'-')} · Penjamin: ${esc(t.penjamin||'-')}</div><div class="detail">📅 ${tglPendek(t.tglMasuk)}${t.tglKeluar?' → '+tglPendek(t.tglKeluar):''}</div></div><div class="data-actions"><button class="btn-edit" onclick="showTamuForm(appData.tamu.find(x=>x.id==='${t.id}'))">✏️</button><button class="btn-del" onclick="deleteTamu('${t.id}')">🗑️</button></div></div>`;}).join(''):emptyState('👤','Belum ada tamu');}
 function showTamuForm(t){const e=!!t;openModal(`<div class="modal-header"><h3>${e?'✏️ Edit':'＋ Catat'} Tamu</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-row"><div class="form-group"><label>Nama *</label><input id="tNama" value="${e?esc(t.nama):''}"></div><div class="form-group"><label>Asal *</label><input id="tAsal" value="${e?esc(t.asal):''}"></div></div><div class="form-group"><label>Alamat/Blok</label><input id="tAlamat" value="${e?esc(t.alamat||''):''}"></div><div class="form-row"><div class="form-group"><label>Keperluan</label><select id="tKeperluan">${['Menginap','Kunjungan','Kost','Bekerja','Lainnya'].map(k=>`<option ${e&&t.keperluan===k?'selected':''}>${k}</option>`).join('')}</select></div><div class="form-group"><label>Penjamin</label><select id="tPenjamin">${(appData.warga||[]).map(w=>`<option ${e&&t.penjamin===w.nama?'selected':''}>${esc(w.nama)}</option>`).join('')}</select></div></div><div class="form-row"><div class="form-group"><label>Tgl Masuk *</label><input type="date" id="tMasuk" value="${e?t.tglMasuk:today()}"></div><div class="form-group"><label>Tgl Keluar</label><input type="date" id="tKeluar" value="${e?(t.tglKeluar||''):''}"></div></div><div class="form-group"><label>Status</label><select id="tStatus"><option value="Menginap" ${e&&t.status==='Menginap'?'selected':''}>Menginap</option><option value="Selesai" ${e&&t.status==='Selesai'?'selected':''}>Selesai</option></select></div><button class="btn btn-primary btn-block" onclick="saveTamu('${e?t.id:''}')">💾 Simpan</button>`);}
 function saveTamu(id){const nama=$('tNama').value.trim(),asal=$('tAsal').value.trim(),alamat=$('tAlamat').value.trim(),keperluan=$('tKeperluan').value,penjamin=$('tPenjamin').value,tglMasuk=$('tMasuk').value,tglKeluar=$('tKeluar').value,status=$('tStatus').value;if(!nama||!asal||!tglMasuk)return showToast('Lengkapi field wajib','error');const l=appData.tamu||[];if(id){const i=l.findIndex(x=>x.id===id);if(i>-1)l[i]={...l[i],nama,asal,alamat,keperluan,penjamin,tglMasuk,tglKeluar,status};}else l.unshift({id:uid('T'),nama,asal,alamat,keperluan,penjamin,tglMasuk,tglKeluar,status});appData.tamu=l;saveData();closeModal();showToast('Tamu tersimpan');renderTamu();}
 function deleteTamu(id){if(!confirm('Hapus tamu?'))return;appData.tamu=appData.tamu.filter(x=>x.id!==id);saveData();showToast('Dihapus');renderTamu();}
 
-/* ================= VOTING ================= */
-function renderVoting(){const l=(appData.voting||[]).slice().sort((a,b)=>(b.tgl||'').localeCompare(a.tgl||''));$('votingList').innerHTML=l.length?l.map(v=>{const tot=v.pilihan.reduce((s,p)=>s+(p.votes||0),0);return `<div class="card" style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;gap:10px;margin-bottom:6px"><h4 style="font-size:15px;font-weight:800;flex:1">${esc(v.pertanyaan)}</h4><span class="badge ${v.status==='Aktif'?'b-green':'b-gray'}">${esc(v.status)}</span></div><div style="font-size:12px;color:var(--muted2);margin-bottom:12px">📅 ${tglIndo(v.tgl)} · 👥 ${tot} suara</div>${v.pilihan.map((p,i)=>{const pc=tot?Math.round((p.votes||0)/tot*100):0;return `<div class="voting-option" onclick="voteVoting('${v.id}',${i})"><span style="font-weight:600">${i+1}. ${esc(p.text)}</span><span style="font-size:12px;color:var(--muted);font-weight:700">${p.votes||0} (${pc}%)</span></div><div class="vbar"><div style="width:${pc}%"></div></div>`;}).join('')}<div style="display:flex;gap:6px;margin-top:10px"><button class="btn btn-sm btn-warning" onclick="showVotingForm(appData.voting.find(x=>x.id==='${v.id}'))">✏️ Edit</button><button class="btn btn-sm btn-danger" onclick="deleteVoting('${v.id}')">🗑️ Hapus</button></div></div>`;}).join(''):emptyState('🗳️','Belum ada voting');}
+function renderVoting(){const l=(appData.voting||[]).slice().sort((a,b)=>(b.tgl||'').localeCompare(a.tgl||''));$('votingList').innerHTML=l.length?l.map(v=>{const tot=v.pilihan.reduce((s,p)=>s+(p.votes||0),0);return `<div class="card" style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;gap:10px;margin-bottom:6px"><h4 style="font-size:15px;font-weight:800;flex:1">${esc(v.pertanyaan)}</h4><span class="badge ${v.status==='Aktif'?'b-green':'b-gray'}">${esc(v.status)}</span></div><div style="font-size:12px;color:var(--muted2);margin-bottom:12px">📅 ${tglIndo(v.tgl)} · 👥 ${tot} suara</div>${v.pilihan.map((p,i)=>{const pc=tot?Math.round((p.votes||0)/tot*100):0;return `<div class="voting-option" onclick="voteVoting('${v.id}',${i})"><span style="font-weight:600">${i+1}. ${esc(p.text)}</span><span style="font-size:12px;color:var(--muted);font-weight:700">${p.votes||0} (${pc}%)</span></div><div class="vbar"><div style="width:${pc}%"></div></div>`;}).join('')}<div style="display:flex;gap:6px;margin-top:10px"><button class="btn btn-sm btn-warning" onclick="showVotingForm(appData.voting.find(x=>x.id==='${v.id}'))">✏️ Edit</button><button class="btn btn-sm btn-danger" onclick="deleteVoting('${v.id}')">️ Hapus</button></div></div>`;}).join(''):emptyState('🗳️','Belum ada voting');}
 function showVotingForm(v){const e=!!v;openModal(`<div class="modal-header"><h3>${e?'✏️ Edit':'＋ Buat'} Voting</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-group"><label>Pertanyaan *</label><input id="vQ" value="${e?esc(v.pertanyaan):''}"></div><div class="form-group"><label>Pilihan 1 *</label><input id="vP1" value="${e?esc((v.pilihan[0]||{}).text||''):''}"></div><div class="form-group"><label>Pilihan 2 *</label><input id="vP2" value="${e?esc((v.pilihan[1]||{}).text||''):''}"></div><div class="form-row"><div class="form-group"><label>Pilihan 3</label><input id="vP3" value="${e?esc((v.pilihan[2]||{}).text||''):''}"></div><div class="form-group"><label>Pilihan 4</label><input id="vP4" value="${e?esc((v.pilihan[3]||{}).text||''):''}"></div></div><div class="form-group"><label>Status</label><select id="vStatus"><option value="Aktif" ${e&&v.status==='Aktif'?'selected':''}>Aktif</option><option value="Selesai" ${e&&v.status==='Selesai'?'selected':''}>Selesai</option></select></div><button class="btn btn-primary btn-block" onclick="saveVoting('${e?v.id:''}')">💾 Simpan</button>`);}
 function saveVoting(id){const q=$('vQ').value.trim(),p1=$('vP1').value.trim(),p2=$('vP2').value.trim(),p3=$('vP3').value.trim(),p4=$('vP4').value.trim(),st=$('vStatus').value;if(!q||!p1||!p2)return showToast('Min 2 pilihan','error');const pil=[{text:p1,votes:0},{text:p2,votes:0}];if(p3)pil.push({text:p3,votes:0});if(p4)pil.push({text:p4,votes:0});const l=appData.voting||[];if(id){const i=l.findIndex(x=>x.id===id);if(i>-1){pil.forEach((p,j)=>{if(l[i].pilihan[j])p.votes=l[i].pilihan[j].votes||0;});l[i]={...l[i],pertanyaan:q,pilihan:pil,status:st};}}else l.unshift({id:uid('V'),pertanyaan:q,pilihan:pil,status:st,tgl:today(),createdBy:currentUser.id});appData.voting=l;saveData();closeModal();showToast('Voting tersimpan');renderVoting();}
 function deleteVoting(id){if(!confirm('Hapus voting?'))return;appData.voting=appData.voting.filter(x=>x.id!==id);saveData();showToast('Dihapus');renderVoting();}
 function voteVoting(vid,i){const v=(appData.voting||[]).find(x=>x.id===vid);if(!v)return;if(v.status!=='Aktif')return showToast('Voting ditutup','error');v.pilihan[i].votes=(v.pilihan[i].votes||0)+1;saveData();showToast('Suara tercatat!');renderVoting();}
 
-/* ================= AKUN & NOTIF ================= */
 function renderAkun(){if(!currentUser)return;const w=currentUser;$('akunInfo').innerHTML=`<div style="text-align:center;padding:16px 0"><div style="width:88px;height:88px;border-radius:24px;background:linear-gradient(135deg,var(--p),var(--pd));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:34px;margin:0 auto 14px">${initials(w.nama)}</div><h3 style="font-size:21px;font-weight:800">${esc(w.nama)}</h3><p style="color:var(--muted);margin-top:4px"><span class="badge b-purple">${esc(w.gol)}</span></p></div><div class="row-item"><div><div class="ri-meta" style="font-size:12px;color:var(--muted2)">Blok / Rumah</div><div class="ri-title">${esc(w.blok)}</div></div></div><div class="row-item"><div><div class="ri-meta" style="font-size:12px;color:var(--muted2)">No. HP</div><div class="ri-title">${esc(w.hp||'-')}</div></div></div><div class="row-item"><div><div class="ri-meta" style="font-size:12px;color:var(--muted2)">Pekerjaan</div><div class="ri-title">${esc(w.pekerjaan||'-')}</div></div></div><div class="row-item"><div><div class="ri-meta" style="font-size:12px;color:var(--muted2)">PIN Login</div><div class="ri-title">•••• <span class="badge b-gray">tersembunyi</span></div></div></div>`;}
 function editProfil(){const w=currentUser;openModal(`<div class="modal-header"><h3>✏️ Edit Profil</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="form-group"><label>Nama</label><input id="pfNama" value="${esc(w.nama)}"></div><div class="form-row"><div class="form-group"><label>Blok</label><input id="pfBlok" value="${esc(w.blok)}"></div><div class="form-group"><label>HP</label><input id="pfHp" value="${esc(w.hp||'')}"></div></div><div class="form-group"><label>Pekerjaan</label><input id="pfPekerjaan" value="${esc(w.pekerjaan||'')}"></div><div class="form-group"><label>Ganti PIN (kosongkan jika tidak)</label><input id="pfPin" maxlength="4" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div><button class="btn btn-primary btn-block" onclick="saveProfil()">💾 Simpan</button>`);}
 function saveProfil(){const nama=$('pfNama').value.trim(),blok=$('pfBlok').value.trim(),hp=$('pfHp').value.trim(),pek=$('pfPekerjaan').value.trim(),pin=$('pfPin').value.trim();if(!nama||!blok)return showToast('Nama & Blok wajib','error');if(pin&&!/^\d{4}$/.test(pin))return showToast('PIN 4 digit','error');const i=appData.warga.findIndex(x=>x.id===currentUser.id);if(i>-1){appData.warga[i]={...appData.warga[i],nama,blok,hp,pekerjaan:pek,...(pin?{pin}:{})};currentUser=appData.warga[i];}saveData();$('headerName').textContent=currentUser.nama;closeModal();showToast('Profil tersimpan');renderAkun();populateLoginWarga();}
-function showNotif(){const pd=(appData.setoran||[]).filter(s=>s.status==='Pending').length;const br=(appData.lapor||[]).filter(s=>s.status==='Baru').length;openModal(`<div class="modal-header"><h3>🔔 Notifikasi</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div style="display:flex;flex-direction:column;gap:10px">${pd&&isStaff()?`<div style="padding:12px;background:var(--tint);border-radius:12px;border-left:4px solid var(--p);cursor:pointer" onclick="closeModal();showPage('setoran')"><b>📤 ${pd} setoran menunggu konfirmasi</b></div>`:''}${br?`<div style="padding:12px;background:#FEF2F2;border-radius:12px;border-left:4px solid var(--red);cursor:pointer" onclick="closeModal();showPage('pengaduan')"><b>🚨 ${br} pengaduan baru</b></div>`:''}<div style="padding:12px;background:#EFF6FF;border-radius:12px;border-left:4px solid var(--blue)"><b>📢 Pengumuman terbaru</b><div style="font-size:12px;color:var(--muted)">${esc(((appData.pengumuman||[]).find(p=>p.pin)||(appData.pengumuman||[])[0]||{}).judul||'-')}</div></div>${!pd&&!br?'<div class="empty" style="padding:20px"><div class="empty-icon">🎉</div><p>Tidak ada notifikasi baru</p></div>':''}</div>`);}
-function showAnnouncementDetail(){const p=(appData.pengumuman||[]).find(x=>x.pin)||(appData.pengumuman||[])[0];if(!p)return;openModal(`<div class="modal-header"><h3>📢 ${esc(p.judul)}</h3><button class="modal-close" onclick="closeModal()">✕</button></div><span class="badge b-purple">${esc(p.kat||'Pengumuman')}</span><p style="margin:12px 0;line-height:1.7;color:#4B5563">${esc(p.isi)}</p><div style="font-size:12px;color:#9CA3AF">📅 ${tglIndo(p.tgl)} · 👤 ${esc(p.oleh||'')}</div>`);}
+function showNotif(){const pd=(appData.setoran||[]).filter(s=>s.status==='Pending').length;const br=(appData.lapor||[]).filter(s=>s.status==='Baru').length;openModal(`<div class="modal-header"><h3>🔔 Notifikasi</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div style="display:flex;flex-direction:column;gap:10px">${pd&&isStaff()?`<div style="padding:12px;background:var(--pt);border-radius:12px;border-left:4px solid var(--p);cursor:pointer" onclick="closeModal();showPage('setoran')"><b>📤 ${pd} setoran menunggu konfirmasi</b></div>`:''}${br?`<div style="padding:12px;background:#FEF2F2;border-radius:12px;border-left:4px solid var(--red);cursor:pointer" onclick="closeModal();showPage('pengaduan')"><b>🚨 ${br} pengaduan baru</b></div>`:''}<div style="padding:12px;background:#EFF6FF;border-radius:12px;border-left:4px solid var(--blue)"><b>📢 Pengumuman terbaru</b><div style="font-size:12px;color:var(--muted)">${esc(((appData.pengumuman||[]).find(p=>p.pin)||(appData.pengumuman||[])[0]||{}).judul||'-')}</div></div>${!pd&&!br?'<div class="empty" style="padding:20px"><div class="empty-icon">🎉</div><p>Tidak ada notifikasi baru</p></div>':''}</div>`);}
+function showAnnouncementDetail(){const p=(appData.pengumuman||[]).find(x=>x.pin)||(appData.pengumuman||[])[0];if(!p)return;openModal(`<div class="modal-header"><h3>📢 ${esc(p.judul)}</h3><button class="modal-close" onclick="closeModal()">✕</button></div><span class="badge b-purple">${esc(p.kat||'Pengumuman')}</span><p style="margin:12px 0;line-height:1.7;color:#4B5563">${esc(p.isi)}</p><div style="font-size:12px;color:#9CA3AF"> ${tglIndo(p.tgl)} · 👤 ${esc(p.oleh||'')}</div>`);}
 
-/* ================= INIT ================= */
 (function init(){
   loadData();normalize();populateLoginWarga();
   $('loading').style.display='none';
