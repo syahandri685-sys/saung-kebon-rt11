@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<!-- LOGIN PAGE -->
+<!-- ===================== LOGIN ===================== -->
 <div class="login-page" id="loginPage">
   <div class="login-container">
     <div class="login-logo">🏘️</div>
@@ -27,10 +27,7 @@
       <input type="password" id="loginPin" placeholder="Masukkan PIN Anda" maxlength="4" inputmode="numeric" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
     </div>
     <div class="form-group">
-      <label class="check-label">
-        <input type="checkbox" id="rememberMe" checked>
-        Ingat saya (auto-login 7 hari)
-      </label>
+      <label class="check-label"><input type="checkbox" id="rememberMe" checked> Ingat saya (auto-login 7 hari)</label>
     </div>
     <button class="btn btn-primary btn-block" onclick="doLogin()">🔓 Masuk ke Portal</button>
     <button class="btn btn-danger btn-block" style="margin-top:10px" onclick="resetData()">🔄 Reset Data</button>
@@ -39,14 +36,35 @@
   </div>
 </div>
 
-<!-- APP -->
+<!-- ===================== APP ===================== -->
 <div class="app" id="app" style="display:none">
-  <div class="sidebar">
-    <div class="sidebar-header"><h2>🏘️ Saung Kebun</h2><p>RT 11 / RW 44</p></div>
-    <div class="sidebar-menu" id="sidebarMenu"></div>
-  </div>
 
-  <div>
+  <!-- SIDEBAR (kiri, sticky) -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>🏘️ Saung Kebun</h2>
+      <p>RT 11 / RW 44</p>
+    </div>
+    <div class="sidebar-menu" id="sidebarMenu">
+      <div class="sidebar-item active" data-page="home" onclick="showPage('home')"><span class="icon">🏠</span>Beranda</div>
+      <div class="sidebar-item" data-page="warga" onclick="showPage('warga')"><span class="icon">👥</span>Warga</div>
+      <div class="sidebar-item" data-page="iuran" onclick="showPage('iuran')"><span class="icon">✅</span>Iuran</div>
+      <div class="sidebar-item" data-page="keuangan" onclick="showPage('keuangan')"><span class="icon">💰</span>Keuangan</div>
+      <div class="sidebar-item" data-page="setoran" onclick="showPage('setoran')"><span class="icon">📤</span>Setoran</div>
+      <div class="sidebar-item" data-page="pengumuman" onclick="showPage('pengumuman')"><span class="icon">📢</span>Pengumuman</div>
+      <div class="sidebar-item" data-page="pengaduan" onclick="showPage('pengaduan')"><span class="icon">🚨</span>Pengaduan</div>
+      <div class="sidebar-item" data-page="ronda" onclick="showPage('ronda')"><span class="icon">🛡️</span>Ronda</div>
+      <div class="sidebar-item" data-page="surat" onclick="showPage('surat')"><span class="icon">✉️</span>Surat</div>
+      <div class="sidebar-item" data-page="tamu" onclick="showPage('tamu')"><span class="icon">👤</span>Tamu</div>
+      <div class="sidebar-item" data-page="voting" onclick="showPage('voting')"><span class="icon">🗳️</span>Voting</div>
+      <div class="sidebar-item" data-page="akun" onclick="showPage('akun')"><span class="icon">⚙️</span>Akun</div>
+    </div>
+  </aside>
+
+  <!-- AREA UTAMA (kanan) -->
+  <div class="main-area">
+
+    <!-- HEADER -->
     <div class="header">
       <div class="header-top">
         <div>
@@ -58,21 +76,22 @@
       </div>
     </div>
 
+    <!-- KONTEN -->
     <div class="content pull" id="content">
+
       <!-- BERANDA -->
       <div class="page active" id="pageHome">
-        <div class="card" id="annCard">
+        <div class="card">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px">
-            <div style="flex:1">
+            <div style="flex:1;min-width:0">
               <span class="badge b-yellow" id="annCategory">Pengumuman</span>
               <h2 style="font-size:20px;font-weight:800;margin:10px 0" id="annTitle">—</h2>
               <p style="font-size:14px;color:#6B7280;line-height:1.6;margin-bottom:14px" id="annDesc">—</p>
-              <div style="font-size:12px;color:#9CA3AF" id="annDate">—</div>
+              <div style="font-size:12px;color:#9CA3AF;font-weight:600" id="annDate">—</div>
             </div>
-            <div style="font-size:54px;opacity:.18"></div>
+            <div style="font-size:54px;opacity:.18;flex-shrink:0">📢</div>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:14px;border-top:1px solid #F3F4F6">
-            <div style="display:flex;gap:6px" id="annDots"></div>
+          <div style="display:flex;justify-content:flex-end;margin-top:16px;padding-top:14px;border-top:1px solid #F3F4F6">
             <button class="btn btn-sm btn-warning" onclick="showAnnouncementDetail()">Lihat Detail →</button>
           </div>
         </div>
@@ -81,22 +100,20 @@
           <div class="card-header"><h3>💰 Ringkasan Keuangan</h3><span class="link" onclick="showPage('keuangan')">Laporan →</span></div>
           <div class="finance-grid">
             <div class="finance-item green"><div class="label">Saldo Kas</div><div class="value" id="hSaldo">Rp 0</div><div class="icon-box">💵</div></div>
-            <div class="finance-item blue"><div class="label">Pemasukan</div><div class="value" id="hMasuk">Rp 0</div><div class="icon-box">️</div></div>
+            <div class="finance-item blue"><div class="label">Pemasukan</div><div class="value" id="hMasuk">Rp 0</div><div class="icon-box">⬆️</div></div>
             <div class="finance-item orange"><div class="label">Pengeluaran</div><div class="value" id="hKeluar">Rp 0</div><div class="icon-box">⬇️</div></div>
           </div>
         </div>
 
         <div class="card">
-          <div class="card-header"><h3> Statistik</h3></div>
+          <div class="card-header"><h3>📊 Statistik</h3></div>
           <div class="finance-grid">
             <div class="finance-item purple"><div class="label">Total Warga</div><div class="value" id="hWarga">0</div><div class="icon-box">👥</div></div>
             <div class="finance-item green"><div class="label">Iuran Lunas</div><div class="value" id="hIuran">0/0</div><div class="icon-box">✅</div></div>
-            <div class="finance-item red"><div class="label">Pengaduan</div><div class="value" id="hLapor">0</div><div class="icon-box"></div></div>
+            <div class="finance-item red"><div class="label">Pengaduan</div><div class="value" id="hLapor">0</div><div class="icon-box">🚨</div></div>
           </div>
           <div style="margin-top:14px">
-            <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:6px">
-              <span>Progress Iuran</span><span id="hIuranPct">0%</span>
-            </div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:#374151;margin-bottom:6px"><span>Progress Iuran</span><span id="hIuranPct">0%</span></div>
             <div class="progress"><div id="hIuranBar" style="width:0%"></div></div>
           </div>
         </div>
@@ -122,10 +139,7 @@
         <div class="card">
           <div class="card-header"><h3>✅ Iuran Warga</h3></div>
           <div class="info-box green">
-            <div class="info-box-header">
-              <h4>💡 Info Iuran</h4>
-              <button onclick="showPage('setoran')">💰 Setor</button>
-            </div>
+            <div class="info-box-header"><h4>💡 Info Iuran</h4><button onclick="showPage('setoran')">💰 Setor</button></div>
             <p class="note">Nominal: <b id="iuranNominalLabel">Rp 50.000</b>/bulan</p>
           </div>
           <div id="iuranList"></div>
@@ -138,26 +152,16 @@
           <div class="card-header"><h3>💰 Keuangan</h3></div>
           <div class="filter-row">
             <select id="filterBulan" onchange="applyFilter()"></select>
-            <select id="filterPeriode" onchange="applyFilter()">
-              <option value="bulan">Per Bulan</option>
-              <option value="semua">Semua</option>
-            </select>
+            <select id="filterPeriode" onchange="applyFilter()"><option value="bulan">Per Bulan</option><option value="semua">Semua</option></select>
           </div>
           <div class="action-row">
             <button class="action-btn add" onclick="showTambahTransaksi()">＋ Tambah</button>
             <button class="action-btn reset" onclick="resetFilter()">🔄 Reset</button>
-            <button class="action-btn pdf" onclick="window.print()"> PDF</button>
+            <button class="action-btn pdf" onclick="window.print()">📄 PDF</button>
           </div>
           <div class="info-box">
-            <div class="info-box-header">
-              <h4>💳 Rekening Iuran</h4>
-              <button onclick="salinRekening()">📋 Salin</button>
-            </div>
-            <div class="bank-info">
-              <div class="bn">Bank Mandiri</div>
-              <div class="acc">123-00-456789-0</div>
-              <div class="an">A/N Kas RT 11 Saung Kebun</div>
-            </div>
+            <div class="info-box-header"><h4>💳 Rekening Iuran</h4><button onclick="salinRekening()">📋 Salin</button></div>
+            <div class="bank-info"><div class="bn">Bank Mandiri</div><div class="acc">123-00-456789-0</div><div class="an">A/N Kas RT 11 Saung Kebun</div></div>
           </div>
           <div class="finance-grid">
             <div class="finance-item green"><div class="label">Saldo</div><div class="value" id="kSaldo">Rp 0</div></div>
@@ -166,7 +170,7 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-header"><h3> Mutasi Kas</h3></div>
+          <div class="card-header"><h3>📊 Mutasi Kas</h3></div>
           <div id="mutasiList"></div>
         </div>
       </div>
@@ -177,30 +181,21 @@
           <div class="card-header"><h3>📤 Setoran Online</h3></div>
           <div class="info-box">
             <div class="info-box-header"><h4>💳 Transfer</h4><button onclick="salinRekening()">📋 Salin</button></div>
-            <div class="bank-info">
-              <div class="bn">Bank Mandiri</div>
-              <div class="acc">123-00-456789-0</div>
-              <div class="an">A/N Kas RT 11</div>
-            </div>
+            <div class="bank-info"><div class="bn">Bank Mandiri</div><div class="acc">123-00-456789-0</div><div class="an">A/N Kas RT 11</div></div>
           </div>
-          <div style="border:1px dashed #E5E7EB;border-radius:14px;padding:16px;margin-bottom:16px">
+          <div class="form-box">
             <div class="section-title" style="margin-top:0">Form Setoran</div>
             <div class="form-row">
               <div class="form-group"><label>Bulan</label><select id="setorBulan"></select></div>
               <div class="form-group"><label>Nominal</label><input type="number" id="setorNominal" value="50000"></div>
             </div>
             <div class="form-group"><label>Metode</label>
-              <select id="setorMetode">
-                <option>Transfer Bank</option>
-                <option>E-Wallet</option>
-                <option>QRIS</option>
-                <option>Tunai</option>
-              </select>
+              <select id="setorMetode"><option>Transfer Bank</option><option>E-Wallet</option><option>QRIS</option><option>Tunai</option></select>
             </div>
             <div class="form-group">
               <label>📷 Bukti (multi-foto)</label>
               <div class="photo-upload-area" onclick="document.getElementById('setorBukti').click()">
-                <div class="upload-icon"></div>
+                <div class="upload-icon">📷</div>
                 <div class="upload-text">Klik untuk pilih foto</div>
                 <input type="file" id="setorBukti" accept="image/*" multiple onchange="handleMultiplePhotos(this)">
               </div>
@@ -261,7 +256,7 @@
       <!-- TAMU -->
       <div class="page" id="pageTamu">
         <div class="card">
-          <div class="card-header"><h3> Tamu</h3><button class="btn btn-sm btn-primary" onclick="showTamuForm()">＋ Tambah</button></div>
+          <div class="card-header"><h3>👤 Tamu</h3><button class="btn btn-sm btn-primary" onclick="showTamuForm()">＋ Tambah</button></div>
           <div id="tamuList"></div>
         </div>
       </div>
@@ -282,8 +277,18 @@
           <button class="btn btn-danger btn-block" style="margin-top:16px" onclick="doLogout()">🚪 Keluar</button>
         </div>
       </div>
-    </div>
-  </div>
+
+    </div><!-- /content -->
+  </div><!-- /main-area -->
+
+  <!-- BOTTOM NAV (mobile) -->
+  <nav class="bottom-nav" id="bottomNav">
+    <button data-page="home" onclick="showPage('home')"><span class="ni">🏠</span><span>Beranda</span></button>
+    <button data-page="keuangan" onclick="showPage('keuangan')"><span class="ni">💰</span><span>Kas</span></button>
+    <button data-page="setoran" onclick="showPage('setoran')"><span class="ni">📤</span><span>Setor</span></button>
+    <button data-page="pengaduan" onclick="showPage('pengaduan')"><span class="ni">🚨</span><span>Lapor</span></button>
+    <button data-page="akun" onclick="showPage('akun')"><span class="ni">⚙️</span><span>Akun</span></button>
+  </nav>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -295,7 +300,6 @@
 </div>
 <div class="loading" id="loading"><div class="spinner"></div><p>Memuat...</p></div>
 
-<!-- SCRIPTS -->
 <script src="js/data.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/auth.js"></script>
@@ -311,6 +315,5 @@
 <script src="js/modules/tamu.js"></script>
 <script src="js/modules/voting.js"></script>
 <script src="js/app.js"></script>
-
 </body>
 </html>
